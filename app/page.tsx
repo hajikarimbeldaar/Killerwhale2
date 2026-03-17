@@ -123,19 +123,22 @@ const normalizeFuelType = (fuel: string): string => {
 const resolveAssetUrl = (path: string, backendUrl: string) => {
   if (!path) return ''
   const r2Url = CDN_URL
-  const legacyR2 = 'https://pub-a4a4bb84fc2d41cba103f4e2a8b5d185.r2.dev'
 
-  if (path.includes(legacyR2)) {
-    return path.replace(legacyR2, r2Url)
+  if (path.startsWith('http')) {
+    // If it's the legacy R2 URL, replace it with the new CDN URL
+    const legacyR2 = 'https://pub-a4a4bb84fc2d41cba103f4e2a8b5d185.r2.dev'
+    if (path.includes(legacyR2)) {
+      return path.replace(legacyR2, r2Url)
+    }
+    return path
   }
-
-  if (path.startsWith('http')) return path
 
   // Return relative path for uploads to let OptimizedImage handle resolution via resolveR2Url
   if (path.startsWith('/uploads/')) return path
 
   return path
 }
+
 
 // Helper function to normalize transmission types
 const normalizeTransmission = (transmission: string): string => {

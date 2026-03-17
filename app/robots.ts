@@ -19,12 +19,16 @@ export default function robots(): MetadataRoute.Robots {
                     '/verify-email',
                     '/debug-env',
                     '/test-honda',
+                    '/test-image',
+                    '/google-terms',
+                    '/visitor-agreement',
                     '/search',       // Search results pages
                     '/ai-search',
                     '/ai-car-finder',
                     '/variants/',    // Legacy variant route (now flat: /brand/model/variant-slug)
                     '*/variant/*',   // Legacy /variant/ subdirectory URLs (301 → flat URL)
                     '*/price-in/*',  // Legacy /price-in/ subdirectory URLs (301 → flat URL)
+                    '/*?*',          // Block duplicate/parameter URLs
                 ],
             },
             // Block AI Scrapers (Content Protection)
@@ -32,6 +36,7 @@ export default function robots(): MetadataRoute.Robots {
                 userAgent: ['GPTBot', 'Google-Extended', 'ClaudeBot', 'Amazonbot', 'Applebot-Extended'],
                 disallow: '/',
             }
+
         ],
         sitemap: `${baseUrl}/sitemap.xml`,
     }

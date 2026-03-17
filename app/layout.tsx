@@ -161,11 +161,7 @@ export default function RootLayout({
         )}
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         {/* Preconnect to Cloudflare R2 CDN for car images (eliminates ~300ms DNS+TLS delay) */}
-        <link rel="preconnect" href="https://pub-a4a4bb84fc2d41cba103f4e2a8b5d185.r2.dev" crossOrigin="anonymous" />
-        {/* Preconnect to R2 custom domain if configured */}
-        {process.env.NEXT_PUBLIC_R2_PUBLIC_BASE_URL && (
-          <link rel="preconnect" href={new URL(process.env.NEXT_PUBLIC_R2_PUBLIC_BASE_URL).origin} crossOrigin="anonymous" />
-        )}
+        <link rel="preconnect" href="https://cdn.gadizone.com" crossOrigin="anonymous" />
 
         {/* Google Tag Manager */}
         <Script id="gtm" strategy="afterInteractive">

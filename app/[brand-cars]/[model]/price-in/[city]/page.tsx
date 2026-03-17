@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import PriceBreakupPage from '@/components/price-breakup/PriceBreakupPage'
 import { FloatingAIBot } from '@/components/FloatingAIBot'
 import { resolveR2Url } from '@/lib/image-utils'
+import { getCurrentMonthYear } from '@/lib/date-utils'
 
 // Enable ISR caching with 24-hour revalidation intervals
 export const revalidate = 86400 // 24 hours — saves Vercel CPU
@@ -54,7 +55,7 @@ export async function generateMetadata({ params }: PriceInCityPageProps): Promis
   const modelName = toDisplayName(modelSlug)
   const cityName = cityMap[citySlug?.toLowerCase() || '']?.split(',')[0] || toDisplayName(citySlug)
 
-  const title = `${brandName} ${modelName} Price in ${cityName} - On-Road Price, EMI, Variants | gadizone`
+  const title = `${brandName} ${modelName} Price in ${cityName} - On-Road Price, EMI, Variants | ${getCurrentMonthYear()} | gadizone`
   const description = `Get ${brandName} ${modelName} on-road price in ${cityName}. Check detailed price breakup including ex-showroom price, RTO, insurance, and calculate EMI. Compare variants and get the best deals.`
 
   // Fetch model image for OpenGraph
@@ -389,21 +390,26 @@ export default async function PriceInCityPage({ params, searchParams }: PriceInC
   const initialData = await getPriceBreakupData(brandSlug, modelSlug, citySlug)
 
   // Generate structured data for Price Page
+  const cityName = cityMap[citySlug?.toLowerCase() || '']?.split(',')[0] || toDisplayName(citySlug)
   const currentUrl = `https://www.gadizone.com/${brandSlug}-cars/${modelSlug}/price-in-${citySlug}`
+  
   const productSchema = initialData ? generateCarProductSchema({
     name: `${initialData.brand.name} ${initialData.model.name}`,
     brand: initialData.brand.name,
     image: initialData.model.heroImage,
     url: currentUrl,
-    description: `Get ${initialData.brand.name} ${initialData.model.name} on-road price in ${toDisplayName(citySlug)}. View price breakup, variants, and specs.`,
+    description: `Get the detailed on-road price of ${initialData.brand.name} ${initialData.model.name} in ${cityName}. Our comprehensive price breakup includes ex-showroom price, RTO charges, insurance, and other taxes. Calculate your monthly EMI and compare variants of the ${initialData.model.name} easily on gadizone.`,
     lowPrice: initialData.variants.length > 0 ? Math.min(...initialData.variants.map((v: any) => v.price)) : 0,
     highPrice: initialData.variants.length > 0 ? Math.max(...initialData.variants.map((v: any) => v.price)) : 0,
     bodyType: initialData.model.bodyType,
     fuelType: initialData.model.fuelTypes?.[0] || 'Petrol',
     transmission: initialData.model.transmissions?.[0] || 'Manual',
     seatingCapacity: initialData.model.seating ? parseInt(initialData.model.seating.split(' ')[0]) : 5,
-    modelDate: new Date().getFullYear().toString()
+    modelDate: new Date().getFullYear().toString(),
+    cityName: cityName,
+    offerCount: initialData.variants.length || 1
   }) : null
+
 
   // Generate breadcrumb schema
   const breadcrumbSchema = generateBreadcrumbSchema([

@@ -22,6 +22,21 @@ export function generateOrganizationSchema() {
             name: 'Karim',
             jobTitle: 'Founder & CEO'
         },
+        address: {
+            '@type': 'PostalAddress',
+            'streetAddress': 'Andheri East',
+            'addressLocality': 'Mumbai',
+            'addressRegion': 'Maharashtra',
+            'postalCode': '400069',
+            'addressCountry': 'IN'
+        },
+        contactPoint: {
+            '@type': 'ContactPoint',
+            telephone: '+91-99452-10466',
+            contactType: 'customer service',
+            areaServed: 'IN',
+            availableLanguage: ['English', 'Hindi']
+        },
         areaServed: {
             '@type': 'Country',
             name: 'India'
@@ -42,16 +57,10 @@ export function generateOrganizationSchema() {
             'https://twitter.com/gadizone',
             'https://instagram.com/gadizone',
             'https://youtube.com/gadizone'
-        ],
-        contactPoint: {
-            '@type': 'ContactPoint',
-            telephone: '+91-99452-10466',
-            contactType: 'customer service',
-            areaServed: 'IN',
-            availableLanguage: ['English', 'Hindi']
-        }
+        ]
     }
 }
+
 
 export function generateWebSiteSchema() {
     return {
@@ -102,7 +111,10 @@ export function generateCarProductSchema(car: {
     seatingCapacity?: number
     modelDate?: string
     url?: string
+    cityName?: string
+    offerCount?: number
 }) {
+
     const validUntilDate = new Date()
     validUntilDate.setFullYear(validUntilDate.getFullYear() + 1)
 
@@ -144,16 +156,22 @@ export function generateCarProductSchema(car: {
     if (car.lowPrice > 0) {
         schema.offers = {
             '@type': 'AggregateOffer',
+            name: car.cityName ? `${car.brand} ${car.name} Price in ${car.cityName}` : `${car.brand} ${car.name} Price`,
             url: car.url || BASE_URL,
             priceCurrency: car.currency || 'INR',
             lowPrice: car.lowPrice,
             highPrice: car.highPrice && car.highPrice >= car.lowPrice ? car.highPrice : car.lowPrice,
-            offerCount: 1,
+            offerCount: car.offerCount || 1,
             availability: 'https://schema.org/InStock',
             priceValidUntil: validUntilDate.toISOString().split('T')[0],
-            itemCondition: 'https://schema.org/NewCondition'
+            itemCondition: 'https://schema.org/NewCondition',
+            areaServed: car.cityName ? {
+                '@type': 'City',
+                name: car.cityName
+            } : undefined
         }
     }
+
 
     // AggregateRating — use real data when available, credible defaults when not
     const hasRealReviews = car.reviews && car.reviews.length > 0

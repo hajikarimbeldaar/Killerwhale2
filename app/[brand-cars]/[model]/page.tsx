@@ -746,8 +746,10 @@ export default async function ModelPage({ params }: ModelPageProps) {
     fuelType: (modelData as any).fuelTypes?.[0] || 'Petrol', // Default to first available
     transmission: (modelData as any).transmissions?.[0] || 'Manual',
     seatingCapacity: (modelData as any).keySpecs?.seatingCapacity || 5,
-    modelDate: new Date().getFullYear().toString() // Current year model
+    modelDate: new Date().getFullYear().toString(), // Current year model
+    offerCount: modelData.variants?.length || 1
   })
+
 
   // Format FAQs for schema — use backend FAQs or auto-generate high-value ones
   let formattedFaqs = modelData.faqs?.map((faq: any) => ({

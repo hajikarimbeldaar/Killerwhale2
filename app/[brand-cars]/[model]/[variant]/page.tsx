@@ -7,6 +7,7 @@ import { generateCarProductSchema, generateBreadcrumbSchema, generateFAQSchema }
 import { FloatingAIBot } from '@/components/FloatingAIBot'
 import { getPriceBreakupData } from '../price-in/[city]/page'
 import { resolveR2Url } from '@/lib/image-utils'
+import { getCurrentMonthYear } from '@/lib/date-utils'
 
 interface PageProps {
   params: Promise<{
@@ -55,7 +56,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const brandName = toDisplayName(brandSlug)
     const modelName = toDisplayName(modelSlug)
     const cityName = cityMap[citySlug?.toLowerCase() || '']?.split(',')[0] || toDisplayName(citySlug)
-    const currentYear = new Date().getFullYear()
+    const monthYear = getCurrentMonthYear()
 
     // Fetch price + image data for CTR-optimized title
     let modelImage = 'https://www.gadizone.com/og-image.jpg'
@@ -97,16 +98,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       console.error('Error fetching price data for meta:', e)
     }
 
-    // CTR-optimized title with price + city + year
+    // CTR-optimized title with price + city + month/year
     const title = priceStr
-      ? `${brandName} ${modelName} Price in ${cityName}${priceStr} - On Road Price ${currentYear}`
-      : `${brandName} ${modelName} Price in ${cityName} - On Road Price, EMI, Variants ${currentYear}`
-    const description = `${brandName} ${modelName} on-road price in ${cityName}${priceStr ? ` starts at${priceStr}` : ''}. Check detailed price breakup including ex-showroom, RTO, insurance. Calculate EMI and compare all variants in ${cityName} (${currentYear}).`
+      ? `${brandName} ${modelName} Price in ${cityName}${priceStr} - On Road Price (${monthYear})`
+      : `${brandName} ${modelName} Price in ${cityName} - On Road Price, EMI, Variants (${monthYear})`
+    const description = `${brandName} ${modelName} on-road price in ${cityName}${priceStr ? ` starts at${priceStr}` : ''}. Check detailed price breakup including ex-showroom, RTO, insurance. Calculate EMI and compare all variants in ${cityName} (${monthYear}).`
 
     return {
       title,
       description,
-      keywords: `${brandName} ${modelName} price ${cityName} ${currentYear}, ${modelName} on road price ${cityName}, ${modelName} EMI, ${modelName} variants, ${modelName} price breakup`,
+      keywords: `${brandName} ${modelName} price ${cityName} ${monthYear}, ${modelName} on road price ${cityName}, ${modelName} variants`,
       openGraph: {
         title,
         description,
@@ -127,11 +128,53 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   // --- VARIANT PAGE METADATA ---
-  const brandName = brandSlug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-  const modelName = modelSlug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-  const variantName = variantSlug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+  const brandName = toDisplayName(brandSlug)
+  const modelName = toDisplayName(modelSlug)
+  const variantName = toDisplayName(variantSlug)
 
-  return generateVariantSEO(brandName, modelName, variantName)
+  let price = 0
+  try {
+    const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001'
+    
+    // Fetch brands to find brand ID, then model ID, then variants
+    const [brandsRes, modelsRes] = await Promise.all([
+      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } }),
+      fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 86400 } }),
+    ])
+
+    if (brandsRes.ok && modelsRes.ok) {
+      const brands = await brandsRes.json()
+      const modelsData = (await modelsRes.json())?.data || []
+      const brand = brands.find((b: any) =>
+        b.name.toLowerCase() === brandSlug.toLowerCase().replace(/-/g, ' ') ||
+        b.name.toLowerCase().replace(/\s+/g, '-') === brandSlug.toLowerCase()
+      )
+      
+      if (brand) {
+        const model = modelsData.find((m: any) =>
+          m.brandId === brand.id && (
+            m.name.toLowerCase() === modelSlug.toLowerCase().replace(/-/g, ' ') ||
+            m.name.toLowerCase().replace(/\s+/g, '-') === modelSlug.toLowerCase()
+          )
+        )
+        
+        if (model) {
+          const variantsRes = await fetch(`${backendUrl}/api/variants?modelId=${model.id}`, { next: { revalidate: 86400 } })
+          if (variantsRes.ok) {
+            const variants = await variantsRes.json()
+            const normalize = (s: string) => s.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+            const target = normalize(variantSlug)
+            const variantEntry = variants.find((v: any) => normalize(v.name) === target)
+            if (variantEntry) price = variantEntry.price
+          }
+        }
+      }
+    }
+  } catch (e) {
+    console.error('Error fetching data for variant metadata:', e)
+  }
+
+  return generateVariantSEO(brandName, modelName, variantName, price)
 }
 
 export default async function VariantDetailPage({ params, searchParams }: PageProps) {
@@ -147,21 +190,25 @@ export default async function VariantDetailPage({ params, searchParams }: PagePr
     const initialData = await getPriceBreakupData(brandSlug, modelSlug, citySlug)
 
     // Generate structured data
+    const cityName = cityMap[citySlug?.toLowerCase() || '']?.split(',')[0] || toDisplayName(citySlug)
     const currentUrl = `https://www.gadizone.com/${resolvedParams['brand-cars']}/${modelSlug}/${variantSlug}`
     const productSchema = initialData ? generateCarProductSchema({
       name: `${initialData.brand.name} ${initialData.model.name}`,
       brand: initialData.brand.name,
       image: initialData.model.heroImage,
       url: currentUrl,
-      description: `Get ${initialData.brand.name} ${initialData.model.name} on-road price in ${toDisplayName(citySlug)}. View price breakup, variants, and specs.`,
+      description: `Get the detailed on-road price of ${initialData.brand.name} ${initialData.model.name} in ${cityName}. Our comprehensive price breakup includes ex-showroom price, RTO charges, insurance, and other taxes. Calculate your monthly EMI and compare variants of the ${initialData.model.name} easily on gadizone.`,
       lowPrice: initialData.variants.length > 0 ? Math.min(...initialData.variants.map((v: any) => v.price)) : 0,
       highPrice: initialData.variants.length > 0 ? Math.max(...initialData.variants.map((v: any) => v.price)) : 0,
       bodyType: initialData.model.bodyType,
       fuelType: initialData.model.fuelTypes?.[0] || 'Petrol',
       transmission: initialData.model.transmissions?.[0] || 'Manual',
       seatingCapacity: initialData.model.seating ? parseInt(initialData.model.seating.split(' ')[0]) : 5,
-      modelDate: new Date().getFullYear().toString()
+      modelDate: new Date().getFullYear().toString(),
+      cityName: cityName,
+      offerCount: initialData.variants.length || 1
     }) : null
+
 
     const breadcrumbSchema = generateBreadcrumbSchema([
       { name: 'Home', item: '/' },

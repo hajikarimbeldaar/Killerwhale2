@@ -21,6 +21,7 @@ import { OptimizedImage } from '../common/OptimizedImage'
 import TestDriveBottomBar from '../common/TestDriveBottomBar'
 import LeadFormModal from '../common/LeadFormModal'
 import CitySEOContent from './CitySEOContent'
+import { getCurrentMonthYear } from '@/lib/date-utils'
 
 
 
@@ -54,6 +55,8 @@ const normalizeForMatch = (str: string) =>
     .replace(/[^a-z0-9-]/g, '') // Remove all non-alphanumeric except hyphens
     .replace(/-+/g, '-')   // Replace multiple consecutive hyphens with single hyphen
     .replace(/^-|-$/g, '') // Remove leading/trailing hyphens
+
+
 
 // Helper to find lowest price variant from array
 const findLowestPriceVariant = (variants: any[]) => {
@@ -973,7 +976,7 @@ export default function PriceBreakupPage({
           {/* Header */}
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              {brandName} {modelName} On-Road Price in {selectedCity.split(',')[0]} {new Date().getFullYear()}
+              {brandName} {modelName} On-Road Price in {selectedCity.split(',')[0]} - {getCurrentMonthYear()}
             </h1>
             <div className="relative">
               <div className={`text-gray-600 leading-relaxed transition-all duration-300 ${!isTextExpanded ? 'line-clamp-2' : ''}`}>
@@ -1184,7 +1187,7 @@ export default function PriceBreakupPage({
               {/* Section Header - Matches other sections */}
               <div className="mb-5">
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
-                  On-Road Price Breakdown
+                  On-Road Price Breakdown - {getCurrentMonthYear()}
                 </h2>
                 <p className="text-sm text-gray-600 mt-1">
                   Complete cost breakdown for {selectedCity.split(',')[0]}
@@ -1330,7 +1333,7 @@ export default function PriceBreakupPage({
                     <tfoot>
                       <tr className="bg-green-50 border-t-2 border-green-200">
                         <td className="px-5 py-5">
-                          <span className="block text-sm text-gray-600">On-Road Price in {selectedCity.split(',')[0]}</span>
+                          <span className="block text-sm text-gray-600">On-Road Price in {selectedCity.split(',')[0]} ({getCurrentMonthYear()})</span>
                         </td>
                         <td className="px-5 py-5 text-right">
                           <span className="text-2xl sm:text-3xl font-bold text-green-600">₹{formatIndianPrice(priceBreakup.totalOnRoadPrice)}</span>

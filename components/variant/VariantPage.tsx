@@ -21,6 +21,7 @@ import UpcomingCars from '../home/UpcomingCars'
 import Ad3DCarousel from '../ads/Ad3DCarousel'
 import UpcomingCarCard from '../home/UpcomingCarCard'
 import { resolveR2Url } from '@/lib/image-utils'
+import { getCurrentMonthYear } from '@/lib/date-utils'
 
 import ImageGalleryModal from '../common/ImageGalleryModal'
 import TestDriveBottomBar from '../common/TestDriveBottomBar'
@@ -895,7 +896,7 @@ export default function VariantPage({
                     {showSkeleton ? (
                       <div className="bg-gray-200 animate-pulse h-9 w-96 rounded"></div>
                     ) : (
-                      currentVariantData?.fullName
+                      `${currentVariantData?.fullName} - On-Road Price ${getCurrentMonthYear()}`
                     )}
                   </h1>
 
@@ -1000,7 +1001,7 @@ export default function VariantPage({
                     formatPrice(displayPrice / 100000)
                   )}
                 </div>
-                <div className="text-sm text-gray-500">*{priceLabel}</div>
+                <div className="text-sm text-gray-500">*{priceLabel} ({getCurrentMonthYear()})</div>
 
                 <button
                   onClick={() => {
@@ -3361,16 +3362,12 @@ export default function VariantPage({
                             </div>
                           </div>
 
-                          <button
-                            onClick={() => {
-                              const currentModelSlug = displayBrandName?.toLowerCase().replace(/\s+/g, '-') + '-' + displayModelName?.toLowerCase().replace(/\s+/g, '-')
-                              const compareModelSlug = car.brandName.toLowerCase().replace(/\s+/g, '-') + '-' + car.name.toLowerCase().replace(/\s+/g, '-')
-                              router.push('/compare/' + currentModelSlug + '-vs-' + compareModelSlug)
-                            }}
-                            className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white py-2 rounded-lg transition-all duration-200 text-sm font-semibold shadow-sm"
+                          <Link
+                            href={`/compare/${displayBrandName?.toLowerCase().replace(/\s+/g, '-')}-${displayModelName?.toLowerCase().replace(/\s+/g, '-')}-vs-${car.brandName.toLowerCase().replace(/\s+/g, '-')}-${car.name.toLowerCase().replace(/\s+/g, '-')}`}
+                            className="w-full inline-block text-center bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white py-2 rounded-lg transition-all duration-200 text-sm font-semibold shadow-sm"
                           >
-                            Compare Now
-                          </button>
+                            Compare {displayModelName} vs {car.name}
+                          </Link>
                         </div>
                       )
                     })}

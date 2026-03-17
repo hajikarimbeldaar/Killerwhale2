@@ -146,12 +146,13 @@ export default function CarCard({ car, index, onClick }: CarCardProps) {
           {car.image ? (
             <OptimizedImage
               src={car.image}
-              alt={`${car.brandName} ${car.name}`}
+              alt={`${car.brandName} ${car.name} price in India - Starting at ₹${(car.startingPrice / 100000).toFixed(2)} Lakh`}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
               className="object-contain p-2"
               priority={index !== undefined ? index < 2 : (car.isPopular || car.isNew)} // Only prioritize first 2 to avoid LCP competition
             />
+
           ) : (
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300' fill='#374151' className="w-3/4 h-3/4">
               <path d='M50 200h300c5.5 0 10-4.5 10-10v-80c0-16.6-13.4-30-30-30H70c-16.6 0-30 13.4-30 30v80c0 5.5 4.5 10 10 10z' />

@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { getCurrentMonthYear } from './date-utils'
 
 interface SEOConfig {
   title: string
@@ -77,14 +78,21 @@ export function generateSEO({
 
 // Brand-specific SEO
 export function generateBrandSEO(brandName: string): Metadata {
-  const currentYear = new Date().getFullYear();
   const brandSlug = brandName.toLowerCase().replace(/\s+/g, '-');
+  const monthYear = getCurrentMonthYear();
   return generateSEO({
-    title: `${brandName} Cars in India ${currentYear} — Prices, Models & Expert Reviews`,
-    description: `Explore all ${brandName} cars available in India in ${currentYear}. Compare ex-showroom and on-road prices, read honest expert reviews, check mileage figures, and find the right ${brandName} for your budget and lifestyle.`,
-    keywords: `${brandName} cars India, ${brandName} car price ${currentYear}, ${brandName} models list, ${brandName} on road price, best ${brandName} car, ${brandName} variants, ${brandName} mileage, ${brandName} review India`,
+    title: `${brandName} Cars in India (${monthYear}) — Prices, Models & Reviews`,
+    description: `Explore all ${brandName} cars available in India in ${monthYear}. Compare ex-showroom and on-road prices, read honest expert reviews, check mileage figures, and find the right ${brandName} for your budget.`,
+    keywords: `${brandName} cars India, ${brandName} car price ${monthYear}, ${brandName} models list, ${brandName} on road price, best ${brandName} car, ${brandName} variants, ${brandName} mileage, ${brandName} review India`,
     canonical: `/${brandSlug}-cars`,
   })
+}
+
+// Format prices for titles (₹10.87 Lakh format)
+const formatLakhPrice = (price: number) => {
+  if (price <= 0) return ''
+  const lakh = price / 100000
+  return lakh >= 100 ? `₹${(lakh / 100).toFixed(2)} Cr` : `₹${lakh.toFixed(2)} Lakh`
 }
 
 // Model-specific SEO — with optional price data for CTR-optimized titles
@@ -99,16 +107,9 @@ export function generateModelSEO(
     fuelTypes?: string[]
   }
 ): Metadata {
-  const currentYear = new Date().getFullYear();
   const brandSlug = brandName.toLowerCase().replace(/\s+/g, '-');
   const modelSlug = modelName.toLowerCase().replace(/\s+/g, '-');
-
-  // Format prices for titles (₹10.87 Lakh format)
-  const formatLakhPrice = (price: number) => {
-    if (price <= 0) return ''
-    const lakh = price / 100000
-    return lakh >= 100 ? `₹${(lakh / 100).toFixed(2)} Cr` : `₹${lakh.toFixed(2)} Lakh`
-  }
+  const monthYear = getCurrentMonthYear();
 
   // Build price string for title
   let priceStr = ''
@@ -124,34 +125,35 @@ export function generateModelSEO(
 
   // CTR-optimized title with price (Google shows ~60 chars)
   const title = priceStr
-    ? `${brandName} ${modelName} Price${priceStr} (${currentYear}) — Variants, Mileage`
-    : `${brandName} ${modelName} Price in India ${currentYear} — Variants, Mileage & Review`
+    ? `${brandName} ${modelName} Price${priceStr} (${monthYear})`
+    : `${brandName} ${modelName} Price in India (${monthYear}) — Variants, Specs`
 
   // Rich description with price for Google snippet
   const variantInfo = options?.variantCount ? `Available in ${options.variantCount} variants. ` : ''
   const fuelInfo = options?.fuelTypes?.length ? `${options.fuelTypes.join(', ')} options. ` : ''
   const priceInfo = priceStr ? `Price starts at ${formatLakhPrice(options!.startingPrice!)} ex-showroom. ` : ''
 
-  const description = `${brandName} ${modelName} ${currentYear}${priceStr ? ` price starts at ${formatLakhPrice(options!.startingPrice!)}` : ' price'}. ${variantInfo}${fuelInfo}${priceInfo}Compare all variants, check real-world mileage, read expert reviews. On-road price, EMI, specs & features.`
-
   return generateSEO({
     title,
-    description,
-    keywords: `${brandName} ${modelName} price ${currentYear}, ${modelName} on road price, ${modelName} variants, ${modelName} mileage, ${modelName} review, ${modelName} specs, ${modelName} EMI, ${modelName} vs competitors, best ${options?.bodyType || 'car'} India`,
+    description: `${brandName} ${modelName} ${monthYear}${priceStr ? ` price starts at ${formatLakhPrice(options!.startingPrice!)}` : ' price'}. ${variantInfo}${fuelInfo}${priceInfo}Compare all variants, check real-world mileage, and detailed specs.`,
+    keywords: `${brandName} ${modelName} price ${monthYear}, ${modelName} on road price, ${modelName} variants, ${modelName} specs`,
     canonical: `/${brandSlug}-cars/${modelSlug}`,
   })
 }
 
 // Variant-specific SEO
-export function generateVariantSEO(brandName: string, modelName: string, variantName: string): Metadata {
-  const currentYear = new Date().getFullYear();
+export function generateVariantSEO(brandName: string, modelName: string, variantName: string, price?: number): Metadata {
   const brandSlug = brandName.toLowerCase().replace(/\s+/g, '-');
   const modelSlug = modelName.toLowerCase().replace(/\s+/g, '-');
   const variantSlug = variantName.toLowerCase().replace(/\s+/g, '-');
+  const monthYear = getCurrentMonthYear();
+
+  const priceStr = price && price > 0 ? ` ₹${(price / 100000).toFixed(2)} Lakh` : ''
+
   return generateSEO({
-    title: `${brandName} ${modelName} ${variantName} — On Road Price, Features & Full Specs (${currentYear})`,
-    description: `${brandName} ${modelName} ${variantName} on road price, detailed features list, fuel efficiency, and full specifications for ${currentYear}. Find out exactly what you get in the ${variantName} trim and whether it's worth the premium over lower variants.`,
-    keywords: `${brandName} ${modelName} ${variantName} price, ${brandName} ${modelName} ${variantName} on road price, ${brandName} ${modelName} ${variantName} features, ${brandName} ${modelName} ${variantName} mileage, ${brandName} ${modelName} ${variantName} specs ${currentYear}`,
+    title: `${brandName} ${modelName} ${variantName} Price${priceStr} — Features (${monthYear})`,
+    description: `${brandName} ${modelName} ${variantName}${priceStr ? ` price is${priceStr}` : ''} on road. Check detailed features, specs, and reviews for ${monthYear}.`,
+    keywords: `${brandName} ${modelName} ${variantName} price, ${brandName} ${modelName} ${variantName} on road price`,
     canonical: `/${brandSlug}-cars/${modelSlug}/${variantSlug}`,
   })
 }
@@ -159,9 +161,9 @@ export function generateVariantSEO(brandName: string, modelName: string, variant
 // Static page SEO
 export const staticPageSEO = {
   home: generateSEO({
-    title: `New Cars in India ${new Date().getFullYear()} — Compare Prices, Specs & Expert Reviews`,
-    description: `Looking for a new car in India? Compare prices, variants, mileage, and expert reviews for ${new Date().getFullYear()} models from Maruti Suzuki, Hyundai, Tata, Mahindra, and more. No dealer bias — just honest research.`,
-    keywords: `new cars India ${new Date().getFullYear()}, car prices India, best cars to buy, car comparison, car reviews India, Maruti Suzuki cars, Hyundai cars, Tata cars, car EMI calculator, on road price`,
+    title: `New Cars in India (${getCurrentMonthYear()}) — Compare Prices, Specs & Reviews`,
+    description: `Looking for a new car in India? Compare prices, variants, and expert reviews for ${getCurrentMonthYear()} models. No dealer bias — just honest research.`,
+    keywords: `new cars India ${getCurrentMonthYear()}, car prices India`,
     canonical: '/',
   }),
 

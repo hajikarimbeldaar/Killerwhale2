@@ -2295,16 +2295,12 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
                                 </div>
                               </div>
 
-                              <button
-                                onClick={() => {
-                                  const currentModelSlug = `${model?.brand.toLowerCase().replace(/\s+/g, '-')}-${model?.name.toLowerCase().replace(/\s+/g, '-')}`
-                                  const compareModelSlug = `${car.brandName.toLowerCase().replace(/\s+/g, '-')}-${car.name.toLowerCase().replace(/\s+/g, '-')}`
-                                  router.push(`/compare/${currentModelSlug}-vs-${compareModelSlug}`)
-                                }}
-                                className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white py-2 rounded-lg transition-all duration-200 text-sm font-semibold shadow-sm"
+                              <Link
+                                href={`/compare/${model?.brand.toLowerCase().replace(/\s+/g, '-')}-${model?.name.toLowerCase().replace(/\s+/g, '-')}-vs-${car.brandName.toLowerCase().replace(/\s+/g, '-')}-${car.name.toLowerCase().replace(/\s+/g, '-')}`}
+                                className="w-full inline-block text-center bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white py-2 rounded-lg transition-all duration-200 text-sm font-semibold shadow-sm"
                               >
-                                Compare Now
-                              </button>
+                                Compare {model?.name} vs {car.name}
+                              </Link>
                             </div>
                           )
                         })}
