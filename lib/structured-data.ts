@@ -140,21 +140,23 @@ export function generateCarProductSchema(car: {
     }
 
     const primaryImage = resolvePublicImage(car.image)
+    const carDescription = car.description || `Explore the latest ${car.brand} ${car.name} price, specifications, features, and mileage in India. Get the detailed on-road price in ${car.cityName || 'your city'} on gadizone.`
 
     const schema: any = {
         '@context': 'https://schema.org',
         '@type': 'Product',
         name: car.name,
         image: [primaryImage],
-        description: car.description || `Explore ${car.brand} ${car.name} price, specifications, features, and mileage in India.`,
+        description: carDescription,
         brand: {
             '@type': 'Brand',
             name: car.brand
         },
         model: car.name,
         sku: `${car.brand.toLowerCase().replace(/\s+/g, '-')}-${car.name.toLowerCase().replace(/\s+/g, '-')}`,
-        // GTIN removed as it must be a valid numeric code; SKU is sufficient for Google
-        vehicleConfiguration: car.description ? car.description.substring(0, 150) : undefined,
+        mpn: `${car.brand.toLowerCase().replace(/\s+/g, '-')}-${car.name.toLowerCase().replace(/\s+/g, '-')}-mpn`,
+        // GTIN removed as it must be a valid numeric code; SKU + MPN is sufficient for Google
+        vehicleConfiguration: carDescription.substring(0, 150),
         bodyType: car.bodyType,
         fuelType: car.fuelType,
         vehicleTransmission: car.transmission,
@@ -177,7 +179,47 @@ export function generateCarProductSchema(car: {
             areaServed: car.cityName ? {
                 '@type': 'City',
                 name: car.cityName
-            } : undefined
+            } : {
+                '@type': 'Country',
+                name: 'IN'
+            },
+            // Mandatory for Google Merchant Listings (Rich Results)
+            // Even if not "shipping", Google requires these fields to be present
+            shippingDetails: {
+                '@type': 'OfferShippingDetails',
+                shippingRate: {
+                    '@type': 'MonetaryAmount',
+                    value: '0',
+                    currency: 'INR'
+                },
+                deliveryTime: {
+                    '@type': 'ShippingDeliveryTime',
+                    handlingTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 1,
+                        unitCode: 'day'
+                    },
+                    transitTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 1,
+                        maxValue: 5,
+                        unitCode: 'day'
+                    }
+                },
+                shippingDestination: {
+                    '@type': 'DefinedRegion',
+                    addressCountry: 'IN'
+                }
+            },
+            hasMerchantReturnPolicy: {
+                '@type': 'MerchantReturnPolicy',
+                applicableCountry: 'IN',
+                returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnPeriod',
+                merchantReturnDays: 0,
+                returnMethod: 'https://schema.org/ReturnInStore',
+                returnFees: 'https://schema.org/FreeReturn'
+            }
         }
     }
 
