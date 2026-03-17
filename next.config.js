@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+// Optimized for Vercel Free Tier: Reduced data fetch limits & increased ISR revalidate to 24h.
 const isProdEnv = process.env.NODE_ENV === 'production'
 const extraImageHosts = (process.env.NEXT_PUBLIC_IMAGE_HOSTS || '')
   .split(',')
