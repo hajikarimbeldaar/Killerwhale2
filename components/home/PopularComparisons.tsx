@@ -1,0 +1,194 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { calculateOnRoadPrice } from '@/lib/rto-data-optimized'
+import { OptimizedImage } from '@/components/common/OptimizedImage'
+
+interface ComparisonData {
+  id: string
+  model1: {
+    id: string
+    name: string
+    brand: string
+    heroImage: string
+    startingPrice: number
+    fuelTypes: string[]
+  }
+  model2: {
+    id: string
+    name: string
+    brand: string
+    heroImage: string
+    startingPrice: number
+    fuelTypes: string[]
+  }
+}
+
+interface PopularComparisonsProps {
+  initialComparisons?: ComparisonData[]
+}
+
+export default function PopularComparisons({ initialComparisons = [] }: PopularComparisonsProps) {
+  const [comparisons] = useState<ComparisonData[]>(initialComparisons)
+  const [mounted, setMounted] = useState(false)
+  const router = useRouter()
+
+  // Only run on-road price calculation after client-side hydration
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Helper function to calculate on-road price - only call after mount
+  const getOnRoadPrice = (exShowroomPrice: number, fuelType: string): number => {
+    if (!mounted) {
+      // During SSR/initial hydration, return ex-showroom price to match server
+      return exShowroomPrice
+    }
+
+    const selectedCity = localStorage.getItem('selectedCity') || 'Mumbai, Maharashtra'
+    const state = selectedCity.split(',')[1]?.trim() || 'Maharashtra'
+    const breakup = calculateOnRoadPrice(exShowroomPrice, state, fuelType)
+    return breakup.totalOnRoadPrice
+  }
+
+  const handleCompareClick = (model1: any, model2: any) => {
+    const slug1 = `${model1.brand.toLowerCase().replace(/\s+/g, '-')}-${model1.name.toLowerCase().replace(/\s+/g, '-')}`
+    const slug2 = `${model2.brand.toLowerCase().replace(/\s+/g, '-')}-${model2.name.toLowerCase().replace(/\s+/g, '-')}`
+    router.push(`/compare/${slug1}-vs-${slug2}`)
+  }
+
+  if (comparisons.length === 0) {
+    return null // Don't show section if no comparisons
+  }
+
+
+  return (
+    <div>
+      {/* Section Header */}
+      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Popular Comparison</h2>
+
+      {/* Comparison Cards Horizontal Scroll */}
+      <div className="relative group">
+        {/* Left Scroll Arrow */}
+        <button
+          onClick={() => {
+            const container = document.getElementById('comparisons-scroll')
+            container?.scrollBy({ left: -340, behavior: 'smooth' })
+          }}
+          className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 hover:bg-white shadow-lg rounded-full items-center justify-center text-gray-700 hover:text-red-600 transition-all opacity-0 group-hover:opacity-100 -ml-5"
+          aria-label="Scroll left"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        {/* Right Scroll Arrow */}
+        <button
+          onClick={() => {
+            const container = document.getElementById('comparisons-scroll')
+            container?.scrollBy({ left: 340, behavior: 'smooth' })
+          }}
+          className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 hover:bg-white shadow-lg rounded-full items-center justify-center text-gray-700 hover:text-red-600 transition-all opacity-0 group-hover:opacity-100 -mr-5"
+          aria-label="Scroll right"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        <div
+          id="comparisons-scroll"
+          className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 scroll-smooth"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {comparisons.map((comparison) => {
+            const model1OnRoad = getOnRoadPrice(
+              comparison.model1.startingPrice,
+              comparison.model1.fuelTypes[0] || 'Petrol'
+            )
+            const model2OnRoad = getOnRoadPrice(
+              comparison.model2.startingPrice,
+              comparison.model2.fuelTypes[0] || 'Petrol'
+            )
+
+            return (
+              <div
+                key={comparison.id}
+                className="flex-shrink-0 w-[320px] bg-white rounded-xl border border-gray-200 p-3 hover:shadow-lg transition-all duration-300"
+              >
+                {/* Side by Side Layout with VS Badge */}
+                <div className="flex items-start gap-2 mb-3">
+                  {/* Model 1 */}
+                  <div className="flex-1">
+                    <div className="relative mb-2 h-20 w-full">
+                      <OptimizedImage
+                        src={comparison.model1.heroImage}
+                        alt={`${comparison.model1.brand} ${comparison.model1.name}`}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="text-left">
+                      <div className="text-xs text-gray-500">{comparison.model1.brand}</div>
+                      <div className="font-bold text-sm text-gray-900 mb-1">{comparison.model1.name}</div>
+                      <div className="text-red-600 font-bold text-sm">
+                        ₹ {(model1OnRoad / 100000).toFixed(2)} Lakh
+                      </div>
+                      <div className="text-xs text-gray-500">{mounted ? 'On-Road Price' : 'Ex-Showroom'}</div>
+                    </div>
+                  </div>
+
+                  {/* VS Badge - Positioned between cards */}
+                  <div className="flex items-center justify-center" style={{ marginTop: '30px' }}>
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-red-600 to-orange-500 flex items-center justify-center shadow-md">
+                      <span className="text-white text-xs font-bold">VS</span>
+                    </div>
+                  </div>
+
+                  {/* Model 2 */}
+                  <div className="flex-1">
+                    <div className="relative mb-2 h-20 w-full">
+                      <OptimizedImage
+                        src={comparison.model2.heroImage}
+                        alt={`${comparison.model2.brand} ${comparison.model2.name}`}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="text-left">
+                      <div className="text-xs text-gray-500">{comparison.model2.brand}</div>
+                      <div className="font-bold text-sm text-gray-900 mb-1">{comparison.model2.name}</div>
+                      <div className="text-red-600 font-bold text-sm">
+                        ₹ {(model2OnRoad / 100000).toFixed(2)} Lakh
+                      </div>
+                      <div className="text-xs text-gray-500">{mounted ? 'On-Road Price' : 'Ex-Showroom'}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => handleCompareClick(comparison.model1, comparison.model2)}
+                  className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white py-2 rounded-lg transition-all duration-200 text-sm font-semibold shadow-sm"
+                >
+                  Compare Now
+                </button>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Compare Cars of Your Choice Button */}
+      <div className="text-center mt-6">
+        <button
+          onClick={() => router.push('/compare')}
+          className="w-full max-w-md bg-white border-2 border-red-600 text-red-600 hover:bg-red-50 py-3 rounded-lg transition-all duration-200 font-medium"
+        >
+          Compare Cars of Your Choice
+        </button>
+      </div>
+    </div>
+  )
+}

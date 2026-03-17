@@ -1,0 +1,1155 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { ChevronDown, Plus, Share2, X, TrendingUp, TrendingDown, Award, Landmark } from 'lucide-react'
+import { calculateOnRoadPrice } from '@/lib/rto-data-optimized'
+import Footer from '@/components/Footer'
+import Breadcrumb from '@/components/common/Breadcrumb'
+import PopularComparisons from '@/components/home/PopularComparisons'
+import PopularCars from '@/components/home/PopularCars'
+import UpcomingCars from '@/components/home/UpcomingCars'
+import MovingAdBanner from '@/components/ads/MovingAdBanner'
+import Ad3DCarousel from '@/components/ads/Ad3DCarousel'
+import PageSection from '@/components/common/PageSection'
+import CarCard from '@/components/home/CarCard'
+import ComparisonYouTube from '@/components/comparison/ComparisonYouTube'
+import { FloatingAIBot } from '@/components/FloatingAIBot'
+import CarExpertBanner from '@/components/CarExpertBanner'
+
+
+interface Variant {
+  id: string
+  name: string
+  price: number
+  fuelType: string
+  transmission: string
+  [key: string]: any
+}
+
+interface Model {
+  id: string
+  name: string
+  brandName: string
+  heroImage: string
+  variants: Variant[]
+}
+
+interface ComparisonItem {
+  model: Model
+  variant: Variant | null
+}
+
+interface ComparePageClientProps {
+  initialSlug: string
+  initialComparisonItems: ComparisonItem[]
+  initialSimilarCars: any[]
+  initialBrands: any[]
+  initialSeoText: string
+}
+
+export default function ComparePageClient({
+  initialSlug,
+  initialComparisonItems,
+  initialSimilarCars,
+  initialBrands,
+  initialSeoText
+}: ComparePageClientProps) {
+  const router = useRouter()
+  const [slug, setSlug] = useState(initialSlug)
+  const [comparisonItems, setComparisonItems] = useState<(ComparisonItem | null)[]>(initialComparisonItems)
+  const [loading, setLoading] = useState(false) // Changed from true since we have initial data
+  const [showVariantDropdown, setShowVariantDropdown] = useState<number | null>(null)
+  const [seoText, setSeoText] = useState(initialSeoText)
+  const [showDifferences, setShowDifferences] = useState(false)
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({})
+  const [similarCars, setSimilarCars] = useState<any[]>(initialSimilarCars)
+  const [loadingSimilarCars, setLoadingSimilarCars] = useState(false)
+  const [showAddCarModal, setShowAddCarModal] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [addCarAtIndex, setAddCarAtIndex] = useState<number | null>(null)
+  const [showVariantModal, setShowVariantModal] = useState<number | null>(null)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  // ✅ OPTIMIZED: Use single API call for all comparison data
+  const [brands, setBrands] = useState<any[]>(initialBrands)
+  const [dataLoaded, setDataLoaded] = useState(true) // Changed from false since we have initial data
+  const [allModels, setAllModels] = useState<any[]>([])
+  const [loadingAllModels, setLoadingAllModels] = useState(false)
+
+  const backendUrl = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001'
+
+  const resolveImageUrl = (image?: string) => {
+    if (!image) return ''
+    if (image.startsWith('http')) return image
+    if (image.startsWith('/uploads/') || image.startsWith('/')) return `${backendUrl}${image}`
+    return `${backendUrl}/uploads/${image}`
+  }
+
+  // No need to fetch initial data since it's provided via props
+  // useEffect for slug resolution removed
+
+  // Scroll to top on page load and attach scroll listener for sticky header
+  useEffect(() => {
+    window.scrollTo(0, 0)
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 220)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const generateSeoText = (modelNames: string[]) => {
+    if (modelNames.length === 0) return ''
+    return `gadizone brings you comparison of ${modelNames.join(', ')}...`
+  }
+
+  // fetchComparisonData removed - data provided via props from SSR parent
+
+
+  const getOnRoadPrice = (exShowroomPrice: number, fuelType: string): number => {
+    const selectedCity = typeof window !== 'undefined' ? localStorage.getItem('selectedCity') || 'Mumbai, Maharashtra' : 'Mumbai, Maharashtra'
+    const state = selectedCity.split(',')[1]?.trim() || 'Maharashtra'
+    const safeFuelType = fuelType || 'Petrol'
+    const breakup = calculateOnRoadPrice(exShowroomPrice, state, safeFuelType)
+    return breakup.totalOnRoadPrice
+  }
+
+  const calculateEMI = (price: number): number => {
+    const principal = price * 0.8
+    const monthlyRate = 9.5 / 12 / 100
+    const tenure = 60
+    return Math.round((principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) / (Math.pow(1 + monthlyRate, tenure) - 1))
+  }
+
+  const handleVariantChange = (index: number, newVariant: Variant) => {
+    const newItems = [...comparisonItems]
+    if (newItems[index]) {
+      newItems[index]!.variant = newVariant
+      setComparisonItems(newItems)
+    }
+    setShowVariantDropdown(null)
+  }
+
+  const handleAddMore = (index?: number) => {
+    setAddCarAtIndex(index ?? null)
+    setShowAddCarModal(true)
+    setSearchQuery('')
+    if (allModels.length === 0) {
+      fetchAllModels()
+    }
+  }
+
+  const fetchAllModels = async () => {
+    try {
+      setLoadingAllModels(true)
+      const response = await fetch(`${backendUrl}/api/models?fields=id,name,brandId,heroImage`)
+      if (response.ok) {
+        const data = await response.json()
+        setAllModels(data)
+      }
+    } catch (error) {
+      console.error('Failed to fetch models:', error)
+    } finally {
+      setLoadingAllModels(false)
+    }
+  }
+
+  const handleAddCar = async (model: any) => {
+    try {
+      // Fetch variants for this model on demand
+      const response = await fetch(`${backendUrl}/api/variants?modelId=${model.id}`)
+      if (!response.ok) throw new Error('Failed to fetch variants')
+
+      const modelVariants = await response.json()
+
+      const brandMap: Record<string, string> = {}
+      brands.forEach((brand: any) => { brandMap[brand.id] = brand.name })
+
+      if (modelVariants.length > 0) {
+        const lowestVariant = modelVariants.reduce((prev: Variant, curr: Variant) =>
+          (curr.price < prev.price && curr.price > 0) ? curr : prev
+        )
+
+        const newModel: Model = {
+          id: model.id,
+          name: model.name,
+          brandName: brandMap[model.brandId] || 'Unknown',
+          heroImage: resolveImageUrl(model.heroImage),
+          variants: modelVariants
+        }
+
+        const newItem = { model: newModel, variant: lowestVariant }
+
+        let newItems: (ComparisonItem | null)[]
+        if (addCarAtIndex !== null) {
+          // Replace at specific index
+          newItems = [...comparisonItems]
+          newItems[addCarAtIndex] = newItem
+        } else {
+          // Add to end
+          newItems = [...comparisonItems, newItem]
+        }
+
+        setComparisonItems(newItems)
+
+        // Update URL - only include non-null items
+        const validItems = newItems.filter((item): item is ComparisonItem => item !== null)
+        if (validItems.length > 0) {
+          const newSlug = validItems.map(item =>
+            `${item.model.brandName.toLowerCase().replace(/\s+/g, '-')}-${item.model.name.toLowerCase().replace(/\s+/g, '-')}`
+          ).join('-vs-')
+          router.push(`/compare/${newSlug}`)
+        }
+
+        setShowAddCarModal(false)
+        setAddCarAtIndex(null)
+      }
+    } catch (error) {
+      console.error('Error adding car:', error)
+      alert('Failed to add car. Please try again.')
+    }
+  }
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `${comparisonItems.filter((item): item is ComparisonItem => item !== null).map(item => `${item.model.brandName} ${item.model.name}`).join(' vs ')}`,
+          text: 'Compare these cars on gadizone',
+          url: window.location.href
+        })
+      } catch (err) {
+        console.log('Share cancelled')
+      }
+    } else {
+      // Fallback: Copy to clipboard
+      navigator.clipboard.writeText(window.location.href)
+      alert('Link copied to clipboard!')
+    }
+  }
+
+  const toggleSection = (sectionId: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [sectionId]: !prev[sectionId]
+    }))
+  }
+
+  // Calculate comparison stats
+  const getComparisonStats = () => {
+    const validItems = comparisonItems.filter((item): item is ComparisonItem => item !== null)
+    if (validItems.length !== 2) return null
+
+    const item1 = validItems[0]
+    const item2 = validItems[1]
+
+    if (!item1.variant || !item2.variant) return null
+
+    const price1 = getOnRoadPrice(item1.variant.price, item1.variant.fuelType)
+    const price2 = getOnRoadPrice(item2.variant.price, item2.variant.fuelType)
+
+    const priceDiff = Math.abs(price1 - price2)
+    const priceDiffPercent = ((priceDiff / Math.min(price1, price2)) * 100).toFixed(1)
+    const cheaperIndex = comparisonItems.findIndex(item => item === item1) < comparisonItems.findIndex(item => item === item2) && price1 < price2 ? comparisonItems.findIndex(item => item === item1) : comparisonItems.findIndex(item => item === item2)
+
+    return {
+      priceDiff,
+      priceDiffPercent,
+      cheaperIndex,
+      cheaperCar: comparisonItems[cheaperIndex]
+    }
+  }
+
+  const stats = getComparisonStats()
+
+  // 9 Specification sections from variant page - EXACT ORDER
+  const specificationSections = [
+    {
+      id: 'comfort',
+      title: 'Comfort & Convenience',
+      specs: [
+        { key: 'ventilatedSeats', label: 'Ventilated Seats' },
+        { key: 'sunroof', label: 'Sunroof' },
+        { key: 'airPurifier', label: 'Air Purifier' },
+        { key: 'headsUpDisplay', label: 'Heads Up Display' },
+        { key: 'cruiseControl', label: 'Cruise Control' },
+        { key: 'rainSensingWipers', label: 'Rain Sensing Wipers' },
+        { key: 'automaticHeadlamp', label: 'Automatic Headlamp' },
+        { key: 'followMeHomeHeadlights', label: 'Follow Me Home Headlights' },
+        { key: 'keylessEntry', label: 'Keyless Entry' },
+        { key: 'ignition', label: 'Ignition' },
+        { key: 'ambientLighting', label: 'Ambient Lighting' },
+        { key: 'steeringAdjustment', label: 'Steering Adjustment' },
+        { key: 'airConditioning', label: 'Air Conditioning' },
+        { key: 'climateZones', label: 'Climate Zones' },
+        { key: 'climateControl', label: 'Climate Control' },
+        { key: 'rearACVents', label: 'Rear A/C Vents' },
+        { key: 'frontArmrest', label: 'Front Armrest' },
+        { key: 'rearArmrest', label: 'Rear Armrest' },
+        { key: 'insideRearViewMirror', label: 'Inside Rear View Mirror' },
+        { key: 'outsideRearViewMirrors', label: 'Outside Rear View Mirrors' },
+        { key: 'steeringMountedControls', label: 'Steering Mounted Controls' },
+        { key: 'rearWindshieldDefogger', label: 'Rear Windshield Defogger' },
+        { key: 'frontWindshieldDefogger', label: 'Front Windshield Defogger' },
+        { key: 'cooledGlovebox', label: 'Cooled Glovebox' },
+        { key: 'pushButtonStart', label: 'Push Button Start' },
+        { key: 'powerWindows', label: 'Power Windows' },
+        { key: 'powerSteering', label: 'Power Steering' },
+        { key: 'cupholders', label: 'Cup Holders' }
+      ]
+    },
+    {
+      id: 'safety',
+      title: 'Safety',
+      specs: [
+        { key: 'globalNCAPRating', label: 'Global NCAP Rating' },
+        { key: 'airbags', label: 'Airbags' },
+        { key: 'airbagsLocation', label: 'Airbags Location' },
+        { key: 'adasLevel', label: 'ADAS Level' },
+        { key: 'adasFeatures', label: 'ADAS Features' },
+        { key: 'reverseCamera', label: 'Reverse Camera' },
+        { key: 'reverseCameraGuidelines', label: 'Reverse Camera Guidelines' },
+        { key: 'tyrePressureMonitor', label: 'Tyre Pressure Monitor' },
+        { key: 'hillHoldAssist', label: 'Hill Hold Assist' },
+        { key: 'hillDescentControl', label: 'Hill Descent Control' },
+        { key: 'rollOverMitigation', label: 'Roll Over Mitigation' },
+        { key: 'parkingSensor', label: 'Parking Sensor' },
+        { key: 'discBrakes', label: 'Disc Brakes' },
+        { key: 'electronicStabilityProgram', label: 'Electronic Stability Program' },
+        { key: 'abs', label: 'ABS' },
+        { key: 'ebd', label: 'EBD' },
+        { key: 'brakeAssist', label: 'Brake Assist' },
+        { key: 'isofixMounts', label: 'ISOFIX Mounts' },
+        { key: 'seatbeltWarning', label: 'Seatbelt Warning' },
+        { key: 'speedAlertSystem', label: 'Speed Alert System' },
+        { key: 'speedSensingDoorLocks', label: 'Speed Sensing Door Locks' },
+        { key: 'immobiliser', label: 'Immobiliser' },
+        { key: 'esc', label: 'ESC' },
+        { key: 'tractionControl', label: 'Traction Control' },
+        { key: 'hillAssist', label: 'Hill Assist' },
+        { key: 'isofix', label: 'ISOFIX' },
+        { key: 'parkingSensors', label: 'Parking Sensors' },
+        { key: 'parkingCamera', label: 'Parking Camera' },
+        { key: 'blindSpotMonitor', label: 'Blind Spot Monitor' }
+      ]
+    },
+    {
+      id: 'entertainment',
+      title: 'Entertainment & Connectivity',
+      specs: [
+        { key: 'touchScreenInfotainment', label: 'Touch Screen Infotainment' },
+        { key: 'androidAppleCarplay', label: 'Android Auto / Apple CarPlay' },
+        { key: 'speakers', label: 'Speakers' },
+        { key: 'tweeters', label: 'Tweeters' },
+        { key: 'subwoofers', label: 'Subwoofers' },
+        { key: 'usbCChargingPorts', label: 'USB-C Charging Ports' },
+        { key: 'usbAChargingPorts', label: 'USB-A Charging Ports' },
+        { key: 'twelvevChargingPorts', label: '12V Charging Ports' },
+        { key: 'wirelessCharging', label: 'Wireless Charging' },
+        { key: 'infotainmentScreen', label: 'Infotainment Screen' },
+        { key: 'bluetooth', label: 'Bluetooth' },
+        { key: 'usb', label: 'USB' },
+        { key: 'aux', label: 'AUX' },
+        { key: 'androidAuto', label: 'Android Auto' },
+        { key: 'appleCarPlay', label: 'Apple CarPlay' },
+        { key: 'connectedCarTech', label: 'Connected Car Tech' }
+      ]
+    },
+    {
+      id: 'engine',
+      title: 'Engine & Transmission',
+      specs: [
+        { key: 'engineNamePage4', label: 'Engine Name' },
+        { key: 'engineCapacity', label: 'Engine Capacity (cc)' },
+        { key: 'fuel', label: 'Fuel Type' },
+        { key: 'maxPower', label: 'Max Power' },
+        { key: 'maxTorque', label: 'Max Torque' },
+        { key: 'transmission', label: 'Transmission' },
+        { key: 'noOfGears', label: 'No of Gears' },
+        { key: 'paddleShifter', label: 'Paddle Shifter' },
+        { key: 'driveType', label: 'Drive Type' },
+        { key: 'turboCharged', label: 'Turbo Charged' },
+        { key: 'mileageCompanyClaimed', label: 'Mileage (Company Claimed)' },
+        { key: 'mileageCity', label: 'Mileage City' },
+        { key: 'mileageHighway', label: 'Mileage Highway' },
+        { key: 'fuelTankCapacity', label: 'Fuel Tank Capacity (Litres)' },
+        { key: 'emissionStandard', label: 'Emission Standard' },
+        { key: 'zeroTo100KmphTime', label: '0-100 km/h Time' },
+        { key: 'topSpeed', label: 'Top Speed' },
+        { key: 'evBatteryCapacity', label: 'EV Battery Capacity' },
+        { key: 'hybridBatteryCapacity', label: 'Hybrid Battery Capacity' },
+        { key: 'batteryType', label: 'Battery Type' },
+        { key: 'electricMotorPlacement', label: 'Electric Motor Placement' },
+        { key: 'evRange', label: 'EV Range' },
+        { key: 'evChargingTime', label: 'EV Charging Time' },
+        { key: 'maxElectricMotorPower', label: 'Max Electric Motor Power' },
+        { key: 'hybridType', label: 'Hybrid Type' },
+        { key: 'driveTrain', label: 'Drive Train' },
+        { key: 'drivingModes', label: 'Driving Modes' },
+        { key: 'offRoadModes', label: 'Off Road Modes' },
+        { key: 'differentialLock', label: 'Differential Lock' },
+        { key: 'limitedSlipDifferential', label: 'Limited Slip Differential' }
+      ]
+    },
+    {
+      id: 'seating',
+      title: 'Seating Comfort',
+      specs: [
+        { key: 'seatUpholstery', label: 'Seat Upholstery' },
+        { key: 'seatsAdjustment', label: 'Seats Adjustment' },
+        { key: 'driverSeatAdjustment', label: 'Driver Seat Adjustment' },
+        { key: 'passengerSeatAdjustment', label: 'Passenger Seat Adjustment' },
+        { key: 'rearSeatAdjustment', label: 'Rear Seat Adjustment' },
+        { key: 'welcomeSeats', label: 'Welcome Seats' },
+        { key: 'memorySeats', label: 'Memory Seats' }
+      ]
+    },
+    {
+      id: 'exteriors',
+      title: 'Exteriors',
+      specs: [
+        { key: 'headLights', label: 'Head Lights' },
+        { key: 'tailLight', label: 'Tail Light' },
+        { key: 'frontFogLights', label: 'Front Fog Lights' },
+        { key: 'daytimeRunningLights', label: 'Daytime Running Lights' },
+        { key: 'roofRails', label: 'Roof Rails' },
+        { key: 'radioAntenna', label: 'Radio Antenna' },
+        { key: 'outsideRearViewMirror', label: 'Outside Rear View Mirror' },
+        { key: 'sideIndicator', label: 'Side Indicator' },
+        { key: 'rearWindshieldWiper', label: 'Rear Windshield Wiper' },
+        { key: 'alloyWheels', label: 'Alloy Wheels' }
+      ]
+    },
+    {
+      id: 'dimensions',
+      title: 'Dimensions',
+      specs: [
+        { key: 'groundClearance', label: 'Ground Clearance (mm)' },
+        { key: 'length', label: 'Length (mm)' },
+        { key: 'width', label: 'Width (mm)' },
+        { key: 'height', label: 'Height (mm)' },
+        { key: 'wheelbase', label: 'Wheelbase (mm)' },
+        { key: 'kerbWeight', label: 'Kerb Weight (kg)' },
+        { key: 'seatingCapacity', label: 'Seating Capacity' },
+        { key: 'doors', label: 'No of Doors' }
+      ]
+    },
+    {
+      id: 'tyre',
+      title: 'Tyre & Suspension',
+      specs: [
+        { key: 'frontTyreProfile', label: 'Front Tyre Profile' },
+        { key: 'rearTyreProfile', label: 'Rear Tyre Profile' },
+        { key: 'spareTyreProfile', label: 'Spare Tyre Profile' },
+        { key: 'spareWheelType', label: 'Spare Wheel Type' },
+        { key: 'wheelSize', label: 'Wheel Size' },
+        { key: 'tyreSize', label: 'Tyre Size' },
+        { key: 'frontSuspension', label: 'Front Suspension' },
+        { key: 'rearSuspension', label: 'Rear Suspension' },
+        { key: 'frontBrake', label: 'Front Brake' },
+        { key: 'rearBrake', label: 'Rear Brake' }
+      ]
+    },
+    {
+      id: 'storage',
+      title: 'Storage',
+      specs: [
+        { key: 'cupholders', label: 'Cup Holders' },
+        { key: 'fuelTankCapacity', label: 'Fuel Tank Capacity (Litres)' },
+        { key: 'bootSpace', label: 'Boot Space (Litres)' },
+        { key: 'bootSpaceAfterFoldingRearRowSeats', label: 'Boot Space (Rear Seats Folded)' }
+      ]
+    }
+  ]
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="w-16 h-16 border-4 border-gray-200 border-t-red-600 rounded-full animate-spin mx-auto"></div>
+      </div>
+    )
+  }
+
+  if (comparisonItems.length === 0) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-gray-600 mb-3">Unable to load comparison</p>
+          <button onClick={() => router.push('/')} className="px-5 py-2 bg-orange-500 text-white rounded-lg text-sm font-medium">Go Home</button>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header with Share Button */}
+        <div className="flex items-start justify-between mb-6">
+          <div className="flex-1">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">
+              {comparisonItems.filter((item): item is ComparisonItem => item !== null).map(item => `${item.model.brandName} ${item.model.name}`).join(' vs ')} - Comparison {new Date().getFullYear()}
+            </h1>
+            <p className="text-base text-gray-600 leading-relaxed">
+              Detailed comparison of {comparisonItems.filter((item): item is ComparisonItem => item !== null).map(item => `${item.model.brandName} ${item.model.name}`).join(' vs ')}. Compare on-road prices, specifications, mileage, safety rating, and features to choose the best car for you.
+            </p>
+          </div>
+          <button
+            onClick={handleShare}
+            className="ml-4 p-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors"
+            title="Share comparison"
+          >
+            <Share2 className="h-5 w-5 text-gray-600" />
+          </button>
+        </div>
+
+
+        {/* Comparison Cards - Side by Side, Mobile Friendly & Sticky */}
+        {/* Comparison Cards - Side by Side, Mobile Friendly & Sticky */}
+        <div className={`sticky z-40 bg-gray-50 -mx-4 px-4 sm:mx-0 sm:px-0 flex gap-3 sm:gap-4 lg:gap-6 overflow-x-auto scrollbar-hide transition-all duration-300 ${isScrolled ? 'top-14 md:top-[70px] pt-3 pb-3 shadow-[0_8px_15px_-10px_rgba(0,0,0,0.15)] border-b border-gray-200' : 'pt-4 pb-4'}`} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {comparisonItems.map((item, index) => {
+            // Handle empty slot or corrupted item
+            if (!item || !item.variant) {
+              return (
+                <div
+                  key={index}
+                  className="relative bg-white rounded-xl md:rounded-2xl border-2 border-dashed border-gray-300 transition-all duration-300 flex-shrink-0 w-[calc(50%-6px)] md:w-full md:flex-1 hover:border-orange-400 flex flex-col items-center justify-center p-4 md:p-6 group"
+                >
+                  <button
+                    onClick={() => handleAddMore(index)}
+                    className={`flex flex-col items-center justify-center w-full h-full transition-all duration-300 ${isScrolled ? 'min-h-[80px]' : 'min-h-[160px]'}`}
+                  >
+                    <div className={`${isScrolled ? 'w-8 h-8' : 'w-12 h-12 md:w-16 md:h-16'} rounded-full bg-gray-50 border border-gray-200 group-hover:border-orange-500 group-hover:bg-orange-50 flex items-center justify-center transition-all duration-200 shadow-sm`}>
+                      <Plus className={`${isScrolled ? 'h-4 w-4' : 'h-6 w-6 md:h-8 md:w-8'} text-gray-400 group-hover:text-orange-600 transition-colors`} />
+                    </div>
+                    {!isScrolled && (
+                      <div className="mt-3 text-center">
+                        <div className="text-sm md:text-base font-bold text-gray-600 group-hover:text-orange-600 transition-colors">
+                          Add Car
+                        </div>
+                      </div>
+                    )}
+                  </button>
+                </div>
+              )
+            }
+
+            const onRoadPrice = getOnRoadPrice(item.variant.price, item.variant.fuelType)
+            const isCheaper = stats && stats.cheaperIndex === index
+
+            return (
+              <div
+                key={index}
+                className={`relative bg-white rounded-xl md:rounded-2xl border-2 transition-all duration-300 flex-shrink-0 w-[calc(50%-6px)] md:w-full md:flex-1 ${isCheaper
+                  ? 'border-emerald-500 shadow-lg shadow-emerald-100/50'
+                  : 'border-gray-200 hover:border-gray-300 shadow-sm'
+                  }`}
+                style={{ overflow: 'visible' }}
+              >
+                {/* Best Value Badge - Enhanced */}
+                {isCheaper && !isScrolled && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-1 bg-gradient-to-r from-emerald-500 to-green-500 text-white px-3 py-1 rounded-full text-[10px] md:text-xs font-bold shadow-md whitespace-nowrap">
+                    <Award className="h-3 w-3 md:h-3.5 md:w-3.5" />
+                    <span>Best Value</span>
+                  </div>
+                )}
+
+                {/* Remove Button - X Icon */}
+                <button
+                  onClick={() => {
+                    const newItems = [...comparisonItems]
+                    newItems[index] = null
+                    setComparisonItems(newItems)
+                  }}
+                  className={`absolute z-20 bg-white/80 backdrop-blur hover:bg-red-50 border border-gray-200 hover:border-red-500 rounded-full transition-all duration-200 shadow-sm group ${isScrolled ? 'top-1 right-1 p-1' : 'top-2 right-2 p-1.5'}`}
+                  aria-label="Remove car"
+                >
+                  <X className={`${isScrolled ? 'h-3 w-3' : 'h-4 w-4 md:h-5 md:w-5'} text-gray-400 group-hover:text-red-500`} />
+                </button>
+
+                {/* Car Image Section (Collapses on scroll) */}
+                <div className={`relative transition-all duration-300 ease-in-out flex items-center justify-center px-2 pt-2 overflow-hidden ${isScrolled ? 'h-0 opacity-0 pb-0 mt-0' : 'h-24 md:h-32 mt-4'}`}>
+                  {item.model.heroImage ? (
+                    <img
+                      src={item.model.heroImage}
+                      alt={`${item.model.brandName} ${item.model.name}`}
+                      className="w-full h-full object-contain drop-shadow-md"
+                      onError={(e) => {
+                        e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300' fill='%23374151'%3E%3Cpath d='M50 200h300c5.5 0 10-4.5 10-10v-80c0-16.6-13.4-30-30-30H70c-16.6 0-30 13.4-30 30v80c0 5.5 4.5 10 10 10z'/%3E%3Ccircle cx='100' cy='220' r='25' fill='%23111827'/%3E%3Ccircle cx='300' cy='220' r='25' fill='%23111827'/%3E%3C/svg%3E"
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-20 h-10 bg-gray-100 rounded-lg animate-pulse"></div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Car Info Section */}
+                <div className={`text-center ${isScrolled ? 'p-2 md:p-3' : 'p-3 md:p-4'}`}>
+                  {/* Brand and Model Name - Venue HYUNDAI Style */}
+                  <h3 className={`font-extrabold text-gray-900 leading-tight line-clamp-1 ${isScrolled ? 'text-xs md:text-sm' : 'text-base md:text-xl md:tracking-tight mb-0.5'}`}>
+                    {item.model.name}
+                  </h3>
+                  <div className={`font-bold text-gray-500 uppercase tracking-widest ${isScrolled ? 'text-[8px] md:text-[10px] mb-1.5' : 'text-[10px] md:text-[11px] mb-3'}`}>
+                    {item.model.brandName}
+                  </div>
+
+                  {/* Variant Button - Opens Modal */}
+                  <button
+                    onClick={() => setShowVariantModal(index)}
+                    className={`w-full flex items-center justify-center gap-1.5 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg font-medium transition-all text-gray-800 group ${isScrolled ? 'px-1.5 py-1 text-[10px] mb-2' : 'px-2 md:px-3 py-2 text-[11px] md:text-xs mb-3'}`}
+                  >
+                    <span className="truncate max-w-[85%]">{item.variant.name}</span>
+                    <ChevronDown className={`text-gray-400 group-hover:text-gray-600 transition-colors ${isScrolled ? 'h-3 w-3' : 'h-4 w-4'}`} />
+                  </button>
+
+                  {/* Price Section */}
+                  <div className={`font-extrabold ${isCheaper ? 'text-emerald-600' : 'text-gray-900'} ${isScrolled ? 'text-xs md:text-sm' : 'text-base md:text-lg'}`}>
+                    ₹{(onRoadPrice / 100000).toFixed(2)} Lakhs
+                  </div>
+                  {!isScrolled && (
+                    <div className="text-[10px] md:text-xs text-gray-400 font-medium">
+                      On-Road Price
+                    </div>
+                  )}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+
+
+        {/* EMI Section - Enhanced to match design */}
+        <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm mb-6 mt-2">
+          {/* Bank Info & Label Header */}
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-[#FF6B00] rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
+                <Landmark className="h-5 w-5 text-white" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-base font-bold text-gray-900 leading-tight">Bank</h3>
+                <p className="text-sm font-medium text-gray-500">Partner</p>
+              </div>
+            </div>
+          </div>
+
+          {/* EMI Values - Two Columns */}
+          <div className="grid grid-cols-2 gap-4 divide-x divide-gray-100">
+            {comparisonItems.filter((item): item is ComparisonItem => item !== null && !!item.variant).map((item, index) => {
+              const onRoadPrice = getOnRoadPrice(item.variant!.price, item.variant!.fuelType)
+              const emi = calculateEMI(onRoadPrice)
+
+              return (
+                <div key={index} className={`flex flex-col ${index === 0 ? 'pr-4 items-center' : 'pl-4 items-center'}`}>
+                  <div className="text-sm font-medium text-gray-500 mb-1">Starting EMI</div>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-[#0B1A28] mb-1 tracking-tight">
+                    ₹{emi.toLocaleString('en-IN')}
+                  </div>
+                  <div className="text-xs sm:text-sm font-medium text-gray-500">per month</div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Ad Banner */}
+        <Ad3DCarousel className="my-4" />
+
+        {/* Specifications - 9 Sections with Win/Loss Algorithym */}
+        <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-200 mb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-gray-900 tracking-tight">Specification Battle</h2>
+              <p className="text-sm text-gray-500 mt-1">Detailed feature tracking & performance comparison</p>
+            </div>
+            {/* Sleek iOS Style Toggle */}
+            <label className="flex items-center gap-3 cursor-pointer select-none">
+              <span className={`text-sm font-bold ${showDifferences ? 'text-gray-900' : 'text-gray-500'}`}>Highlight Differences</span>
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  className="sr-only"
+                  checked={showDifferences}
+                  onChange={(e) => setShowDifferences(e.target.checked)}
+                />
+                <div className={`block w-12 h-6 rounded-full transition-colors duration-300 ${showDifferences ? 'bg-indigo-600' : 'bg-gray-200'}`}></div>
+                <div className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 ${showDifferences ? 'transform translate-x-6' : ''}`}></div>
+              </div>
+            </label>
+          </div>
+
+          <div className="space-y-4">
+            {/* All 9 Specification Sections - Show ALL fields */}
+            {specificationSections.map((section) => {
+              const isExpanded = expandedSections[section.id] !== false; // defaulted to expanded
+              return (
+                <div key={section.id} className="border border-gray-100 rounded-xl overflow-hidden shadow-sm">
+                  <button
+                    onClick={() => toggleSection(section.id)}
+                    className="w-full flex items-center justify-between py-4 px-5 bg-gray-50 hover:bg-gray-100 transition-colors text-left group"
+                  >
+                    <h3 className="text-base font-bold text-gray-800">{section.title}</h3>
+                    <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center group-hover:border-indigo-300 transition-colors">
+                      <ChevronDown className={`h-4 w-4 text-gray-500 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+                    </div>
+                  </button>
+
+                  {isExpanded && (
+                    <div className="bg-white">
+                      {section.specs.map((spec, specIdx) => {
+                        const validItems = comparisonItems.filter((item): item is ComparisonItem => item !== null && !!item.variant)
+                        if (validItems.length < 2) return null;
+
+                        const values = validItems.map(item => item.variant![spec.key] || 'N/A')
+                        const strValues = values.map(v => String(v).toLowerCase().trim())
+                        const allSame = strValues.every(val => val === strValues[0])
+
+                        // Hide Similarities Logic
+                        if (showDifferences && allSame) return null
+
+                        // --- Win / Loss Parser Logic ---
+                        let bestIdx: number | null = null;
+
+                        // Specs where higher number is better
+                        const higherIsBetter = ['maxPower', 'maxTorque', 'mileageCompanyClaimed', 'mileageCity', 'mileageHighway', 'bootSpace', 'groundClearance', 'fuelTankCapacity', 'airbags', 'topSpeed', 'evRange', 'evBatteryCapacity', 'length', 'width', 'wheelbase', 'speakers'];
+                        // Specs where lower number is better
+                        const lowerIsBetter = ['zeroTo100KmphTime', 'kerbWeight'];
+
+                        if (!allSame) {
+                          const parsedNums = values.map(v => {
+                            if (typeof v === 'string') {
+                              // Extract first number found
+                              const match = v.match(/[\d.]+/);
+                              return match ? parseFloat(match[0]) : null;
+                            }
+                            return typeof v === 'number' ? v : null;
+                          });
+
+                          // If both values are numbers, we can compare
+                          if (parsedNums.every(n => n !== null)) {
+                            const nums = parsedNums as number[];
+                            if (higherIsBetter.includes(spec.key)) {
+                              const maxVal = Math.max(...nums);
+                              // Ensure there's a clear winner
+                              if (nums[0] !== nums[1]) {
+                                bestIdx = nums.indexOf(maxVal);
+                              }
+                            } else if (lowerIsBetter.includes(spec.key)) {
+                              const minVal = Math.min(...nums);
+                              if (nums[0] !== nums[1]) {
+                                bestIdx = nums.indexOf(minVal);
+                              }
+                            }
+                          } else {
+                            // Boolean/Feature based wins ("Yes" vs "No")
+                            const yesNoKeys = ['Yes', 'No', 'Available', 'Not Available']
+                            if (strValues.some(v => v === 'yes' || v === 'available') && strValues.some(v => v === 'no' || v === 'not available' || v === 'n/a')) {
+                              bestIdx = strValues.indexOf(strValues.find(v => v === 'yes' || v === 'available') || '');
+                            }
+                          }
+                        }
+
+                        return (
+                          <div key={spec.key} className={`py-4 px-5 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 ${specIdx % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'}`}>
+                            <div className="w-full sm:w-1/3 flex items-center justify-between sm:justify-start">
+                              <span className="text-sm font-semibold text-gray-500">{spec.label}</span>
+                              {!allSame && (
+                                <span className="sm:hidden text-[10px] font-bold tracking-wider uppercase text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded">Diff</span>
+                              )}
+                            </div>
+
+                            <div className="w-full sm:w-2/3 grid gap-4" style={{ gridTemplateColumns: `repeat(${values.length}, minmax(0, 1fr))` }}>
+                              {values.map((val, idx) => {
+                                const isWinner = bestIdx === idx;
+                                const isLoser = bestIdx !== null && bestIdx !== idx;
+
+                                return (
+                                  <div key={idx} className="relative">
+                                    <div className={`text-sm md:text-base font-medium transition-all ${isWinner ? 'text-emerald-700 bg-emerald-50 px-2 py-1 -ml-2 rounded-md inline-block font-bold' :
+                                      isLoser ? 'text-gray-400' :
+                                        allSame && showDifferences === false ? 'text-gray-600' : 'text-gray-900'
+                                      }`}>
+                                      {val}
+                                      {isWinner && <span className="ml-1 text-emerald-500">✓</span>}
+                                    </div>
+                                  </div>
+                                )
+                              })}
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Ad Banner */}
+        <Ad3DCarousel className="my-4" />
+
+        {/* Car Expert Banner */}
+        <div className="mb-6">
+          <CarExpertBanner
+            title={`Can't decide between these cars? Get expert advice!`}
+            subtitle={`Our experts help you compare & choose the best car for your needs`}
+            feature1="Compare Help"
+            feature2="Best Deal"
+            feature3="Expert Pick"
+          />
+        </div>
+
+        {/* Compare With Similar Cars */}
+        <div className="mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">More Car Comparisons You May Like</h2>
+
+          {loadingSimilarCars ? (
+            <div className="flex gap-3 sm:gap-4 lg:gap-6 overflow-x-auto pb-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="flex-shrink-0 w-80 bg-white rounded-xl border border-gray-200 p-4">
+                  <div className="h-32 bg-gray-200 animate-pulse rounded"></div>
+                </div>
+              ))}
+            </div>
+          ) : similarCars.length === 0 ? (
+            <div className="text-center py-8 text-gray-500">
+              <p>No cars available for comparison</p>
+            </div>
+          ) : (
+            <div className="flex gap-3 sm:gap-4 lg:gap-6 overflow-x-auto pb-4" style={{ scrollbarWidth: 'thin' }}>
+              {similarCars.map((car) => {
+                const firstValidItem = comparisonItems.find((item): item is ComparisonItem => item !== null && !!item.variant)
+                if (!firstValidItem) return null
+
+                // Fix: Handle undefined or zero prices
+                const carPrice = car.startingPrice || 0
+                if (carPrice === 0) return null
+
+                const currentModelOnRoad = getOnRoadPrice(firstValidItem.variant!.price, firstValidItem.variant!.fuelType)
+                const compareCarOnRoad = getOnRoadPrice(carPrice, car.fuelTypes?.[0] || car.lowestPriceFuelType || 'Petrol')
+
+                return (
+                  <div key={car.id} className="flex-shrink-0 w-[320px] bg-white rounded-xl border border-gray-200 p-3 hover:shadow-lg transition-all">
+                    <div className="flex items-start gap-2 mb-3">
+                      <div className="flex-1">
+                        <div className="relative mb-2">
+                          <img
+                            src={firstValidItem.model.heroImage}
+                            alt={`${firstValidItem.model.brandName} ${firstValidItem.model.name}`}
+                            className="w-full h-20 object-contain"
+                            onError={(e) => {
+                              e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300' fill='%23374151'%3E%3Cpath d='M50 200h300c5.5 0 10-4.5 10-10v-80c0-16.6-13.4-30-30-30H70c-16.6 0-30 13.4-30 30v80c0 5.5 4.5 10 10 10z'/%3E%3Ccircle cx='100' cy='220' r='25' fill='%23111827'/%3E%3Ccircle cx='300' cy='220' r='25' fill='%23111827'/%3E%3C/svg%3E"
+                            }}
+                          />
+                        </div>
+                        <div className="text-left">
+                          <div className="text-xs text-gray-500">{firstValidItem.model.brandName}</div>
+                          <div className="font-bold text-sm text-gray-900 mb-1">{firstValidItem.model.name}</div>
+                          <div className="text-red-600 font-bold text-sm">
+                            ₹ {(currentModelOnRoad / 100000).toFixed(2)} Lakh
+                          </div>
+                          <div className="text-xs text-gray-500">On-Road Price</div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-center" style={{ marginTop: '30px' }}>
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-red-600 to-orange-500 flex items-center justify-center shadow-md">
+                          <span className="text-white text-xs font-bold">VS</span>
+                        </div>
+                      </div>
+
+                      <div className="flex-1">
+                        <div className="relative mb-2">
+                          <img
+                            src={car.image}
+                            alt={`${car.brand} ${car.name}`}
+                            className="w-full h-20 object-contain"
+                            onError={(e) => {
+                              e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300' fill='%23374151'%3E%3Cpath d='M50 200h300c5.5 0 10-4.5 10-10v-80c0-16.6-13.4-30-30-30H70c-16.6 0-30 13.4-30 30v80c0 5.5 4.5 10 10 10z'/%3E%3Ccircle cx='100' cy='220' r='25' fill='%23111827'/%3E%3Ccircle cx='300' cy='220' r='25' fill='%23111827'/%3E%3C/svg%3E"
+                            }}
+                          />
+                        </div>
+                        <div className="text-left">
+                          <div className="text-xs text-gray-500">{car.brandName || car.brand}</div>
+                          <div className="font-bold text-sm text-gray-900 mb-1">{car.name}</div>
+                          <div className="text-red-600 font-bold text-sm">
+                            ₹ {(compareCarOnRoad / 100000).toFixed(2)} Lakhs
+                          </div>
+                          <div className="text-xs text-gray-500">On-Road Price</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        const brand1 = firstValidItem.model.brandName.toLowerCase().replace(/\s+/g, '-')
+                        const model1 = firstValidItem.model.name.toLowerCase().replace(/\s+/g, '-')
+                        const brand2 = (car.brandName || car.brand || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^brand-/, '')
+                        const model2 = car.name.toLowerCase().replace(/\s+/g, '-')
+                        router.push(`/compare/${brand1}-${model1}-vs-${brand2}-${model2}`)
+                      }}
+                      className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white py-2 rounded-lg transition-all text-sm font-semibold shadow-sm"
+                    >
+                      Compare Now
+                    </button>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Ad Banner */}
+        <Ad3DCarousel className="my-4" />
+
+        {/* Popular Comparison - Using Homepage Component */}
+        <div className="mb-6">
+          <PopularComparisons />
+        </div>
+
+        {/* Similar Cars Section - Exact copy from Model Page */}
+        <div className="mb-6">
+          <div className="space-y-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+              Popular Cars in India {new Date().getFullYear()}
+            </h2>
+
+            {/* Cars Horizontal Scroll */}
+            <div className="relative">
+              {loadingSimilarCars ? (
+                <div className="flex gap-3 sm:gap-4 lg:gap-6 overflow-x-auto scrollbar-hide pb-4">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="flex-shrink-0 w-72 bg-white rounded-xl border border-gray-200 overflow-hidden">
+                      <div className="h-48 bg-gray-200 animate-pulse"></div>
+                      <div className="p-5 space-y-3">
+                        <div className="h-6 bg-gray-200 animate-pulse rounded"></div>
+                        <div className="h-8 bg-gray-200 animate-pulse rounded w-1/2"></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : similarCars.length === 0 ? (
+                <div className="text-center py-12 text-gray-500">
+                  <p>No similar cars found</p>
+                </div>
+              ) : (
+                <div className="relative group">
+                  {/* Left Scroll Arrow */}
+                  <button
+                    onClick={() => {
+                      const container = document.getElementById('compare-similar-scroll')
+                      container?.scrollBy({ left: -300, behavior: 'smooth' })
+                    }}
+                    className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 hover:bg-white shadow-lg rounded-full items-center justify-center text-gray-700 hover:text-red-600 transition-all opacity-0 group-hover:opacity-100 -ml-5"
+                    aria-label="Scroll left"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => {
+                      const container = document.getElementById('compare-similar-scroll')
+                      container?.scrollBy({ left: 300, behavior: 'smooth' })
+                    }}
+                    className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 hover:bg-white shadow-lg rounded-full items-center justify-center text-gray-700 hover:text-red-600 transition-all opacity-0 group-hover:opacity-100 -mr-5"
+                    aria-label="Scroll right"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                  <div
+                    id="compare-similar-scroll"
+                    className="flex gap-3 sm:gap-4 lg:gap-6 overflow-x-auto scrollbar-hide pb-4 scroll-smooth"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                  >
+                    {similarCars.map((car) => (
+                      <CarCard
+                        key={car.id}
+                        car={car}
+                        onClick={() => {
+                          const brandSlug = car.brandName.toLowerCase().replace(/\s+/g, '-')
+                          const modelSlug = car.name.toLowerCase().replace(/\s+/g, '-')
+                          window.location.href = `/${brandSlug}-cars/${modelSlug}`
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Ad Banner */}
+        <Ad3DCarousel className="my-4" />
+
+        {/* Comparison Videos */}
+        <ComparisonYouTube carNames={comparisonItems.filter((item): item is ComparisonItem => item !== null).map(item => `${item.model.brandName} ${item.model.name}`)} />
+      </div>
+
+      {/* Variant Selection Modal */}
+      {showVariantModal !== null && comparisonItems[showVariantModal] && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => setShowVariantModal(null)}>
+          <div className="bg-white rounded-2xl max-w-lg w-full max-h-[80vh] overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <div>
+                <h2 className="text-xl font-bold text-gray-900">Select Variant</h2>
+                <p className="text-sm text-gray-500 mt-1">
+                  {comparisonItems[showVariantModal]!.model.brandName} {comparisonItems[showVariantModal]!.model.name}
+                </p>
+              </div>
+              <button
+                onClick={() => setShowVariantModal(null)}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                <X className="h-6 w-6 text-gray-600" />
+              </button>
+            </div>
+
+            {/* Variants List */}
+            <div className="overflow-y-auto max-h-96 p-4">
+              {comparisonItems[showVariantModal]!.model.variants.map((v) => (
+                <button
+                  key={v.id}
+                  onClick={() => {
+                    handleVariantChange(showVariantModal, v)
+                    setShowVariantModal(null)
+                  }}
+                  className={`w-full text-left px-5 py-4 hover:bg-gray-50 rounded-xl transition-colors border-2 mb-3 ${v.id === comparisonItems[showVariantModal]!.variant?.id
+                    ? 'bg-orange-50 border-orange-500'
+                    : 'border-gray-100 hover:border-gray-200'
+                    }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <div className="font-semibold text-gray-900 text-base mb-1">{v.name}</div>
+                      <div className="text-sm text-gray-500">₹{(v.price / 100000).toFixed(2)} Lakhs</div>
+                    </div>
+                    {v.id === comparisonItems[showVariantModal]!.variant?.id && (
+                      <div className="ml-3 w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Add Car Search Modal */}
+      {showAddCarModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => setShowAddCarModal(false)}>
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Add Car to Compare</h2>
+              <button
+                onClick={() => setShowAddCarModal(false)}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                <X className="h-6 w-6 text-gray-600" />
+              </button>
+            </div>
+
+            {/* Search Input */}
+            <div className="p-6 border-b border-gray-200">
+              <input
+                type="text"
+                placeholder="Search for a car model..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:outline-none text-base"
+                autoFocus
+              />
+            </div>
+
+            {/* Search Results */}
+            <div className="overflow-y-auto max-h-96 p-4">
+              {allModels
+                .filter((m: any) => {
+                  const brandMap: Record<string, string> = {}
+                  brands.forEach((brand: any) => { brandMap[brand.id] = brand.name })
+                  const brandName = brandMap[m.brandId] || ''
+                  const fullName = `${brandName} ${m.name}`.toLowerCase()
+                  return fullName.includes(searchQuery.toLowerCase()) && !comparisonItems.filter((item): item is ComparisonItem => item !== null).some(item => item.model.id === m.id)
+                })
+                .slice(0, 10)
+                .map((model: any) => {
+                  const brandMap: Record<string, string> = {}
+                  brands.forEach((brand: any) => { brandMap[brand.id] = brand.name })
+                  const brandName = brandMap[model.brandId] || ''
+
+                  return (
+                    <button
+                      key={model.id}
+                      onClick={() => handleAddCar(model)}
+                      className="w-full flex items-center gap-4 p-4 hover:bg-gray-50 rounded-xl transition-colors border border-gray-100 mb-2"
+                    >
+                      <img
+                        src={resolveImageUrl(model.heroImage)}
+                        alt={`${brandName} ${model.name}`}
+                        className="w-20 h-16 object-contain"
+                        onError={(e) => {
+                          e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300' fill='%23374151'%3E%3Cpath d='M50 200h300c5.5 0 10-4.5 10-10v-80c0-16.6-13.4-30-30-30H70c-16.6 0-30 13.4-30 30v80c0 5.5 4.5 10 10 10z'/%3E%3Ccircle cx='100' cy='220' r='25' fill='%23111827'/%3E%3Ccircle cx='300' cy='220' r='25' fill='%23111827'/%3E%3C/svg%3E"
+                        }}
+                      />
+                      <div className="flex-1 text-left">
+                        <div className="text-xs text-gray-500">{brandName}</div>
+                        <div className="font-bold text-gray-900">{model.name}</div>
+                      </div>
+                      <Plus className="h-5 w-5 text-orange-600" />
+                    </button>
+                  )
+                })}
+              {searchQuery && allModels.filter((m: any) => {
+                const brandMap: Record<string, string> = {}
+                brands.forEach((brand: any) => { brandMap[brand.id] = brand.name })
+                const brandName = brandMap[m.brandId] || ''
+                const fullName = `${brandName} ${m.name}`.toLowerCase()
+                return fullName.includes(searchQuery.toLowerCase()) && !comparisonItems.filter((item): item is ComparisonItem => item !== null).some(item => item.model.id === m.id)
+              }).length === 0 && (
+                  <div className="text-center py-8 text-gray-500">
+                    No cars found matching "{searchQuery}"
+                  </div>
+                )}
+            </div>
+          </div>
+        </div>
+      )}
+
+
+      <Breadcrumb
+        items={[
+          { label: 'Compare', href: '/compare' },
+          { label: comparisonItems.filter((item): item is ComparisonItem => item !== null).map(item => `${item.model.brandName} ${item.model.name}`).join(' vs ') }
+        ]}
+      />
+      <Footer />
+      <FloatingAIBot
+        type="comparison"
+        id={comparisonItems.length > 0
+          ? comparisonItems
+            .filter((item): item is ComparisonItem => item !== null)
+            .map(item => item.model.id) // Use Model IDs for stability
+            .join(',')
+          : "general"
+        }
+        name={comparisonItems.length > 0 ? "Comparison" : "Comparison Tool"}
+      />
+    </div>
+  )
+}

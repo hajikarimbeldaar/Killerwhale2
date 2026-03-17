@@ -1,0 +1,5205 @@
+{
+  "config": {
+    "configFile": "/Applications/WEBSITE-23092025-101/playwright.config.ts",
+    "rootDir": "/Applications/WEBSITE-23092025-101/e2e",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/test-results.json"
+        }
+      ],
+      [
+        "list",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Applications/WEBSITE-23092025-101/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Applications/WEBSITE-23092025-101/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Applications/WEBSITE-23092025-101/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Applications/WEBSITE-23092025-101/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Applications/WEBSITE-23092025-101/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Applications/WEBSITE-23092025-101/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Applications/WEBSITE-23092025-101/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "Mobile Chrome",
+        "name": "Mobile Chrome",
+        "testDir": "/Applications/WEBSITE-23092025-101/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Applications/WEBSITE-23092025-101/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "Mobile Safari",
+        "name": "Mobile Safari",
+        "testDir": "/Applications/WEBSITE-23092025-101/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.57.0",
+    "workers": 2,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:3000",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "comprehensive.spec.ts",
+      "file": "comprehensive.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Comprehensive Site Verification",
+          "file": "comprehensive.spec.ts",
+          "line": 64,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should load Home at /",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4861,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:33:55.890Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-597564867ee7e5ea9c53",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load New Cars at /new-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 3929,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /new-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:33:55.881Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-3421903371d9e326abc6",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Upcoming Cars at /upcoming-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 4665,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /upcoming-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:00.387Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-1dac8a4e8b04493db011",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Popular Cars at /popular-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3987,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /popular-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:01.331Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-4a9e50bebafc11d85f33",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Electric Cars at /electric-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5601,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /electric-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:05.071Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-d814f815be35dab4a608",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Top Selling Cars at /top-selling-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5647,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /top-selling-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:05.345Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-4d75c8e1586e56c3d7ac",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load New Launches at /new-car-launches-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 3634,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /new-car-launches-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:10.690Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-486edf885fdf4f2d497d",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 10 Lakh at /best-cars-under-10-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5706,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-10-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:11.014Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-ffde1a8fed5ec43a0bab",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 15 Lakh at /best-cars-under-15-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 6961,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-15-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:14.341Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-d87f38964f6460ea4242",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 25 Lakh at /best-cars-under-25-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8327,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-25-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:16.735Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-0029c51743791311006c",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 50 Lakh at /best-cars-under-50-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5975,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-50-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:21.321Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-a186949382ef4f7bd4a4",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 8 Lakh at /best-cars-under-8-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3842,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-8-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:25.078Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-c3b6b62640b464fe3617",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Compare Cars at /compare",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2148,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /compare\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:27.316Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-cbc45c1c2afad237fc40",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load EMI Calculator at /emi-calculator",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1815,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /emi-calculator\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:28.938Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-a48841c51d24b2f3b813",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load News at /news",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1832,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /news\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:29.480Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-c0584066783eb4e97bc6",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Price Breakup at /price-breakup",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4421,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /price-breakup\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:30.772Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-4d4397e9da44ea2198f7",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Search at /search",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1969,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /search\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:31.326Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-a7f10ed7f4e1642d3e78",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Privacy Policy at /privacy-policy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 20597,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /privacy-policy\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:33.312Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-b6b58631e45b9fd4a0d5",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Terms of Service at /terms-and-conditions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 24030,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /terms-and-conditions\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:35.207Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-a427e8ac8dd859f3c35f",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Visitor Agreement at /visitor-agreement",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5612,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /visitor-agreement\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:53.925Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-167dde2c51d1526052c3",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Login at /login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4765,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /login\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:59.252Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-27ff4f3411099bb8b3f3",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Signup at /signup",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 12490,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /signup\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:34:59.554Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-9ccccb77327670cf82ef",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Forgot Password at /forgot-password",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9489,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /forgot-password\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:35:04.036Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-38ae42ecd2c30995ff47",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load AI Chat at /ai-chat",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 8836,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /ai-chat\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:35:12.173Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-b39a938bf0e21925524c",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Brand Page (Maruti) at /brands/maruti-suzuki",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8776,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /brands/maruti-suzuki\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:35:13.541Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-be1b755594b51ec1ef84",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Brand Cars List (Maruti) at /maruti-suzuki-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5946,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /maruti-suzuki-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:35:21.024Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-1579ff483338875bf654",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Home at /",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 23620,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:35:24.260Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-4363a745f6611a64bf5a",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load New Cars at /new-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 21101,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /new-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:35:31.342Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-a2fb3540671108fe48eb",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Upcoming Cars at /upcoming-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10108,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /upcoming-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:35:52.771Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-3e3bbcc229554d25f124",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Popular Cars at /popular-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 9385,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /popular-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:35:54.957Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-86d358ba8d1802bfd5ef",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Electric Cars at /electric-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 24622,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /electric-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:36:02.902Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-dc63eeccc2e9bd3201e1",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Top Selling Cars at /top-selling-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 23298,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /top-selling-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:36:04.366Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-a8f4526f0a420e9a688b",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load New Launches at /new-car-launches-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 16912,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /new-car-launches-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:36:27.548Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-d2426840a0df9015e3fe",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 10 Lakh at /best-cars-under-10-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 16442,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-10-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:36:27.686Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-d6ae9d3d521d2f470a6d",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 15 Lakh at /best-cars-under-15-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 8937,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-15-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:36:44.148Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-21f1c5e746e45e1b669d",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 25 Lakh at /best-cars-under-25-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7158,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-25-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:36:44.481Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-8fa14140e899b5579538",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 50 Lakh at /best-cars-under-50-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 14769,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-50-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:36:51.662Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-715aff0f3f11e7c60f61",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 8 Lakh at /best-cars-under-8-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 12350,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-8-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:36:53.103Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-7f4a84cd5e5be4b1e7fe",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Compare Cars at /compare",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 6037,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /compare\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:37:05.473Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-782d54e3efbc4ccfd16f",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load EMI Calculator at /emi-calculator",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 17019,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /emi-calculator\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:37:06.449Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-db42b89a71f27cd3ad77",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load News at /news",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 13229,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /news\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:37:11.530Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-58b1c51218c70f67bed5",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Price Breakup at /price-breakup",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 18703,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /price-breakup\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:37:23.485Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-d0914800b0681de711fb",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Search at /search",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 16411,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /search\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:37:24.779Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-9e5f2b1cdf6ff7ba2736",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Privacy Policy at /privacy-policy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 6534,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /privacy-policy\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:37:41.210Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-0fed2d07a32a235a7062",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Terms of Service at /terms-and-conditions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6588,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /terms-and-conditions\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:37:42.204Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-3d3143aa6e73485899b6",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Visitor Agreement at /visitor-agreement",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 15413,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /visitor-agreement\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:37:47.767Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-8b07b3396e0fe9d289d2",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Login at /login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 14228,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /login\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:37:48.811Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-3e1c67caaca5f66e3545",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Signup at /signup",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5551,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /signup\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:38:03.058Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-57c0c6c9498f4d03c524",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Forgot Password at /forgot-password",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5463,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /forgot-password\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:38:03.197Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-54c02fddec5479349ecc",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load AI Chat at /ai-chat",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7562,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /ai-chat\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:38:08.626Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-894cf8a45bec2981853b",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Brand Page (Maruti) at /brands/maruti-suzuki",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 8305,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /brands/maruti-suzuki\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:38:08.679Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-8b997866721569e23d56",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Brand Cars List (Maruti) at /maruti-suzuki-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5456,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /maruti-suzuki-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:38:16.209Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-8b9835705808e4a2e121",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Home at /",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 29105,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:38:19.558Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-0ed1e3095e2260bcd2a9",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load New Cars at /new-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 25956,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /new-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:38:23.557Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-434b4c0fd2d3a7f8ee84",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Upcoming Cars at /upcoming-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 18715,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /upcoming-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:38:49.817Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-3a577ab9cfd463d72939",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Popular Cars at /popular-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 19636,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /popular-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:38:50.049Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-2c0cc42317ae771bb92b",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Electric Cars at /electric-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 13131,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /electric-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:39:08.558Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-954374a3c14b135b6711",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Top Selling Cars at /top-selling-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 13798,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /top-selling-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:39:09.708Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-a33694081f1db6f47ece",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load New Launches at /new-car-launches-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11792,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /new-car-launches-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:39:21.716Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-beea8e361893227be3ae",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 10 Lakh at /best-cars-under-10-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 11424,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-10-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:39:23.528Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-372993f3f2e325c8ccaa",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 15 Lakh at /best-cars-under-15-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 18109,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-15-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:39:33.528Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-26f6aaeb3090e2952dd1",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 25 Lakh at /best-cars-under-25-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 14186,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-25-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:39:34.972Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-39f3aafbed1d163f9357",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 50 Lakh at /best-cars-under-50-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 15293,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-50-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:39:49.177Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-23611a404ad94601b6c3",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 8 Lakh at /best-cars-under-8-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 17018,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-8-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:39:51.656Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-324aefc014c6e991b611",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Compare Cars at /compare",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 8932,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /compare\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:40:04.489Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-d83d3eedd57cd000aa67",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load EMI Calculator at /emi-calculator",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 13620,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /emi-calculator\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:40:08.690Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-ed9c5cafc152f6206dc1",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load News at /news",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 9065,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /news\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:40:13.437Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-d24d6099cb7ca221c901",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Price Breakup at /price-breakup",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 16091,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /price-breakup\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:40:22.328Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-8b33a4209c1cf85998c8",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Search at /search",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 15503,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /search\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:40:22.523Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-a472247f3a49c3acc729",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Privacy Policy at /privacy-policy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 12563,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /privacy-policy\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:40:38.046Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-cb14534551d6b0532a7e",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Terms of Service at /terms-and-conditions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12168,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /terms-and-conditions\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:40:38.436Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-1b2f3f64d642e6175a9f",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Visitor Agreement at /visitor-agreement",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 7312,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /visitor-agreement\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:40:50.627Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-e74bc6fbe6fb2572098f",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Login at /login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7191,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /login\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:40:50.648Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-62adf6a639ee8a60e7dd",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Signup at /signup",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 832,
+                      "error": {
+                        "message": "Error: page.goto: Could not connect to the server.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/signup\", waiting until \"domcontentloaded\"\u001b[22m\n",
+                        "stack": "Error: page.goto: Could not connect to the server.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/signup\", waiting until \"domcontentloaded\"\u001b[22m\n\n    at /Applications/WEBSITE-23092025-101/e2e/comprehensive.spec.ts:87:28",
+                        "location": {
+                          "file": "/Applications/WEBSITE-23092025-101/e2e/comprehensive.spec.ts",
+                          "column": 28,
+                          "line": 87
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 85 |\u001b[39m                 \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(pageInfo\u001b[33m.\u001b[39mpath\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[35m60000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 86 |\u001b[39m             } \u001b[36melse\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m                 \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(pageInfo\u001b[33m.\u001b[39mpath\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m             }\n \u001b[90m 89 |\u001b[39m\n \u001b[90m 90 |\u001b[39m             \u001b[90m// Special handling for homepage which might have complex lazy loading or ads\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Applications/WEBSITE-23092025-101/e2e/comprehensive.spec.ts",
+                            "column": 28,
+                            "line": 87
+                          },
+                          "message": "Error: page.goto: Could not connect to the server.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/signup\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 85 |\u001b[39m                 \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(pageInfo\u001b[33m.\u001b[39mpath\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[35m60000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 86 |\u001b[39m             } \u001b[36melse\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m                 \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(pageInfo\u001b[33m.\u001b[39mpath\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m             }\n \u001b[90m 89 |\u001b[39m\n \u001b[90m 90 |\u001b[39m             \u001b[90m// Special handling for homepage which might have complex lazy loading or ads\u001b[39m\u001b[0m\n\u001b[2m    at /Applications/WEBSITE-23092025-101/e2e/comprehensive.spec.ts:87:28\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /signup\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:40:57.867Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Applications/WEBSITE-23092025-101/test-results/comprehensive-Comprehensiv-96c83-hould-load-Signup-at-signup-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Applications/WEBSITE-23092025-101/test-results/comprehensive-Comprehensiv-96c83-hould-load-Signup-at-signup-webkit/video.webm"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Applications/WEBSITE-23092025-101/e2e/comprehensive.spec.ts",
+                        "column": 28,
+                        "line": 87
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-ec77c1bdb7fc3526b284",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Forgot Password at /forgot-password",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 730,
+                      "error": {
+                        "message": "Error: page.goto: Could not connect to the server.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/forgot-password\", waiting until \"domcontentloaded\"\u001b[22m\n",
+                        "stack": "Error: page.goto: Could not connect to the server.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/forgot-password\", waiting until \"domcontentloaded\"\u001b[22m\n\n    at /Applications/WEBSITE-23092025-101/e2e/comprehensive.spec.ts:87:28",
+                        "location": {
+                          "file": "/Applications/WEBSITE-23092025-101/e2e/comprehensive.spec.ts",
+                          "column": 28,
+                          "line": 87
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 85 |\u001b[39m                 \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(pageInfo\u001b[33m.\u001b[39mpath\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[35m60000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 86 |\u001b[39m             } \u001b[36melse\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m                 \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(pageInfo\u001b[33m.\u001b[39mpath\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m             }\n \u001b[90m 89 |\u001b[39m\n \u001b[90m 90 |\u001b[39m             \u001b[90m// Special handling for homepage which might have complex lazy loading or ads\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Applications/WEBSITE-23092025-101/e2e/comprehensive.spec.ts",
+                            "column": 28,
+                            "line": 87
+                          },
+                          "message": "Error: page.goto: Could not connect to the server.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/forgot-password\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 85 |\u001b[39m                 \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(pageInfo\u001b[33m.\u001b[39mpath\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[35m60000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 86 |\u001b[39m             } \u001b[36melse\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m                 \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(pageInfo\u001b[33m.\u001b[39mpath\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m             }\n \u001b[90m 89 |\u001b[39m\n \u001b[90m 90 |\u001b[39m             \u001b[90m// Special handling for homepage which might have complex lazy loading or ads\u001b[39m\u001b[0m\n\u001b[2m    at /Applications/WEBSITE-23092025-101/e2e/comprehensive.spec.ts:87:28\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /forgot-password\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:40:57.967Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Applications/WEBSITE-23092025-101/test-results/comprehensive-Comprehensiv-63f73-Password-at-forgot-password-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Applications/WEBSITE-23092025-101/test-results/comprehensive-Comprehensiv-63f73-Password-at-forgot-password-webkit/video.webm"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Applications/WEBSITE-23092025-101/e2e/comprehensive.spec.ts",
+                        "column": 28,
+                        "line": 87
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-99d68991702a08c55975",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load AI Chat at /ai-chat",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 29718,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /ai-chat\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:41:01.781Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-597f6f0c56ecd1f1e39c",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Brand Page (Maruti) at /brands/maruti-suzuki",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 32259,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Applications/WEBSITE-23092025-101/e2e/comprehensive.spec.ts",
+                            "column": 28,
+                            "line": 87
+                          },
+                          "message": "Error: page.goto: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/brands/maruti-suzuki\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 85 |\u001b[39m                 \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(pageInfo\u001b[33m.\u001b[39mpath\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[35m60000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 86 |\u001b[39m             } \u001b[36melse\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 87 |\u001b[39m                 \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(pageInfo\u001b[33m.\u001b[39mpath\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 88 |\u001b[39m             }\n \u001b[90m 89 |\u001b[39m\n \u001b[90m 90 |\u001b[39m             \u001b[90m// Special handling for homepage which might have complex lazy loading or ads\u001b[39m\u001b[0m\n\u001b[2m    at /Applications/WEBSITE-23092025-101/e2e/comprehensive.spec.ts:87:28\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /brands/maruti-suzuki\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:41:01.777Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Applications/WEBSITE-23092025-101/test-results/comprehensive-Comprehensiv-c6f5f-uti-at-brands-maruti-suzuki-webkit/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Applications/WEBSITE-23092025-101/test-results/comprehensive-Comprehensiv-c6f5f-uti-at-brands-maruti-suzuki-webkit/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Applications/WEBSITE-23092025-101/test-results/comprehensive-Comprehensiv-c6f5f-uti-at-brands-maruti-suzuki-webkit/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-7554dd66a92e9da09925",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Brand Cars List (Maruti) at /maruti-suzuki-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12443,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /maruti-suzuki-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:41:31.924Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-6d530ad7fe4c9cd61b27",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Home at /",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 11718,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:41:36.337Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-2230b1643b112e7ec08b",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load New Cars at /new-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10722,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /new-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:41:46.042Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-c1351d89d702ce3cf1b8",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Upcoming Cars at /upcoming-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 7945,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /upcoming-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:41:52.488Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-526916e97e2b53ffe9ad",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Popular Cars at /popular-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6686,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /popular-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:41:57.013Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-e871d1ee7cd3da6782b9",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Electric Cars at /electric-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 13332,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /electric-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:42:00.450Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-71349d8ca330b8ba668a",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Top Selling Cars at /top-selling-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10047,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /top-selling-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:42:03.721Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-35491f1c7fd626369ea2",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load New Launches at /new-car-launches-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9136,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /new-car-launches-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:42:13.785Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-3a5474bb325099b40ca1",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 10 Lakh at /best-cars-under-10-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 8971,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-10-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:42:13.800Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-9c3b4dcea43a04b82f30",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 15 Lakh at /best-cars-under-15-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 8318,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-15-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:42:22.792Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-227babdb9917d7cc5854",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 25 Lakh at /best-cars-under-25-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6832,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-25-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:42:22.945Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-e6565fbcdb42d7331156",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 50 Lakh at /best-cars-under-50-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7716,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-50-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:42:29.797Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-3f4b97732610482e0a2d",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 8 Lakh at /best-cars-under-8-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 6280,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-8-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:42:31.139Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-5724a4d6f2e61e0d04e1",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Compare Cars at /compare",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 14483,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /compare\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:42:37.439Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-14d4189015992fdc2c77",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load EMI Calculator at /emi-calculator",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 14017,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /emi-calculator\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:42:37.528Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-8913258eca09b4971336",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load News at /news",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11964,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /news\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:42:51.560Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-640026eeac5f0ac453ad",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Price Breakup at /price-breakup",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 12572,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /price-breakup\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:42:51.939Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-4e443499bb2c2081c647",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Search at /search",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9007,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /search\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:43:03.537Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-cdfed30b2bed5e766df6",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Privacy Policy at /privacy-policy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 8232,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /privacy-policy\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:43:04.528Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-662c98069cf5d26803f5",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Terms of Service at /terms-and-conditions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7668,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /terms-and-conditions\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:43:12.558Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-907d3cc2c9629b362f33",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Visitor Agreement at /visitor-agreement",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 7245,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /visitor-agreement\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:43:12.779Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-c3ab4e7a929dee0f2e44",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Login at /login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 14305,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /login\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:43:20.039Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-f3db0cb7b64b51120ce3",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Signup at /signup",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 14061,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /signup\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:43:20.248Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-3ad5f5520bd1be3f5608",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Forgot Password at /forgot-password",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7069,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /forgot-password\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:43:34.353Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-53224e47648d445b97ad",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load AI Chat at /ai-chat",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 7058,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /ai-chat\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:43:34.363Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-d6043b1d846f04fae79a",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Brand Page (Maruti) at /brands/maruti-suzuki",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 10619,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /brands/maruti-suzuki\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:43:41.435Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-1626515444021ff87b36",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Brand Cars List (Maruti) at /maruti-suzuki-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11422,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /maruti-suzuki-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:43:41.438Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-0ba2c3645f1a7e29665a",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Home at /",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 11718,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:43:54.904Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-73e9703730e637ff1324",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load New Cars at /new-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8495,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /new-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:43:54.945Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-100728e81af25fba989f",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Upcoming Cars at /upcoming-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6449,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /upcoming-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:03.737Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-ce7f9566472bea384bb0",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Popular Cars at /popular-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 11009,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /popular-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:06.966Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-ceb904000495f68809c8",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Electric Cars at /electric-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8729,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /electric-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:10.215Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-1b6456dbd8778f1b3744",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Top Selling Cars at /top-selling-cars-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 11362,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /top-selling-cars-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:17.997Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-090549d6c6faa7f3fe4c",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load New Launches at /new-car-launches-in-india",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9933,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /new-car-launches-in-india\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:18.972Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-7ef531e0be3a1544eb54",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 10 Lakh at /best-cars-under-10-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9239,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-10-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:28.926Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-69c84822eb88909890e5",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 15 Lakh at /best-cars-under-15-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 11679,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-15-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:29.386Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-520ff8b9cb98e8b0a6c9",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 25 Lakh at /best-cars-under-25-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7364,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-25-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:38.189Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-505fbeb1267d6f2c65ac",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 50 Lakh at /best-cars-under-50-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5513,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-50-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:41.081Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-cde9d285664ee0647c41",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Cars Under 8 Lakh at /best-cars-under-8-lakh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9357,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /best-cars-under-8-lakh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:45.570Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-abd5dd5dde598c212309",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Compare Cars at /compare",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 8323,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /compare\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:46.610Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-77e7e801183f7db94555",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load EMI Calculator at /emi-calculator",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7988,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /emi-calculator\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:54.948Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-18bc166323fa753b0cb6",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load News at /news",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 7897,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /news\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:44:54.950Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-6967338548f8e8efc4fb",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Price Breakup at /price-breakup",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 8179,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /price-breakup\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:45:02.864Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-8a87b521b23ff64f4c85",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Search at /search",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7499,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /search\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:45:02.955Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-1310490b0e3a45c60505",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Privacy Policy at /privacy-policy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6841,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /privacy-policy\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:45:10.482Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-1562ff93fefc98665454",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Terms of Service at /terms-and-conditions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 7614,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /terms-and-conditions\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:45:11.057Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-2aa3e10fa831c45ae0d0",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Visitor Agreement at /visitor-agreement",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6308,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /visitor-agreement\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:45:17.339Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-7e9b0e0cbd35133d7a09",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Login at /login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5295,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /login\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:45:18.690Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-cc5bf79e2c88695a7fb0",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Signup at /signup",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5780,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /signup\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:45:23.681Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-cdf8f497705886472ac8",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Forgot Password at /forgot-password",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5301,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /forgot-password\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:45:24.018Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-0db0644a52b62b50e029",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load AI Chat at /ai-chat",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5975,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /ai-chat\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:45:29.337Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-eade32616cf48123cd94",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Brand Page (Maruti) at /brands/maruti-suzuki",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8001,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /brands/maruti-suzuki\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:45:29.492Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-dd1839d78dd5f5094d0e",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            },
+            {
+              "title": "should load Brand Cars List (Maruti) at /maruti-suzuki-cars",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 7994,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Testing navigation to: /maruti-suzuki-cars\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-12-17T10:45:35.326Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-b56f9799c971a2ece243",
+              "file": "comprehensive.spec.ts",
+              "line": 81,
+              "column": 13
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-12-17T10:33:53.300Z",
+    "duration": 710118.053,
+    "expected": 127,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}
