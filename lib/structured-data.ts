@@ -1,4 +1,6 @@
 
+import { resolveR2Url } from './image-utils'
+
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.gadizone.com'
 
 export function generateOrganizationSchema() {
@@ -121,8 +123,15 @@ export function generateCarProductSchema(car: {
     // Ensure image is a valid, publicly accessible URL (not localhost/internal)
     const resolvePublicImage = (img: string | undefined | null): string => {
         if (!img || img.trim() === '') return `${BASE_URL}/og-image.jpg`
+        
+        // Use standard R2 resolver to ensure CDN pathing (crucial for Google Search images)
+        const resolvedPath = resolveR2Url(img)
+        
         // Build full URL if relative
-        const fullUrl = img.startsWith('http') ? img : `${BASE_URL}${img.startsWith('/') ? '' : '/'}${img}`
+        const fullUrl = resolvedPath.startsWith('http') 
+            ? resolvedPath 
+            : `${BASE_URL}${resolvedPath.startsWith('/') ? '' : '/'}${resolvedPath}`
+        
         // Block internal/unreachable URLs that Google can't access
         if (fullUrl.includes('localhost') || fullUrl.includes('127.0.0.1') || fullUrl.includes(':5001') || fullUrl.includes(':5000') || fullUrl.includes(':3000')) {
             return `${BASE_URL}/og-image.jpg`
