@@ -40,7 +40,9 @@ export default async function GetPricePage({ params }: GetPricePageProps) {
     fuelType: initialData.model.fuelTypes?.[0] || 'Petrol',
     transmission: initialData.model.transmissions?.[0] || 'Manual',
     seatingCapacity: initialData.model.seating ? parseInt(initialData.model.seating.split(' ')[0]) : 5,
-    modelDate: new Date().getFullYear().toString()
+    modelDate: new Date().getFullYear().toString(),
+    rating: initialData.model.rating,
+    reviewCount: initialData.model.reviewCount,
   }) : null
 
   return (

@@ -206,7 +206,9 @@ export default async function VariantDetailPage({ params, searchParams }: PagePr
       seatingCapacity: initialData.model.seating ? parseInt(initialData.model.seating.split(' ')[0]) : 5,
       modelDate: new Date().getFullYear().toString(),
       cityName: cityName,
-      offerCount: initialData.variants.length || 1
+      offerCount: initialData.variants.length || 1,
+      rating: initialData.model.rating,
+      reviewCount: initialData.model.reviewCount,
     }) : null
 
 

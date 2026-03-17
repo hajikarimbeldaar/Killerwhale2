@@ -350,6 +350,8 @@ export async function getPriceBreakupData(brandSlug: string, modelSlug: string, 
         seating: model.seating,
         fuelTypes: model.fuelTypes || ['Petrol'],
         transmissions: model.transmissions || ['Manual'],
+        rating: model.rating || 0,
+        reviewCount: model.reviewCount || 0,
       },
       variants: variants.map((v: any) => ({
         id: v.id,
@@ -407,7 +409,9 @@ export default async function PriceInCityPage({ params, searchParams }: PriceInC
     seatingCapacity: initialData.model.seating ? parseInt(initialData.model.seating.split(' ')[0]) : 5,
     modelDate: new Date().getFullYear().toString(),
     cityName: cityName,
-    offerCount: initialData.variants.length || 1
+    offerCount: initialData.variants.length || 1,
+    rating: initialData.model.rating,
+    reviewCount: initialData.model.reviewCount,
   }) : null
 
 
