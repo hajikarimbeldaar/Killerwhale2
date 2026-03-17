@@ -10,7 +10,23 @@ export const revalidate = 3600
 const BASE_URL = 'https://www.gadizone.com'
 const EXTERNAL_API_URL = BACKEND_URL
 
-const MODELS_PER_CHUNK = 10
+// Tier 1: Cities where popular === true (~105 verified metros across all of India)
+// Tier 2 & 3: ALL other cities from the SAME major states (district HQs, growing towns etc.)
+//
+// Strategy: Find which states have at least one popular city, then include EVERY city
+// from those states. This gives us organic Tier 2+3 coverage (Nashik, Aligarh, Anand, Sikar,
+// Dewas, Karimnagar, Nellore, Palakkad, Moga, Bhilwara etc.) without including tiny
+// hamlets from fringe states that have no search traffic.
+//
+// Result: ~919 cities covering Tier 1, 2 and 3 from all major Indian states.
+const MAJOR_STATES = new Set(
+    CITY_DATABASE
+        .filter(city => city.popular === true)
+        .map(city => city.state)
+)
+const TIER_1_2_3_CITIES = CITY_DATABASE.filter(city => MAJOR_STATES.has(city.state))
+
+const MODELS_PER_CHUNK = 3
 
 // PHASE 4 REMINDER: To add remaining Tier 4/5 cities from smaller states later,
 // create dedicated sub-sitemaps once your current pages gain impressions (3-4 months):
@@ -157,8 +173,8 @@ export async function GET(request: NextRequest, props: { params: Promise<{ id: s
                     routes.push({ url: `${basePath}/${sub}`, lastModified: lastMod, priority: 0.6 })
                 })
 
-                // 3. City Pages (Price In City)
-                CITY_DATABASE.forEach(city => {
+                // 3. Price URLs for Tier 1-2-3 Cities (Matches GSC Success state: 2,775 URLs)
+                TIER_1_2_3_CITIES.forEach(city => {
                     const citySlug = city.city.toLowerCase().replace(/\s+/g, '-')
                     routes.push({
                         url: `${basePath}/price-in-${citySlug}`,
