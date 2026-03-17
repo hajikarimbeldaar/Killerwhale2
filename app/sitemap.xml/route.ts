@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
 import { BACKEND_URL } from '@/lib/config'
 
-// Cache for 1 hour — prevents repeated backend calls when Googlebot hits the index repeatedly.
-export const revalidate = 3600
+// Cache for 24 hours — prevents repeated backend calls when Googlebot hits the index repeatedly.
+export const revalidate = 86400
 
 const BASE_URL = 'https://www.gadizone.com'
 const EXTERNAL_API_URL = BACKEND_URL

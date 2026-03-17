@@ -2,10 +2,8 @@ import { NextRequest } from 'next/server'
 import { BACKEND_URL } from '@/lib/config'
 import { CITY_DATABASE } from '@/lib/city-database'
 
-// Cache each sitemap chunk for 1 hour on Vercel's edge.
-// Without this, Google hitting all 17 chunks simultaneously would make 34+ backend
-// API calls at once (/api/models?limit=5000 × 17), overwhelming the server and causing timeouts.
-export const revalidate = 3600
+// Cache each sitemap chunk for 24 hours — significantly reduces Vercel CPU/Data overages.
+export const revalidate = 86400
 
 const BASE_URL = 'https://www.gadizone.com'
 const EXTERNAL_API_URL = BACKEND_URL
