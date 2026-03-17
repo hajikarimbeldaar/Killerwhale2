@@ -20,6 +20,7 @@ import CarCard from '../home/CarCard'
 import UpcomingCars from '../home/UpcomingCars'
 import Ad3DCarousel from '../ads/Ad3DCarousel'
 import UpcomingCarCard from '../home/UpcomingCarCard'
+import { resolveR2Url } from '@/lib/image-utils'
 
 import ImageGalleryModal from '../common/ImageGalleryModal'
 import TestDriveBottomBar from '../common/TestDriveBottomBar'
@@ -170,7 +171,7 @@ export default function VariantPage({
               name: car.name,
               brandId: car.brandId,
               brandName: brand.name,
-              image: car.heroImage ? (car.heroImage.startsWith('http') ? car.heroImage : `${backendUrl}${car.heroImage}`) : '',
+              image: resolveR2Url(car.heroImage),
               expectedPriceMin: car.expectedPriceMin,
               expectedPriceMax: car.expectedPriceMax,
               fuelTypes: car.fuelTypes || ['Petrol'],

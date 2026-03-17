@@ -6,6 +6,7 @@ import { generateVariantSEO } from '@/lib/seo'
 import { generateCarProductSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/structured-data'
 import { FloatingAIBot } from '@/components/FloatingAIBot'
 import { getPriceBreakupData } from '../price-in/[city]/page'
+import { resolveR2Url } from '@/lib/image-utils'
 
 interface PageProps {
   params: Promise<{
@@ -82,9 +83,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           )
           if (model) {
             if (model.heroImage) {
-              modelImage = model.heroImage.startsWith('http')
-                ? model.heroImage
-                : `${backendUrl}${model.heroImage}`
+              modelImage = resolveR2Url(model.heroImage)
             }
             lowestPrice = model.lowestPrice || model.price || 0
             if (lowestPrice > 0) {
@@ -406,9 +405,7 @@ export default async function VariantDetailPage({ params, searchParams }: PagePr
     const productSchema = generateCarProductSchema({
       name: `${brandName} ${modelName} ${variantName}`,
       brand: brandName,
-      image: variant?.highlightImages?.[0]?.url
-        ? (variant.highlightImages[0].url.startsWith('http') ? variant.highlightImages[0].url : `${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001'}${variant.highlightImages[0].url}`)
-        : (model.heroImage?.startsWith('http') ? model.heroImage : `${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001'}${model.heroImage}`),
+      image: resolveR2Url(variant?.highlightImages?.[0]?.url || model.heroImage),
       description: variant?.description || variant?.headerSummary || `Full specifications and features of ${brandName} ${modelName} ${variantName}.`,
       lowPrice: variant?.price || modelStartingPrice,
       highPrice: variant?.price || modelStartingPrice,

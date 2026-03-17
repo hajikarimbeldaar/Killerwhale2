@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import Ad3DCarousel from '@/components/ads/Ad3DCarousel'
 import BudgetCarsClient from '@/app/cars-by-budget/[budget]/BudgetCarsClient'
 import Breadcrumb from '@/components/common/Breadcrumb'
+import { resolveR2Url } from '@/lib/image-utils'
 import CarExpertBanner from '@/components/CarExpertBanner'
 
 export const revalidate = 86400 // 24 hours
@@ -128,7 +129,7 @@ async function getTransCarsData(type: string) {
                 name: model.name,
                 brand: model.brandId,
                 brandName: brandMap[model.brandId] || 'Unknown',
-                image: model.heroImage ? (model.heroImage.startsWith('http') ? model.heroImage : `${backendUrl}${model.heroImage}`) : '',
+                image: resolveR2Url(model.heroImage),
                 startingPrice: model.lowestPrice || model.price || 0,
                 lowestPriceFuelType: model.lowestPriceFuelType || (model.fuelTypes?.[0] || 'Petrol'),
                 fuelTypes: model.fuelTypes?.length > 0 ? model.fuelTypes : ['Petrol'],

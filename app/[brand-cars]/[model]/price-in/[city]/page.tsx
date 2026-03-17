@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import PriceBreakupPage from '@/components/price-breakup/PriceBreakupPage'
 import { FloatingAIBot } from '@/components/FloatingAIBot'
+import { resolveR2Url } from '@/lib/image-utils'
 
 // Enable ISR caching with 24-hour revalidation intervals
 export const revalidate = 86400 // 24 hours — saves Vercel CPU
@@ -96,9 +97,7 @@ export async function generateMetadata({ params }: PriceInCityPageProps): Promis
         )
 
         if (model && model.heroImage) {
-          modelImage = model.heroImage.startsWith('http')
-            ? model.heroImage
-            : `${backendUrl}${model.heroImage}`
+          modelImage = resolveR2Url(model.heroImage)
         }
       }
     }
@@ -191,9 +190,7 @@ export async function getPriceBreakupData(brandSlug: string, modelSlug: string, 
 
     // Get hero image with proper URL
     const heroImage = model.heroImage
-      ? (model.heroImage.startsWith('http')
-        ? model.heroImage
-        : `${backendUrl}${model.heroImage}`)
+      ? resolveR2Url(model.heroImage)
       : ''
 
     // Create map of active brand IDs and names

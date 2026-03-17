@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import Ad3DCarousel from '@/components/ads/Ad3DCarousel'
 import TopSellingCarsClient from './TopSellingCarsClient'
 import Breadcrumb from '@/components/common/Breadcrumb'
+import { resolveR2Url } from '@/lib/image-utils'
 import CarExpertBanner from '@/components/CarExpertBanner'
 
 // Enable ISR with 1-hour revalidation
@@ -92,9 +93,7 @@ async function getTopSellingCarsData() {
                 const lowestPrice = model.lowestPrice || model.price || 0
                 const fuelTypes = model.fuelTypes && model.fuelTypes.length > 0 ? model.fuelTypes : ['Petrol']
                 const transmissions = model.transmissionTypes && model.transmissionTypes.length > 0 ? model.transmissionTypes : ['Manual']
-                const heroImage = model.heroImage
-                    ? (model.heroImage.startsWith('http') ? model.heroImage : `${backendUrl}${model.heroImage}`)
-                    : ''
+                const heroImage = resolveR2Url(model.heroImage)
 
                 return {
                     id: model.id,

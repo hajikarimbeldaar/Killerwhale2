@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import Ad3DCarousel from '@/components/ads/Ad3DCarousel'
 import UpcomingCarsClient from './UpcomingCarsClient'
 import Breadcrumb from '@/components/common/Breadcrumb'
+import { resolveR2Url } from '@/lib/image-utils'
 
 // Enable ISR with 1-hour revalidation
 export const revalidate = 21600
@@ -86,9 +87,7 @@ async function getUpcomingCarsData() {
         const processedCars = (upcomingCars.data || upcomingCars || [])
             .filter((car: any) => activeBrandIds.has(car.brandId)) // Filter inactive brands
             .map((car: any) => {
-                const heroImage = car.image || car.heroImage
-                    ? ((car.image || car.heroImage).startsWith('http') ? (car.image || car.heroImage) : `${backendUrl}${car.image || car.heroImage}`)
-                    : ''
+                const heroImage = resolveR2Url(car.image || car.heroImage)
 
                 return {
                     id: car.id,

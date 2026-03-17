@@ -7,6 +7,7 @@ import TataSierraAdBanner from '@/components/ads/TataSierraAdBanner'
 import PageSection from '@/components/common/PageSection'
 import Card from '@/components/common/Card'
 import { staticPageSEO } from '@/lib/seo'
+import { CDN_URL } from '@/lib/config'
 import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/structured-data'
 
 // Lazy load below-fold components for better performance
@@ -121,10 +122,10 @@ const normalizeFuelType = (fuel: string): string => {
 
 const resolveAssetUrl = (path: string, backendUrl: string) => {
   if (!path) return ''
-  const r2Url = process.env.R2_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_R2_PUBLIC_BASE_URL || ''
+  const r2Url = CDN_URL
   const legacyR2 = 'https://pub-a4a4bb84fc2d41cba103f4e2a8b5d185.r2.dev'
 
-  if (path.includes(legacyR2) && r2Url) {
+  if (path.includes(legacyR2)) {
     return path.replace(legacyR2, r2Url)
   }
 

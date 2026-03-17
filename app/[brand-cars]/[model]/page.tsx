@@ -5,6 +5,7 @@ import { generateModelSEO } from '@/lib/seo'
 import BrandNews from '@/components/brand/BrandNews'
 import { generateCarProductSchema, generateFAQSchema, generateBreadcrumbSchema, BASE_URL } from '@/lib/structured-data'
 import SEOInternalLinks from '@/components/seo/SEOInternalLinks'
+import { resolveR2Url } from '@/lib/image-utils'
 
 interface ModelPageProps {
   params: Promise<{
@@ -15,19 +16,7 @@ interface ModelPageProps {
 
 // Enable ISR with 1-hour revalidation (matches home page pattern)
 const resolveAssetUrl = (path: string, backendUrl: string) => {
-  if (!path) return ''
-  const r2Url = process.env.R2_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_R2_PUBLIC_BASE_URL || ''
-  const legacyR2 = 'https://pub-a4a4bb84fc2d41cba103f4e2a8b5d185.r2.dev'
-
-  if (path.includes(legacyR2) && r2Url) {
-    return path.replace(legacyR2, r2Url)
-  }
-
-  if (path.startsWith('http')) return path
-
-  if (path.startsWith('/uploads/') && r2Url) return `${r2Url}${path}`
-  if (path.startsWith('/uploads/')) return `${backendUrl}${path}`
-  return path
+  return resolveR2Url(path)
 }
 
 export const revalidate = 86400 // 24 hours — car specs don't change hourly, saves Vercel CPU

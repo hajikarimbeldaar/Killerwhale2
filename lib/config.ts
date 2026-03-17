@@ -7,6 +7,10 @@ export const BACKEND_URL = process.env.BACKEND_URL ||
     process.env.NEXT_PUBLIC_BACKEND_URL ||
     'http://localhost:5001';
 
+// Cloudflare R2 CDN custom domain
+export const CDN_URL = process.env.NEXT_PUBLIC_R2_PUBLIC_BASE_URL || 
+    'https://cdn.gadizone.com';
+
 // The API Base URL is usually the public facing URL of the Next.js app
 // Used for internal calls, or frontend-to-nextjs-api calls
 export const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL ||

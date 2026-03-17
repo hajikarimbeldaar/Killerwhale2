@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import Ad3DCarousel from '@/components/ads/Ad3DCarousel'
 import NewLaunchesClient from './NewLaunchesClient'
 import Breadcrumb from '@/components/common/Breadcrumb'
+import { resolveR2Url } from '@/lib/image-utils'
 
 export const revalidate = 86400 // 24 hours
 
@@ -90,9 +91,7 @@ async function getNewLaunchesData() {
                 const lowestPrice = model.lowestPrice || model.price || 0
                 const fuelTypes = model.fuelTypes && model.fuelTypes.length > 0 ? model.fuelTypes : ['Petrol']
                 const transmissions = model.transmissionTypes && model.transmissionTypes.length > 0 ? model.transmissionTypes : ['Manual']
-                const heroImage = model.heroImage
-                    ? (model.heroImage.startsWith('http') ? model.heroImage : `${backendUrl}${model.heroImage}`)
-                    : ''
+                const heroImage = resolveR2Url(model.heroImage)
 
                 return {
                     id: model.id,

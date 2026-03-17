@@ -6,6 +6,7 @@ import PageSection from '@/components/common/PageSection'
 import Footer from '@/components/Footer'
 import Ad3DCarousel from '@/components/ads/Ad3DCarousel'
 import TopCarsClient from './TopCarsClient'
+import { resolveR2Url } from '@/lib/image-utils'
 
 interface PageProps {
     params: Promise<{ bodyType: string }>
@@ -133,9 +134,7 @@ async function getTopCarsData() {
             const lowestPrice = model.lowestPrice || model.price || 0
             const fuelTypes = model.fuelTypes && model.fuelTypes.length > 0 ? model.fuelTypes : ['Petrol']
             const transmissions = model.transmissionTypes && model.transmissionTypes.length > 0 ? model.transmissionTypes : ['Manual']
-            const heroImage = model.heroImage
-                ? (model.heroImage.startsWith('http') ? model.heroImage : `${backendUrl}${model.heroImage}`)
-                : ''
+            const heroImage = resolveR2Url(model.heroImage)
 
             return {
                 id: model.id,
