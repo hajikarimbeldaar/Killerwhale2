@@ -930,25 +930,7 @@ export default function PriceBreakupPage({
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* SEO JSON-LD Structured Data */}
-      {/* SEO JSON-LD Structured Data - Product schema handled by page.tsx wrapper */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faqs.map(faq => ({
-              "@type": "Question",
-              "name": faq.question,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer
-              }
-            }))
-          })
-        }}
-      />
+      {/* Hero Section */}
 
       {/* Sticky Navigation Ribbon */}
       <div className="bg-white border-b sticky top-0 z-40 transition-all duration-300">

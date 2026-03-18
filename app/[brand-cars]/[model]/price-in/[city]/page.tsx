@@ -373,7 +373,7 @@ export async function getPriceBreakupData(brandSlug: string, modelSlug: string, 
   }
 }
 
-import { generateCarProductSchema, generateBreadcrumbSchema } from '@/lib/structured-data'
+import { generateCarProductSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/structured-data'
 
 export default async function PriceInCityPage({ params, searchParams }: PriceInCityPageProps) {
   // Await params and searchParams as required by Next.js 15
@@ -423,6 +423,30 @@ export default async function PriceInCityPage({ params, searchParams }: PriceInC
     { name: `Price in ${toDisplayName(citySlug)}`, item: `/${brandSlug}-cars/${modelSlug}/price-in-${citySlug}` },
   ])
 
+  // Generate FAQ schema (moved from PriceBreakupPage to fix duplication)
+  const brandName = initialData?.brand?.name || toDisplayName(brandSlug)
+  const modelName = initialData?.model?.name || toDisplayName(modelSlug)
+  const lowestPrice = initialData?.variants?.length ? Math.min(...initialData.variants.map((v: any) => v.price)) : 0
+  const highestPrice = initialData?.variants?.length ? Math.max(...initialData.variants.map((v: any) => v.price)) : 0
+  
+  const faqs = [
+    {
+      question: `What is the on-road price of ${brandName} ${modelName} in ${cityName}?`,
+      answer: lowestPrice > 0 
+        ? `The on-road price of ${brandName} ${modelName} in ${cityName} starts at approximately ₹${(lowestPrice / 100000).toFixed(2)} Lakh. The final price includes ex-showroom price, RTO, insurance and other taxes.` 
+        : `The on-road price of ${brandName} ${modelName} in ${cityName} depends on the variant selected and local taxes.`
+    },
+    {
+      question: `What is the mileage of ${brandName} ${modelName}?`,
+      answer: `The ${brandName} ${modelName} offers a competitive mileage. Exact fuel efficiency depends on the engine, transmission and driving conditions.`
+    },
+    {
+       question: `How many variants of ${brandName} ${modelName} are available?`,
+       answer: `There are ${initialData?.variants?.length || 'multiple'} variants of ${brandName} ${modelName} available, catering to different feature and price requirements.`
+    }
+  ]
+  const faqSchema = generateFAQSchema(faqs)
+
   return (
     <>
       {productSchema && (
@@ -434,6 +458,10 @@ export default async function PriceInCityPage({ params, searchParams }: PriceInC
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <PriceBreakupPage
         brandSlug={brandSlug}

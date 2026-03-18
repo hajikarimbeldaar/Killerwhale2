@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import CarCard from './CarCard'
+import { useBatchOnRoadPrice } from '@/hooks/useOnRoadPrice'
 
 interface Car {
   id: string
@@ -11,6 +12,7 @@ interface Car {
   brandName: string
   image: string
   startingPrice: number
+  lowestPriceFuelType?: string
   fuelTypes: string[]
   transmissions: string[]
   seating: number
@@ -45,6 +47,17 @@ interface CarsByBudgetProps {
  * 4. Full SEO support - all content is server-rendered
  */
 export default function CarsByBudget({ allCars }: CarsByBudgetProps) {
+  // Prepare items for batch price calculation
+  const batchItems = useMemo(() => {
+    return allCars.map(car => ({
+      id: car.id,
+      exShowroomPrice: car.startingPrice,
+      fuelType: car.lowestPriceFuelType || car.fuelTypes?.[0] || 'Petrol'
+    }))
+  }, [allCars])
+
+  const batchPrices = useBatchOnRoadPrice(batchItems)
+
   // All possible budget ranges
   const allBudgetRanges: BudgetRange[] = [
     { id: 'under-10', label: 'Under ₹10 Lakh', min: 0, max: 1000000, urlSlug: '10' },
@@ -65,12 +78,13 @@ export default function CarsByBudget({ allCars }: CarsByBudgetProps) {
     return allBudgetRanges.filter(range => {
       // Count cars in this range
       const carsInRange = allCars.filter(car => {
-        const price = car.startingPrice
+        const priceData = batchPrices.get(car.id)
+        const price = priceData?.isOnRoadMode ? priceData.onRoadPrice : car.startingPrice
         return price >= range.min && price <= range.max
       })
       return carsInRange.length > 0
     })
-  }, [allCars])
+  }, [allCars, batchPrices])
 
   // Get the first available range or default to 'under-10'
   const defaultRange = availableBudgetRanges.length > 0 ? availableBudgetRanges[0].id : 'under-10'
@@ -88,7 +102,8 @@ export default function CarsByBudget({ allCars }: CarsByBudgetProps) {
   // Filter cars based on selected budget range
   const selectedRange = allBudgetRanges.find(b => b.id === selectedBudget)
   const currentCars = allCars.filter(car => {
-    const price = car.startingPrice
+    const priceData = batchPrices.get(car.id)
+    const price = priceData?.isOnRoadMode ? priceData.onRoadPrice : car.startingPrice
     if (!selectedRange) return false
     return price >= selectedRange.min && price <= selectedRange.max
   }).slice(0, 10) // Limit to 10 cars, 11th is "See More" card
