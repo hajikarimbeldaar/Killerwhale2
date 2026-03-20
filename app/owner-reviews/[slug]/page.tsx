@@ -94,7 +94,7 @@ export default function OwnerReviewsPage() {
         "review": data.reviews.map(r => ({
             "@type": "Review",
             "author": { "@type": "Person", "name": r.authorName },
-            "datePublished": "2024-01-15", // Mock date
+            "datePublished": new Date().toISOString().split('T')[0], // dynamically valid ISO Mock date
             "reviewBody": r.review,
             "reviewRating": {
                 "@type": "Rating",

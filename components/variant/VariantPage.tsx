@@ -896,7 +896,7 @@ export default function VariantPage({
                     {showSkeleton ? (
                       <div className="bg-gray-200 animate-pulse h-9 w-96 rounded"></div>
                     ) : (
-                      `${currentVariantData?.fullName} - On-Road Price ${getCurrentMonthYear()}`
+                      currentVariantData?.fullName
                     )}
                   </h1>
 

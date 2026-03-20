@@ -155,7 +155,13 @@ export async function GET(request: NextRequest, props: { params: Promise<{ id: s
             const end = start + MODELS_PER_CHUNK
             const chunkModels = validModels.slice(start, end)
 
-            chunkModels.forEach((model: { name: string; brandId: string; brandName: string; updatedAt?: string }) => {
+            // 🚀 NEW: Fetch variants for this specific chunk of models in parallel
+            const variantsPromises = chunkModels.map((model: any) => 
+                fetchData(`/api/variants?modelId=${model.id}`)
+            )
+            const chunkVariants = await Promise.all(variantsPromises)
+
+            chunkModels.forEach((model: { name: string; brandId: string; brandName: string; updatedAt?: string }, index: number) => {
                 const brandName = model.brandName || brandMap.get(model.brandId)
                 const brandSlug = (brandName as string).toLowerCase().replace(/\s+/g, '-')
                 const modelSlug = model.name.toLowerCase().replace(/\s+/g, '-')
@@ -171,7 +177,20 @@ export async function GET(request: NextRequest, props: { params: Promise<{ id: s
                     routes.push({ url: `${basePath}/${sub}`, lastModified: lastMod, priority: 0.6 })
                 })
 
-                // 3. Price URLs for Tier 1-2-3 Cities (Matches GSC Success state: 2,775 URLs)
+                // 3. Variant Pages (CRITICAL for long-tail SEO!)
+                const modelVariants = Array.isArray(chunkVariants[index]) ? chunkVariants[index] : []
+                modelVariants.forEach((variant: any) => {
+                    if (variant && variant.name) {
+                        const variantSlug = variant.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+                        routes.push({ 
+                            url: `${basePath}/${variantSlug}`, 
+                            lastModified: variant.updatedAt ? new Date(variant.updatedAt) : lastMod, 
+                            priority: 0.8 
+                        })
+                    }
+                })
+
+                // 4. Price URLs for Tier 1-2-3 Cities (Matches GSC Success state: 2,775 URLs)
                 TIER_1_2_3_CITIES.forEach(city => {
                     const citySlug = city.city.toLowerCase().replace(/\s+/g, '-')
                     routes.push({

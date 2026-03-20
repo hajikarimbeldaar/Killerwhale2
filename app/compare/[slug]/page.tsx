@@ -53,6 +53,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
 
     return {
+      metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://www.gadizone.com'),
       title: `${title} Comparison - Specs, Price & Features | gadizone`,
       description: description.substring(0, 160), // Truncate for SEO
       keywords: `${title} comparison, ${modelNames.join(', ')}, car comparison, ${modelNames[0]} vs ${modelNames[1]}`,

@@ -27,7 +27,6 @@ export default function robots(): MetadataRoute.Robots {
                     '/ai-car-finder',
                     '/variants/',    // Legacy variant route (now flat: /brand/model/variant-slug)
                     '*/variant/*',   // Legacy /variant/ subdirectory URLs (301 → flat URL)
-                    '*/price-in/*',  // Legacy /price-in/ subdirectory URLs (301 → flat URL)
                     '/*?*',          // Block duplicate/parameter URLs
                 ],
             },

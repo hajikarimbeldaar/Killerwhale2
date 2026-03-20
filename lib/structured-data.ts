@@ -164,6 +164,16 @@ export function generateCarProductSchema(car: {
         productionDate: car.modelDate
     }
 
+    if (car.rating && car.reviewCount && car.reviewCount > 0) {
+        schema.aggregateRating = {
+            '@type': 'AggregateRating',
+            ratingValue: car.rating.toString(),
+            reviewCount: car.reviewCount.toString(),
+            bestRating: '5',
+            worstRating: '1'
+        }
+    }
+
     if (car.lowPrice > 0) {
         schema.offers = {
             '@type': 'AggregateOffer',

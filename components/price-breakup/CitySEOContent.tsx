@@ -1,15 +1,6 @@
 'use client'
 
-import React, { useMemo } from 'react'
-
-interface CitySEOContentProps {
-    brandName: string
-    modelName: string
-    cityName: string
-    bodyType?: string
-    transmissions?: string[]
-    fuelTypes?: string[]
-}
+import React from 'react'
 
 // Helper to determine city traits for localized content
 const getCityTraits = (city: string) => {
@@ -97,6 +88,15 @@ const getCityTraits = (city: string) => {
     }
 }
 
+interface CitySEOContentProps {
+    brandName: string
+    modelName: string
+    cityName: string
+    bodyType?: string
+    transmissions?: string[]
+    fuelTypes?: string[]
+}
+
 export default function CitySEOContent({
     brandName,
     modelName,
@@ -106,54 +106,48 @@ export default function CitySEOContent({
     fuelTypes = ['Petrol']
 }: CitySEOContentProps) {
 
-    // Memoize the content so it doesn't change on re-renders,
-    // but uniquely generates based on the props.
-    const seoText = useMemo(() => {
-        const traits = getCityTraits(cityName)
-        // ✅ Guard against null values from the database.
-        // Default params only cover `undefined`; the DB sometimes sends explicit `null`.
-        const safeBodyType = (bodyType ?? 'car').toLowerCase()
-        const safeTransmissions = (transmissions ?? ['Manual']).filter(Boolean)
-        const safeFuelTypes = (fuelTypes ?? ['Petrol']).filter(Boolean)
+    // Server component: compute directly (no useMemo needed)
+    const traits = getCityTraits(cityName)
+    // Guard against null values from the database.
+    const safeBodyType = (bodyType ?? 'car').toLowerCase()
+    const safeTransmissions = (transmissions ?? ['Manual']).filter(Boolean)
+    const safeFuelTypes = (fuelTypes ?? ['Petrol']).filter(Boolean)
 
-        const hasAuto = safeTransmissions.some(t => t.toLowerCase().includes('auto') || t.toLowerCase() === 'amt' || t.toLowerCase() === 'cvt')
-        const hasEV = safeFuelTypes.some(f => f.toLowerCase().includes('electric') || f.toLowerCase() === 'ev')
-        const hasCNG = safeFuelTypes.some(f => f.toLowerCase().includes('cng'))
-        const isSUV = safeBodyType.includes('suv')
-        const isHatch = safeBodyType.includes('hatchback')
+    const hasAuto = safeTransmissions.some((t: string) => t.toLowerCase().includes('auto') || t.toLowerCase() === 'amt' || t.toLowerCase() === 'cvt')
+    const hasEV = safeFuelTypes.some((f: string) => f.toLowerCase().includes('electric') || f.toLowerCase() === 'ev')
+    const hasCNG = safeFuelTypes.some((f: string) => f.toLowerCase().includes('cng'))
+    const isSUV = safeBodyType.includes('suv')
+    const isHatch = safeBodyType.includes('hatchback')
 
-        // Build paragraph 1: City context & Transmission/Size
-        let p1 = `Navigating through ${traits.traffic} is where the ${brandName} ${modelName} truly shines. `
+    // Build paragraph 1: City context & Transmission/Size
+    let p1 = `Navigating through ${traits.traffic} is where the ${brandName} ${modelName} truly shines. `
 
-        if (hasAuto) {
-            if (isHatch) {
-                p1 += `As a compact ${safeBodyType}, its automatic transmission options take the stress out of ${traits.vibe}, fitting perfectly into tight parking spaces. `
-            } else {
-                p1 += `Despite its presence, the available automatic transmission takes the effort out of driving along ${traits.vibe}. `
-            }
+    if (hasAuto) {
+        if (isHatch) {
+            p1 += `As a compact ${safeBodyType}, its automatic transmission options take the stress out of ${traits.vibe}, fitting perfectly into tight parking spaces. `
         } else {
-            p1 += `The refined manual gearbox offers absolute control whether you are on ${traits.roads} or making your daily commute. `
+            p1 += `Despite its presence, the available automatic transmission takes the effort out of driving along ${traits.vibe}. `
         }
+    } else {
+        p1 += `The refined manual gearbox offers absolute control whether you are on ${traits.roads} or making your daily commute. `
+    }
 
-        if (isSUV) {
-            p1 += `Furthermore, the superior ground clearance ensures you confidently tackle ${traits.roads} without scraping the underbelly.`
-        }
+    if (isSUV) {
+        p1 += `Furthermore, the superior ground clearance ensures you confidently tackle ${traits.roads} without scraping the underbelly.`
+    }
 
-        // Build paragraph 2: Fuel efficiency & Climate/State
-        let p2 = `Considering ${traits.state}'s specific RTO road tax structures, the ${modelName} offers phenomenal value. `
+    // Build paragraph 2: Fuel efficiency & Climate/State
+    let p2 = `Considering ${traits.state}'s specific RTO road tax structures, the ${modelName} offers phenomenal value. `
 
-        if (hasEV) {
-            p2 += `With the growing EV charging infrastructure across ${cityName.split(',')[0]}, opting for the electric variant brings running costs down to a fraction, perfectly countering ${traits.climate} while producing zero tailpipe emissions. `
-        } else if (hasCNG) {
-            p2 += `Given the volatile fuel prices, the factory-fitted CNG option is a massive hit among daily commuters looking for maximum mileage on ${traits.roads}. `
-        } else {
-            p2 += `The refined ${fuelTypes.join(' and ')} engine options are tuned to deliver excellent mileage in ${cityName.split(',')[0]} without compromising on the power needed for ${traits.vibe}. `
-        }
+    if (hasEV) {
+        p2 += `With the growing EV charging infrastructure across ${cityName.split(',')[0]}, opting for the electric variant brings running costs down to a fraction, perfectly countering ${traits.climate} while producing zero tailpipe emissions. `
+    } else if (hasCNG) {
+        p2 += `Given the volatile fuel prices, the factory-fitted CNG option is a massive hit among daily commuters looking for maximum mileage on ${traits.roads}. `
+    } else {
+        p2 += `The refined ${safeFuelTypes.join(' and ')} engine options are tuned to deliver excellent mileage in ${cityName.split(',')[0]} without compromising on the power needed for ${traits.vibe}. `
+    }
 
-        p2 += `Built to handle ${traits.climate}, its robust AC and cabin insulation keep the outside world at bay.`
-
-        return { p1, p2, state: traits.state }
-    }, [brandName, modelName, cityName, bodyType, transmissions, fuelTypes])
+    p2 += `Built to handle ${traits.climate}, its robust AC and cabin insulation keep the outside world at bay.`
 
     return (
         <div className="mt-8 pt-6 border-t border-gray-100">
@@ -161,8 +155,8 @@ export default function CitySEOContent({
                 Why Buy the {modelName} in {cityName.split(',')[0]}?
             </h3>
             <div className="space-y-3 text-sm text-gray-600 leading-relaxed font-medium">
-                <p>{seoText.p1}</p>
-                <p>{seoText.p2}</p>
+                <p>{p1}</p>
+                <p>{p2}</p>
             </div>
         </div>
     )

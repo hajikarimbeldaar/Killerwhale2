@@ -20,16 +20,18 @@ export const viewport = {
   // Removed maximumScale to allow user zooming (accessibility)
 }
 
+const currentYear = new Date().getFullYear();
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.gadizone.com'),
   title: {
-    default: 'gadizone: New Cars, Used Cars, Buy a Car, Compare Prices in India 2025',
+    default: `gadizone: New Cars, Used Cars, Buy a Car, Compare Prices in India ${currentYear}`,
     template: '%s | gadizone'
   },
-  description: 'gadizone is India\'s #1 car research platform. Compare new car prices 2025, check on-road price, read expert reviews, find used cars, calculate EMI & get best deals. Trusted by 50,000+ car buyers.',
+  description: `gadizone is India\'s #1 car research platform. Compare new car prices ${currentYear}, check on-road price, read expert reviews, find used cars, calculate EMI & get best deals. Trusted by 50,000+ car buyers.`,
   keywords: [
     // Primary High-Intent Keywords
-    'new cars India 2025',
+    `new cars India ${currentYear}`,
     'car prices India',
     'on road price calculator',
     'used cars India',
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
     'Toyota cars India',
     'Honda cars',
     // Body Type Keywords
-    'best SUV India 2025',
+    `best SUV India ${currentYear}`,
     'best sedan India',
     'best hatchback India',
     'compact SUV under 15 lakh',
@@ -62,7 +64,7 @@ export const metadata: Metadata = {
     // Long-tail Keywords
     'which car to buy under 10 lakh',
     'best car for family in India',
-    'safest cars in India 2025',
+    `safest cars in India ${currentYear}`,
     'electric cars India price',
     // Brand
     'gadizone',

@@ -32,11 +32,11 @@ export const generateCarModelUrl = (car: CarUrlData): string => {
 
 /**
  * Generate car comparison URL with multiple cars
- * Format: /compare?cars=brand1-model1,brand2-model2
+ * Format: /compare/brand1-model1-vs-brand2-model2
  */
 export const generateCompareUrl = (cars: CarUrlData[]): string => {
   const carSlugs = cars.map(car => `${generateSlug(car.brand)}-${generateSlug(car.model)}`)
-  return `/compare?cars=${carSlugs.join(',')}`
+  return `/compare/${carSlugs.join('-vs-')}`
 }
 
 /**

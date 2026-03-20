@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 
 interface SEOInternalLinksProps {
@@ -104,7 +102,7 @@ export default function SEOInternalLinks({
                                 return (
                                     <li key={index}>
                                         <Link
-                                            href={`/compare?car1=${brandSlug}-${modelSlug}&car2=${carBrandSlug}-${carModelSlug}`}
+                                            href={`/compare/${brandSlug}-${modelSlug}-vs-${carBrandSlug}-${carModelSlug}`}
                                             className="text-gray-600 hover:text-red-600 transition-colors block"
                                         >
                                             {modelName} vs {car.name}
@@ -115,6 +113,25 @@ export default function SEOInternalLinks({
                         </ul>
                     </section>
                 )}
+
+                {/* Used Cars / Cross Linking */}
+                <section>
+                    <h2 className="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
+                        Interested in Used {brandName} {modelName}?
+                    </h2>
+                    <ul className="flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
+                        <li>
+                            <Link href={`/used-cars/${brandSlug}-cars`} className="text-gray-600 hover:text-red-600 transition-colors">
+                                Used {brandName} Cars
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={`/used-cars/${brandSlug}-cars/${modelSlug}`} className="text-gray-600 hover:text-red-600 transition-colors">
+                                Used {brandName} {modelName}
+                            </Link>
+                        </li>
+                    </ul>
+                </section>
 
                 {/* Quick Explore Links */}
                 <section>
@@ -133,13 +150,8 @@ export default function SEOInternalLinks({
                             </Link>
                         </li>
                         <li>
-                            <Link href={`/${brandSlug}-cars`} className="text-gray-600 hover:text-red-600 transition-colors">
-                                All {brandName} Cars
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/compare" className="text-gray-600 hover:text-red-600 transition-colors">
-                                Compare Cars
+                            <Link href={`/${brandSlug}-cars/${modelSlug}#faqs`} className="text-gray-600 hover:text-red-600 transition-colors">
+                                {modelName} FAQs
                             </Link>
                         </li>
                         <li>

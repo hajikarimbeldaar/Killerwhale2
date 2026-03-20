@@ -1178,13 +1178,7 @@ export default function PriceBreakupPage({
 
               {/* Price Table - Semantic HTML for SEO */}
               {priceBreakup ? (
-                <div className="bg-white rounded-xl border border-gray-200" itemScope itemType="https://schema.org/Product">
-                  <meta itemProp="name" content={`${brandName} ${modelName}`} />
-                  <div itemProp="offers" itemScope itemType="https://schema.org/Offer">
-                    <meta itemProp="priceCurrency" content="INR" />
-                    <meta itemProp="price" content={String(priceBreakup.totalOnRoadPrice)} />
-                    <meta itemProp="availability" content="https://schema.org/InStock" />
-                  </div>
+                <div className="bg-white rounded-xl border border-gray-200">
 
                   <table className="w-full">
                     <caption className="sr-only">{brandName} {modelName} price breakdown in {selectedCity.split(',')[0]}</caption>

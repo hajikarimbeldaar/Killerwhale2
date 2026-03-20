@@ -19,17 +19,13 @@ const ExploreElectricCars = dynamic(() => import('@/components/home/ExploreElect
   loading: () => <div className="h-64 bg-gray-50 rounded-lg animate-pulse my-4" />
 })
 
-const PopularCars = dynamic(() => import('@/components/home/PopularCars'), {
-  loading: () => <div className="h-96 bg-gray-100 rounded-lg animate-pulse" />
-})
+import PopularCars from '@/components/home/PopularCars'
 
 const DecemberOffersSection = dynamic(() => import('@/components/home/DecemberOffersSection'), {
   loading: () => <div className="h-96 bg-gray-100 rounded-lg animate-pulse" />
 })
 
-const BrandSection = dynamic(() => import('@/components/home/BrandSection'), {
-  loading: () => <div className="h-96 bg-gray-100 rounded-lg animate-pulse" />
-})
+import BrandSection from '@/components/home/BrandSection'
 
 const UpcomingCars = dynamic(() => import('@/components/home/UpcomingCars'), {
   loading: () => <div className="h-96 bg-gray-100 rounded-lg animate-pulse" />
@@ -39,9 +35,7 @@ const FavouriteCars = dynamic(() => import('@/components/home/FavouriteCars'), {
   loading: () => <div className="h-96 bg-gray-100 rounded-lg animate-pulse" />
 })
 
-const NewLaunchedCars = dynamic(() => import('@/components/home/NewLaunchedCars'), {
-  loading: () => <div className="h-96 bg-gray-100 rounded-lg animate-pulse" />
-})
+import NewLaunchedCars from '@/components/home/NewLaunchedCars'
 
 const LatestCarNews = dynamic(() => import('@/components/home/LatestCarNews'), {
   loading: () => <div className="h-96 bg-gray-100 rounded-lg animate-pulse" />
@@ -64,9 +58,7 @@ const Ad3DCarousel = dynamic(() => import('@/components/ads/Ad3DCarousel'), {
 })
 
 
-const Footer = dynamic(() => import('@/components/Footer'), {
-  loading: () => <div className="h-96 bg-gray-900 animate-pulse" />
-})
+import Footer from '@/components/Footer'
 
 const CarExpertBanner = dynamic(() => import('@/components/CarExpertBanner'), {
   loading: () => <div className="h-32 bg-gray-100 animate-pulse rounded-xl my-4" />

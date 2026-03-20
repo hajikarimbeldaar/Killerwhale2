@@ -104,7 +104,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       : `${brandName} ${modelName} Price in ${cityName} - On Road Price, EMI, Variants (${monthYear})`
     const description = `${brandName} ${modelName} on-road price in ${cityName}${priceStr ? ` starts at${priceStr}` : ''}. Check detailed price breakup including ex-showroom, RTO, insurance. Calculate EMI and compare all variants in ${cityName} (${monthYear}).`
 
+    const canonicalUrl = `https://www.gadizone.com/${resolvedParams['brand-cars']}/${modelSlug}/${variantSlug}`
+
     return {
+      metadataBase: new URL('https://www.gadizone.com'),
       title,
       description,
       keywords: `${brandName} ${modelName} price ${cityName} ${monthYear}, ${modelName} on road price ${cityName}, ${modelName} variants`,
@@ -112,7 +115,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         title,
         description,
         type: 'website',
-        url: `/${resolvedParams['brand-cars']}/${modelSlug}/${variantSlug}`,
+        url: canonicalUrl,
         images: [{ url: modelImage, width: 1200, height: 630, alt: `${brandName} ${modelName} Price in ${cityName}` }]
       },
       twitter: {
@@ -122,7 +125,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         images: [modelImage],
       },
       alternates: {
-        canonical: `/${resolvedParams['brand-cars']}/${modelSlug}/${variantSlug}`,
+        canonical: canonicalUrl,
       },
     }
   }

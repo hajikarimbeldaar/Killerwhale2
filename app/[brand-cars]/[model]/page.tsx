@@ -72,8 +72,9 @@ export async function generateMetadata({ params }: ModelPageProps): Promise<Meta
   const seo = generateModelSEO(brandName, modelName, seoOptions)
   return {
     ...seo,
+    metadataBase: new URL('https://www.gadizone.com'),
     alternates: {
-      canonical: `/${resolvedParams['brand-cars']}/${modelSlug}`,
+      canonical: `https://www.gadizone.com/${resolvedParams['brand-cars']}/${modelSlug}`,
     },
   }
 }

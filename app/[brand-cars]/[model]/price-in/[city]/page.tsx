@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import PriceBreakupPage from '@/components/price-breakup/PriceBreakupPage'
 import { FloatingAIBot } from '@/components/FloatingAIBot'
+import SEOInternalLinks from '@/components/seo/SEOInternalLinks'
 import { resolveR2Url } from '@/lib/image-utils'
 import { getCurrentMonthYear } from '@/lib/date-utils'
 
@@ -106,7 +107,10 @@ export async function generateMetadata({ params }: PriceInCityPageProps): Promis
     console.error('Error fetching OG image for price page:', e)
   }
 
+  const canonicalUrl = `https://www.gadizone.com/${resolvedParams['brand-cars']}/${modelSlug}/price-in-${citySlug}`
+
   return {
+    metadataBase: new URL('https://www.gadizone.com'),
     title,
     description,
     keywords: `${brandName} ${modelName} price ${cityName}, ${modelName} on-road price, ${modelName} EMI, ${modelName} variants, ${modelName} price breakup`,
@@ -114,7 +118,7 @@ export async function generateMetadata({ params }: PriceInCityPageProps): Promis
       title,
       description,
       type: 'website',
-      url: `/${resolvedParams['brand-cars']}/${modelSlug}/price-in-${citySlug}`,
+      url: canonicalUrl,
       images: [
         {
           url: modelImage,
@@ -131,7 +135,7 @@ export async function generateMetadata({ params }: PriceInCityPageProps): Promis
       images: [modelImage],
     },
     alternates: {
-      canonical: `/${resolvedParams['brand-cars']}/${modelSlug}/price-in-${citySlug}`,
+      canonical: canonicalUrl,
     },
   }
 }
@@ -473,6 +477,13 @@ export default async function PriceInCityPage({ params, searchParams }: PriceInC
         initialVariants={initialData?.variants}
         initialSimilarCars={initialData?.similarCars}
         initialPopularCars={initialData?.popularCars}
+      />
+      <SEOInternalLinks 
+        brandSlug={brandSlug} 
+        modelSlug={modelSlug} 
+        brandName={brandName} 
+        modelName={modelName}
+        similarCars={initialData?.similarCars || []}
       />
       <FloatingAIBot type="price" id={modelSlug} name={modelSlug} hasStickyBottomBar={true} />
     </>
