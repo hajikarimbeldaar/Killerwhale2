@@ -247,7 +247,7 @@ class BrandApiClient {
       'Maruti Suzuki': 'Swift',
       'Hyundai': 'Creta',
       'Tata': 'Nexon',
-      'Mahindra': 'XUV700',
+      'Mahindra': 'XUV 7XO',
       'Toyota': 'Innova Crysta',
       'Kia': 'Seltos',
       'MG': 'Hector'

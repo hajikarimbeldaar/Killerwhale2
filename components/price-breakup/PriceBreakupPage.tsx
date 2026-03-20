@@ -95,6 +95,7 @@ export default function PriceBreakupPage({
 
   // Get URL parameters - support both new slug-based URLs and old query params
   const getBrandName = () => {
+    if (initialBrand && initialBrand.name) return initialBrand.name
     if (brandSlug) {
       // Convert slug to display name: "honda" -> "Honda"
       return brandSlug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
@@ -103,6 +104,7 @@ export default function PriceBreakupPage({
   }
 
   const getModelName = () => {
+    if (initialModel && initialModel.name) return initialModel.name
     if (modelSlug) {
       // Convert slug to display name: "elevate" -> "Elevate"
       return modelSlug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')

@@ -78,7 +78,7 @@ async function getActiveCarNames(): Promise<string[]> {
             'creta', 'seltos', 'nexon', 'punch', 'brezza', 'venue', 'sonet',
             'swift', 'baleno', 'i20', 'altroz', 'tiago', 'kwid',
             'city', 'verna', 'ciaz', 'amaze', 'dzire',
-            'xuv700', 'hector', 'harrier', 'safari', 'compass', 'fortuner',
+            'xuv7xo', 'hector', 'harrier', 'safari', 'compass', 'fortuner',
             'innova', 'ertiga', 'xl6', 'carens', 'alcazar',
             'scorpio', 'thar', 'jimny', 'grand vitara', 'hyryder'
         ]

@@ -358,7 +358,7 @@ router.get('/:type/:id', async (req: Request, res: Response) => {
         ⚡ Be CONCISE - Under 100 characters, no fluff
 
         EXAMPLES OF GOOD FACTS:
-        - "XUV700's ADAS detects obstacles faster than you can say 'brake'"
+        - "XUV 7XO's ADAS detects obstacles faster than you can say 'brake'"
         - "Nexon scored 5 stars in crash tests. Your peace of mind? Priceless."
         - "Swift holds its value like fine wine - just depreciates slower"
         - "This engine drinks less fuel than a hybrid in traffic"

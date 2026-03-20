@@ -143,7 +143,10 @@ export const CAR_ALIASES: Record<string, string> = {
     'balenoo': 'baleno',
 
     // Informal names
-    'xv700': 'xuv700',
+    'xv700': 'xuv7xo',
+    'xuv700': 'xuv7xo',
+    'xuv 7xo': 'xuv7xo',
+    '7xo': 'xuv7xo',
     'xv400': 'xuv400',
     'fortunner': 'fortuner',
     'inoova': 'innova',

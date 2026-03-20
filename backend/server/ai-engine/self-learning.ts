@@ -141,7 +141,7 @@ function extractPatternKey(query: string): string {
         'creta', 'seltos', 'nexon', 'brezza', 'venue', 'sonet', 'punch',
         'swift', 'baleno', 'i20', 'altroz', 'tiago', 'glanza',
         'city', 'verna', 'ciaz', 'amaze', 'dzire',
-        'xuv700', 'xuv400', 'hector', 'harrier', 'safari', 'thar',
+        'xuv7xo', 'xuv400', 'hector', 'harrier', 'safari', 'thar',
         'fortuner', 'innova', 'ertiga', 'carens', 'alcazar',
         'hyundai', 'tata', 'maruti', 'mahindra', 'kia', 'honda', 'toyota', 'mg'
     ]

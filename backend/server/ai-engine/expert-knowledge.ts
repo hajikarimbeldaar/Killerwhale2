@@ -57,25 +57,25 @@ export const HEAD_TO_HEAD: Record<string, {
     },
 
     // Premium SUV Battle
-    "xuv700_safari": {
-        cars: ["Mahindra XUV700", "Tata Safari"],
-        winner: { overall: "xuv700", resale: "xuv700", features: "xuv700", safety: "tie", value: "xuv700" },
-        insight: "XUV700 came and ate Safari's lunch. Same-ish price, more features, ADAS.",
+    "xuv7xo_safari": {
+        cars: ["Mahindra XUV 7XO", "Tata Safari"],
+        winner: { overall: "xuv7xo", resale: "xuv7xo", features: "xuv7xo", safety: "tie", value: "xuv7xo" },
+        insight: "XUV 7XO's triple-screen setup and Harman Kardon audio put it ahead. Safari fights back on looks.",
         forWhom: {
-            car1: "Tech lovers who want ADAS and panoramic sunroof",
-            car2: "Those who prefer Safari's classic SUV stance and cabin feel"
+            car1: "Tech lovers who want ADAS, triple screens and panoramic sunroof",
+            car2: "Those who prefer Safari's bold design language and cabin feel"
         },
-        proTip: "XUV700 AX5 with ADAS is the smart buy. Skip AX7 unless you need roof rails."
+        proTip: "XUV 7XO AX5 is the sweet spot. AX7T adds ADAS and Harman Kardon if you can stretch."
     },
-    "xuv700_harrier": {
-        cars: ["Mahindra XUV700", "Tata Harrier"],
-        winner: { overall: "xuv700", resale: "tie", features: "xuv700", safety: "tie", value: "xuv700" },
-        insight: "Harrier looks meaner but XUV700 is smarter. Literally, it has ADAS.",
+    "xuv7xo_harrier": {
+        cars: ["Mahindra XUV 7XO", "Tata Harrier"],
+        winner: { overall: "xuv7xo", resale: "tie", features: "xuv7xo", safety: "tie", value: "xuv7xo" },
+        insight: "Harrier looks meaner but XUV 7XO is smarter with triple screens, 540° camera and ADAS.",
         forWhom: {
             car1: "Those who want the 'best in class' bragging rights",
             car2: "Those who prefer Harrier's aggressive design language"
         },
-        proTip: "Both have same engine. XUV700 diesel tuned for more power."
+        proTip: "XUV 7XO diesel has more power and 7-seater option. Harrier tops out at 5 seats."
     },
     "fortuner_gloster": {
         cars: ["Toyota Fortuner", "MG Gloster"],
@@ -177,11 +177,11 @@ export const OBJECTIONS: Record<string, {
         data: "300+ service centers, 7-year warranty, 24/7 RSA",
         alternative: "Their customer satisfaction scores are actually higher than most established brands."
     },
-    "xuv700_waiting": {
-        objection: "XUV700 has 6 month waiting",
-        response: "True for AX7 diesel automatic. But AX5 petrol has 2-3 week delivery. Javelin color across variants has shortest wait.",
-        data: "AX5 Petrol: 2-3 weeks, AX7 Diesel AT: 6 months, Javelin color: fastest",
-        alternative: "Consider AX5 with ADAS option pack. You get key features without the wait."
+    "xuv7xo_waiting": {
+        objection: "XUV 7XO has long waiting",
+        response: "Waiting varies by variant. AX and AX3 petrol have shorter waits. Higher trims like AX7L AWD can stretch to 3-4 months.",
+        data: "AX/AX3 Petrol: 2-4 weeks, AX7T/AX7L Diesel AT: 2-4 months",
+        alternative: "Consider AX5 or AX7 — great feature-to-wait balance with triple screens standard."
     },
     "diesel_vs_petrol": {
         objection: "Should I buy diesel or petrol?",
@@ -203,7 +203,7 @@ export const OBJECTIONS: Record<string, {
     },
     "first_year_problems": {
         objection: "Never buy a car in its first year",
-        response: "Partially valid. BUT modern cars are much better tested. XUV700 launched with minimal issues. Nexon facelift was flawless from day 1.",
+        response: "Partially valid. BUT modern cars are much better tested. XUV 7XO launched with minimal issues. Nexon facelift was flawless from day 1.",
         data: "First 6 months = most updates. After that, stable platform.",
         alternative: "Wait 3-6 months after launch if you can. Let early adopters find issues."
     },
@@ -332,9 +332,9 @@ export const COMPETITORS: Record<string, string[]> = {
     "seltos": ["creta", "grand_vitara", "hyryder"],
     "nexon": ["brezza", "venue", "sonet"],
     "brezza": ["nexon", "venue", "sonet"],
-    "xuv700": ["safari", "harrier", "hector"],
-    "safari": ["xuv700", "hector", "harrier"],
-    "harrier": ["xuv700", "safari", "hector"],
+    "xuv7xo": ["safari", "harrier", "hector"],
+    "safari": ["xuv7xo", "hector", "harrier"],
+    "harrier": ["xuv7xo", "safari", "hector"],
     "swift": ["altroz", "i20", "baleno"],
     "altroz": ["swift", "i20", "baleno"],
     "i20": ["altroz", "swift", "baleno"],

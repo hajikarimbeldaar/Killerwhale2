@@ -430,7 +430,7 @@ export async function semanticCarSearch(
 import { findBestCarMatches, CAR_ALIASES } from './fuzzy-match'
 
 const KNOWN_CAR_NAMES = [
-    'swift', 'creta', 'nexon', 'seltos', 'venue', 'brezza', 'baleno', 'i20', 'i10', 'sonet', 'carens', 'innova', 'fortuner', 'city', 'elevate', 'amaze', 'thar', 'scorpio', 'xuv700', 'xuv400', 'xuv300', 'bolero', 'harrier', 'safari', 'punch', 'tiago', 'tigor', 'altroz', 'curvv', 'fronx', 'jimny', 'invicto', 'hycross', 'grand vitara', 'ertiga', 'xl6', 'dzire', 's-presso', 'wagonr', 'alto', 'eeco', 'verna', 'exter', 'aura', 'alcazar', 'tata', 'maruti', 'hyundai', 'kia', 'mahindra', 'honda', 'toyota', 'mg', 'skoda', 'volkswagen'
+    'swift', 'creta', 'nexon', 'seltos', 'venue', 'brezza', 'baleno', 'i20', 'i10', 'sonet', 'carens', 'innova', 'fortuner', 'city', 'elevate', 'amaze', 'thar', 'scorpio', 'xuv7xo', 'xuv400', 'xuv300', 'bolero', 'harrier', 'safari', 'punch', 'tiago', 'tigor', 'altroz', 'curvv', 'fronx', 'jimny', 'invicto', 'hycross', 'grand vitara', 'ertiga', 'xl6', 'dzire', 's-presso', 'wagonr', 'alto', 'eeco', 'verna', 'exter', 'aura', 'alcazar', 'tata', 'maruti', 'hyundai', 'kia', 'mahindra', 'honda', 'toyota', 'mg', 'skoda', 'volkswagen'
 ]
 
 function extractCarNamesFromQuery(query: string): string[] {

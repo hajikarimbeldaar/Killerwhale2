@@ -19,7 +19,7 @@ const completeBrandModels = {
     "Safari", "Curvv", "Nexon EV", "Tigor EV", "Tiago EV"
   ],
   "Mahindra": [
-    "Bolero", "Bolero Neo", "XUV300", "Thar", "Scorpio N", "XUV700", 
+    "Bolero", "Bolero Neo", "XUV300", "Thar", "Scorpio N", "XUV 7XO", 
     "XUV400", "Scorpio Classic", "Marazzo"
   ],
   "Force Motors": [

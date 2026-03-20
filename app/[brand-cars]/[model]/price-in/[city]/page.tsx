@@ -52,29 +52,14 @@ export async function generateMetadata({ params }: PriceInCityPageProps): Promis
   const modelSlug = resolvedParams.model
   const citySlug = resolvedParams.city
 
-  const brandName = toDisplayName(brandSlug)
-  const modelName = toDisplayName(modelSlug)
+  let brandName = toDisplayName(brandSlug)
+  let modelName = toDisplayName(modelSlug)
   const cityName = cityMap[citySlug?.toLowerCase() || '']?.split(',')[0] || toDisplayName(citySlug)
 
-  const title = `${brandName} ${modelName} Price in ${cityName} - On-Road Price, EMI, Variants | ${getCurrentMonthYear()} | gadizone`
-  const description = `Get ${brandName} ${modelName} on-road price in ${cityName}. Check detailed price breakup including ex-showroom price, RTO, insurance, and calculate EMI. Compare variants and get the best deals.`
-
-  // Fetch model image for OpenGraph
+  // Fetch model image for OpenGraph and correct names
   let modelImage = 'https://www.gadizone.com/og-image.jpg' // Default fallback
   try {
     const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001'
-    const start = Date.now()
-
-    // OPTIMIZATION: Use the light "models-with-pricing" or similar if available, 
-    // but for now we need the specific model image. 
-    // We can reuse the same fetch logic as getPriceBreakupData but lighter.
-    // Or just fetch brands -> find brand -> fetch models -> find model.
-    // To save time in metadata generation, let's try to hit the specific model endpoint directly if we had ID.
-    // Since we don't have ID, we have to search.
-
-    // Strategy: Fetch models list for the brand if possible, or just all models if list is cached/small.
-    // Actually, let's just fetch all models like getPriceBreakupData does but faster?
-    // No, let's rely on the fact that these are cached.
 
     const [brandsRes, modelsRes] = await Promise.all([
       fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } }),
@@ -91,6 +76,7 @@ export async function generateMetadata({ params }: PriceInCityPageProps): Promis
       )
 
       if (brand) {
+        brandName = brand.name
         const model = models.find((m: any) =>
           m.brandId === brand.id && (
             m.name.toLowerCase() === modelSlug.toLowerCase().replace(/-/g, ' ') ||
@@ -98,15 +84,20 @@ export async function generateMetadata({ params }: PriceInCityPageProps): Promis
           )
         )
 
-        if (model && model.heroImage) {
-          modelImage = resolveR2Url(model.heroImage)
+        if (model) {
+          modelName = model.name
+          if (model.heroImage) {
+            modelImage = resolveR2Url(model.heroImage)
+          }
         }
       }
     }
   } catch (e) {
-    console.error('Error fetching OG image for price page:', e)
+    console.error('Error fetching OG image and names for price page:', e)
   }
 
+  const title = `${brandName} ${modelName} Price in ${cityName} - On-Road Price, EMI, Variants | ${getCurrentMonthYear()} | gadizone`
+  const description = `Get ${brandName} ${modelName} on-road price in ${cityName}. Check detailed price breakup including ex-showroom price, RTO, insurance, and calculate EMI. Compare variants and get the best deals.`
   const canonicalUrl = `https://www.gadizone.com/${resolvedParams['brand-cars']}/${modelSlug}/price-in-${citySlug}`
 
   return {

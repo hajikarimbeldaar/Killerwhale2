@@ -19,7 +19,7 @@ const CAR_MODELS = [
   'Nexon', 'Harrier', 'Safari', 'Punch', 'Altroz', 'Tiago', 'Tigor', 'Curvv', 'Nexon EV', 'Tigor EV', 'Tiago EV',
 
   // Mahindra models
-  'XUV700', 'Scorpio N', 'Thar', 'XUV300', 'Bolero', 'Bolero Neo', 'XUV400', 'Scorpio Classic', 'Marazzo',
+  'XUV 7XO', 'Scorpio N', 'Thar', 'XUV300', 'Bolero', 'Bolero Neo', 'XUV400', 'Scorpio Classic', 'Marazzo',
 
   // Toyota models
   'Innova Crysta', 'Fortuner', 'Camry', 'Glanza', 'Urban Cruiser Hyryder', 'Vellfire',

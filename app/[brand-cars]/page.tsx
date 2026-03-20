@@ -180,11 +180,11 @@ One aspect in which Maruti Suzuki has remained unbeaten is fuel efficiency. Thei
     name: 'Mahindra',
     slug: 'mahindra',
     logo: '/brands/mahindra.png',
-    description: 'Mahindra car price starts at Rs 7.49 Lakh for the cheapest model which is Bolero and the price of most expensive model, which is XUV700 starts at Rs 13.99 Lakh. Mahindra has 10 car models in India, including 8 cars in SUV category, 1 car in MUV category, 1 car in Pickup category.',
-    fullDescription: `Mahindra is India's leading SUV manufacturer, known for rugged and reliable vehicles. With a strong focus on utility vehicles, Mahindra has established itself as the go-to brand for customers looking for robust and capable SUVs. The company has been expanding its portfolio with modern SUVs while maintaining its reputation for durability and off-road capability.`,
+    description: 'Mahindra car price starts at Rs 7.49 Lakh for the cheapest model which is Bolero and the price of most expensive model, which is XUV 7XO (formerly XUV700) starts at Rs 13.66 Lakh. Mahindra has 10 car models in India, including 8 cars in SUV category, 1 car in MUV category, 1 car in Pickup category.',
+    fullDescription: `Mahindra is India's leading SUV manufacturer, known for rugged and reliable vehicles. With a strong focus on utility vehicles, Mahindra has established itself as the go-to brand for customers looking for robust and capable SUVs. The company has been expanding its portfolio with modern SUVs like the XUV 7XO (successor to XUV700) while maintaining its reputation for durability and off-road capability.`,
     priceRange: {
       min: 749000,
-      max: 1399000
+      max: 2492000
     },
     totalModels: 10,
     categories: {
@@ -195,7 +195,7 @@ One aspect in which Maruti Suzuki has remained unbeaten is fuel efficiency. Thei
       minivan: 0
     },
     upcomingCars: 3,
-    models: ['Bolero', 'Scorpio', 'XUV300', 'XUV700', 'Thar', 'Scorpio-N', 'XUV400']
+    models: ['Bolero', 'Scorpio', 'XUV300', 'XUV 7XO', 'Thar', 'Scorpio-N', 'XUV400']
   },
   'kia': {
     name: 'Kia',
