@@ -477,6 +477,13 @@ app.post('/api/monitoring/vitals', (req, res) => {
       console.warn('⚠️  Continuing without YouTube scheduler...');
     }
 
+    // Setup Vite or static serving
+    if (process.env.NODE_ENV !== "production") {
+      await setupVite(app, server);
+    } else {
+      serveStatic(app);
+    }
+
     // Sentry Error Handler must be before any other error middleware and after all controllers
     if (sentryEnabled) {
       try {
@@ -494,12 +501,6 @@ app.post('/api/monitoring/vitals', (req, res) => {
       res.status(status).json({ message });
     });
 
-    // Setup Vite or static serving
-    if (process.env.NODE_ENV !== "production") {
-      await setupVite(app, server);
-    } else {
-      serveStatic(app);
-    }
 
     // Start server
     const PORT = parseInt(process.env.PORT || "5001", 10);
