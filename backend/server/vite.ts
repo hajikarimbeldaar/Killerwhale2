@@ -81,11 +81,20 @@ export function serveStatic(app: Express) {
   // So dist/public is relative to process.cwd() if running 'node dist/index.js'
   const distPath = path.resolve(process.cwd(), "dist", "public");
 
-  if (!fs.existsSync(distPath)) {
-    throw new Error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`,
-    );
-  }
+  log(`Serving static files from: ${distPath}`);
+  log(`Index file exists: ${fs.existsSync(path.resolve(distPath, "index.html"))}`);
+
+  // Diagnostic route
+  app.get("/api/diagnostic/frontend", (req, res) => {
+    res.json({
+      processCwd: process.cwd(),
+      distPath,
+      indexExists: fs.existsSync(path.resolve(distPath, "index.html")),
+      nodeEnv: process.env.NODE_ENV,
+      dirname: import.meta.dirname,
+      publicDirContents: fs.existsSync(distPath) ? fs.readdirSync(distPath) : "directory-not-found"
+    });
+  });
 
   app.use(express.static(distPath));
 
