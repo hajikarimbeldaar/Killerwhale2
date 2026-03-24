@@ -495,7 +495,7 @@ app.post('/api/monitoring/vitals', (req, res) => {
     });
 
     // Setup Vite or static serving
-    if (app.get("env") === "development") {
+    if (process.env.NODE_ENV !== "production") {
       await setupVite(app, server);
     } else {
       serveStatic(app);
