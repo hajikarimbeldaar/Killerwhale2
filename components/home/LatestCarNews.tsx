@@ -89,10 +89,10 @@ export default function LatestCarNews({ initialNews = [] }: { initialNews?: News
   return (
     <div>
       <div className="flex items-center justify-between mb-4 sm:mb-6 lg:mb-8">
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Latest Car News</h2>
+        <h2 className="text-lg sm:text-xl font-bold text-gray-900">Latest Car News</h2>
         <Link
           href="/news"
-          className="flex items-center text-red-600 hover:text-orange-600 font-medium text-sm sm:text-base"
+          className="flex items-center text-red-600 hover:text-orange-600 font-medium text-xs sm:text-sm"
         >
           <span className="hidden sm:inline">View All News</span>
           <span className="sm:hidden">View All</span>
@@ -176,7 +176,7 @@ export default function LatestCarNews({ initialNews = [] }: { initialNews?: News
 
               {/* Article Info */}
               <div className="p-2.5 sm:p-3">
-                <h3 className="font-bold text-gray-900 mb-1.5 sm:mb-2 text-sm sm:text-base leading-tight line-clamp-2">
+                <h3 className="font-bold text-gray-900 mb-1.5 sm:mb-2 text-xs sm:text-sm leading-tight line-clamp-2">
                   {article.title}
                 </h3>
 

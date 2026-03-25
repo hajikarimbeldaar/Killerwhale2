@@ -117,7 +117,7 @@ export default function DecemberOffersSection({ initialCars = [], initialBrands 
     return (
         <div>
             {/* Dynamic month header */}
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">{currentMonth} Offers on Cars</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">{currentMonth} Offers on Cars</h2>
 
             {/* Brand Filter Buttons with Logos and Brand Colors */}
             <div

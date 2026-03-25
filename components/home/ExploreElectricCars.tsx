@@ -118,7 +118,7 @@ export default function ExploreElectricCars({ allCars }: { allCars: Car[] }) {
                         </svg>
                     </div>
                     <div>
-                        <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Explore Electric Cars</h2>
+                        <h2 className="text-lg sm:text-xl font-bold text-gray-900">Explore Electric Cars</h2>
                         <p className="text-sm text-emerald-600">Go green with zero emissions</p>
                     </div>
                 </div>
@@ -176,7 +176,7 @@ export default function ExploreElectricCars({ allCars }: { allCars: Car[] }) {
                             {/* Top section matching image height */}
                             <div className="h-40 sm:h-48 flex items-center justify-center bg-gradient-to-br from-emerald-400 to-green-500">
                                 <div className="text-center px-4 sm:px-6">
-                                    <h3 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+                                    <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                                         See More
                                     </h3>
                                 </div>
@@ -184,7 +184,7 @@ export default function ExploreElectricCars({ allCars }: { allCars: Car[] }) {
 
                             {/* Bottom section matching card info height */}
                             <div className="p-4 sm:p-5 bg-gradient-to-br from-emerald-500 to-green-600">
-                                <h4 className="text-xl sm:text-2xl font-bold text-white text-center mb-3 sm:mb-4">
+                                <h4 className="text-lg sm:text-xl font-bold text-white text-center mb-3 sm:mb-4">
                                     Electric Cars
                                 </h4>
 
@@ -192,7 +192,7 @@ export default function ExploreElectricCars({ allCars }: { allCars: Car[] }) {
                                 <div className="h-20 sm:h-24"></div>
 
                                 {/* Button matching View Details */}
-                                <div className="w-full bg-white text-emerald-600 py-2 sm:py-2.5 rounded-lg font-semibold text-sm sm:text-base text-center shadow-md">
+                                <div className="w-full bg-white text-emerald-600 py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-sm text-center shadow-md">
                                     View All Cars
                                 </div>
                             </div>

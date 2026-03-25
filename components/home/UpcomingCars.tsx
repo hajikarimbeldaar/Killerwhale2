@@ -23,7 +23,7 @@ export default function UpcomingCars({ initialCars = [] }: { initialCars?: Upcom
 
   return (
     <div>
-      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">Upcoming Cars</h2>
+      <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">Upcoming Cars</h2>
 
       {/* Cars Horizontal Scroll */}
       <div className="relative">
@@ -92,7 +92,7 @@ export default function UpcomingCars({ initialCars = [] }: { initialCars?: Upcom
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-1">View All</h3>
+                    <h3 className="text-lg font-bold text-white mb-1">View All</h3>
                     <p className="text-white/80 text-sm mb-4">Upcoming Cars</p>
                     <div className="px-5 py-2 bg-white text-orange-600 rounded-full font-semibold text-sm">
                       Explore

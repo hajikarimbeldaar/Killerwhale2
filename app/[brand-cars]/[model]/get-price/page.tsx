@@ -11,7 +11,7 @@ interface GetPricePageProps {
 
 import { getPriceBreakupData } from '../price-in/[city]/page'
 import { generateCarProductSchema } from '@/lib/structured-data'
-import { FloatingAIBot } from '@/components/FloatingAIBot'
+
 
 export default async function GetPricePage({ params }: GetPricePageProps) {
   const resolvedParams = await params
@@ -63,7 +63,7 @@ export default async function GetPricePage({ params }: GetPricePageProps) {
         initialSimilarCars={initialData?.similarCars}
         initialPopularCars={initialData?.popularCars}
       />
-      <FloatingAIBot type="price" id={modelSlug} name={modelSlug} />
+
     </>
   )
 }

@@ -136,7 +136,7 @@ export default function CarProductBox({
         <div className="p-4">
           {/* Brand and Model */}
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+            <h3 className="text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
               {car.fullName}
             </h3>
             <div className="flex items-center space-x-1">
@@ -148,7 +148,7 @@ export default function CarProductBox({
 
           {/* Price */}
           <div className="mb-3">
-            <p className="text-xl font-bold text-blue-600">{car.priceRange}</p>
+            <p className="text-lg font-bold text-blue-600">{car.priceRange}</p>
             <p className="text-xs text-gray-500">Ex-showroom price</p>
           </div>
 
@@ -186,13 +186,13 @@ export default function CarProductBox({
 
           {/* Action Buttons */}
           <div className="flex space-x-2">
-            <div className="flex-1 bg-blue-600 text-white py-2 px-3 rounded text-sm font-medium hover:bg-blue-700 transition-colors text-center group-hover:bg-blue-700">
+            <div className="flex-1 bg-blue-600 text-white py-2 px-3 rounded text-xs font-medium hover:bg-blue-700 transition-colors text-center group-hover:bg-blue-700">
               View Details
             </div>
             {showCompare && (
               <button
                 onClick={handleCompare}
-                className="px-3 py-2 border border-gray-300 text-gray-700 rounded text-sm font-medium hover:bg-gray-50 transition-colors"
+                className="px-3 py-2 border border-gray-300 text-gray-700 rounded text-xs font-medium hover:bg-gray-50 transition-colors"
               >
                 Compare
               </button>

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import PriceBreakupPage from '@/components/price-breakup/PriceBreakupPage'
-import { FloatingAIBot } from '@/components/FloatingAIBot'
+
 import SEOInternalLinks from '@/components/seo/SEOInternalLinks'
 import { resolveR2Url } from '@/lib/image-utils'
 import { getCurrentMonthYear } from '@/lib/date-utils'
@@ -476,7 +476,7 @@ export default async function PriceInCityPage({ params, searchParams }: PriceInC
         modelName={modelName}
         similarCars={initialData?.similarCars || []}
       />
-      <FloatingAIBot type="price" id={modelSlug} name={modelSlug} hasStickyBottomBar={true} />
+
     </>
   )
 }

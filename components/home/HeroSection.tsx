@@ -17,11 +17,11 @@ export default function HeroSection() {
   }
 
   return (
-    <section className="bg-gradient-to-br from-red-600 to-orange-500 text-white py-6 sm:py-10 lg:py-12">
+    <section className="bg-gradient-to-br from-red-600 to-orange-500 text-white py-5 sm:py-8 lg:py-10">
       <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-6">
         {/* Hero Title */}
         <div className="text-center mb-6 sm:mb-8 lg:mb-12">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-4">
             Find Your Perfect Car
           </h1>
         </div>
@@ -37,7 +37,7 @@ export default function HeroSection() {
                 onClick={handleSearchClick}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Best car for family under 15 lakhs"
-                className="w-full px-4 py-3 sm:px-6 sm:py-4 text-gray-900 placeholder-gray-500 text-sm sm:text-base lg:text-lg bg-gray-100 rounded-xl sm:rounded-2xl border-0 focus:outline-none focus:ring-2 focus:ring-red-500 pr-14 sm:pr-20 cursor-pointer"
+                className="w-full px-4 py-3 sm:px-6 sm:py-4 text-gray-900 placeholder-gray-500 text-xs sm:text-sm lg:text-base bg-gray-100 rounded-xl sm:rounded-2xl border-0 focus:outline-none focus:ring-2 focus:ring-red-500 pr-14 sm:pr-20 cursor-pointer"
                 aria-label="Search for cars with AI"
                 readOnly
               />
@@ -47,7 +47,7 @@ export default function HeroSection() {
                   className="p-2 sm:p-2.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
                   aria-label="Voice search"
                 >
-                  <Mic className="h-5 w-5 sm:h-6 sm:w-6" />
+                  <Mic className="h-4 w-4 sm:h-5 sm:w-5" />
                 </button>
               </div>
             </div>
@@ -55,9 +55,9 @@ export default function HeroSection() {
             {/* Search Button */}
             <button
               onClick={handleSearchClick}
-              className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white font-semibold py-3 px-6 sm:py-4 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-center space-x-2 sm:space-x-3 text-base sm:text-lg hover:shadow-xl"
+              className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white font-semibold py-2.5 px-5 sm:py-3 sm:px-6 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-center space-x-2 sm:space-x-3 text-sm sm:text-base hover:shadow-xl"
             >
-              <Sparkles className="h-5 w-5 sm:h-6 sm:w-6" />
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5" />
               <span>Start AI Search</span>
             </button>
 

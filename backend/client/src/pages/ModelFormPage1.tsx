@@ -60,6 +60,7 @@ export default function ModelFormPage1() {
 
     try {
       await apiRequest('PUT', `/api/models/${editingModelId}`, { status: newStatus });
+      updateFormData({ status: newStatus });
       await queryClient.invalidateQueries({ queryKey: ['/api/models'] });
       await queryClient.invalidateQueries({ queryKey: ['/api/models', editingModelId] });
 

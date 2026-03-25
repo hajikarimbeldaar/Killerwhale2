@@ -51,7 +51,7 @@ export default function CityPriceGrid({
         <div>
             {/* Section Header */}
             <div className="mb-6">
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                     {brandName} {modelName} Price in Nearby Cities
                 </h3>
                 <p className="text-sm text-gray-600 mt-1">
@@ -72,7 +72,7 @@ export default function CityPriceGrid({
                             <span className="font-semibold text-gray-900 text-sm">{city.name}</span>
                         </div>
                         <div className="flex items-baseline justify-between">
-                            <span className="text-lg font-bold text-gray-900">₹{(city.onRoadPrice / 100000).toFixed(2)} Lakhs</span>
+                            <span className="text-base font-bold text-gray-900">₹{(city.onRoadPrice / 100000).toFixed(2)} Lakhs</span>
                             <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-orange-500 transition-colors" />
                         </div>
                         <span className="text-xs text-gray-500">On-Road Price</span>

@@ -34,7 +34,7 @@
 
 .titleOrange {
     display: block;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 800;
     color: #ea580c;
     font-style: italic;
@@ -42,14 +42,14 @@
 
 .titleBlue {
     display: block;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 800;
     color: #1e40af;
     font-style: italic;
 }
 
 .tagline {
-    font-size: 13px;
+    font-size: 12px;
     color: #78716c;
     margin: 0 0 10px 0;
 }
@@ -60,14 +60,14 @@
 }
 
 .subtitle {
-    font-size: 15px;
+    font-size: 13px;
     color: #1f2937;
     margin: 0 0 6px 0;
     font-weight: 600;
 }
 
 .description {
-    font-size: 13px;
+    font-size: 12px;
     color: #6b7280;
     margin: 0;
     font-weight: 400;
@@ -91,8 +91,8 @@
 }
 
 .featureIcon {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: #fff;
     display: flex;
@@ -105,8 +105,8 @@
 }
 
 .ctaCircle {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
     display: flex;
@@ -124,14 +124,14 @@
 }
 
 .featureLabel {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     color: #1f2937;
     line-height: 1.2;
 }
 
 .featureText {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     color: #6b7280;
     line-height: 1.2;
@@ -150,17 +150,17 @@
 
     .titleOrange,
     .titleBlue {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .subtitle {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     .featureIcon,
     .ctaCircle {
-        width: 46px;
-        height: 46px;
+        width: 42px;
+        height: 42px;
     }
 
     .featureIcon svg,
@@ -170,10 +170,10 @@
     }
 
     .featureLabel {
-        font-size: 11px;
+        font-size: 10px;
     }
 
     .featureText {
-        font-size: 10px;
+        font-size: 9px;
     }
 }

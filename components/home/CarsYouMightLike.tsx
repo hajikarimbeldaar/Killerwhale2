@@ -163,7 +163,7 @@ export default function CarsYouMightLike({ allCars }: { allCars: Car[] }) {
     return (
         <PageSection background="white">
             <div className="mb-4 sm:mb-6">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Cars You Might Like</h2>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900">Cars You Might Like</h2>
                 <p className="text-sm text-gray-500 mt-1">
                     Based on your interest in {visitedModel.brandName} {visitedModel.name}
                 </p>

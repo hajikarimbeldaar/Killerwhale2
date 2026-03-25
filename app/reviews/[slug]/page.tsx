@@ -175,7 +175,7 @@ export default async function ReviewDetailPage({ params }: PageProps) {
             <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-10">
 
                 {/* The Verdict Box */}
-                <div className="bg-white rounded-2xl shadow-xl border-t-4 border-red-600 p-8 mb-12">
+                <div className="bg-white rounded-2xl shadow-xl border-t-4 border-red-600 p-8 mb-6 sm:mb-8">
                     <div className="flex flex-col md:flex-row gap-8 items-start">
                         <div className="flex-shrink-0 text-center md:text-left">
                             <div className="w-24 h-24 bg-gray-900 rounded-2xl flex items-center justify-center mb-2 mx-auto md:mx-0">
@@ -202,12 +202,12 @@ export default async function ReviewDetailPage({ params }: PageProps) {
                 </div>
 
                 {/* Main Content */}
-                <div className="prose prose-lg md:prose-xl max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-red-600 mb-16">
+                <div className="prose prose-lg md:prose-xl max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-red-600 mb-8 sm:mb-10">
                     <ReviewRenderer blocks={review.contentBlocks as any} />
                 </div>
 
                 {/* Share / Author Footer */}
-                <div className="border-t border-gray-200 pt-8 pb-12 mb-12 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="border-t border-gray-200 pt-8 pb-12 mb-6 sm:mb-8 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex items-center gap-4">
                         <div className="w-16 h-16 rounded-full bg-gray-200 overflow-hidden">
                             <User className="w-full h-full p-3 text-gray-400" />

@@ -73,7 +73,7 @@ function TopCarCard({ car, rank, index, onClick }: { car: RankedCar; rank: numbe
                         boxShadow: '0 4px 15px rgba(249, 115, 22, 0.4)',
                     }}
                 >
-                    <span className="text-white font-black text-lg sm:text-xl" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}>
+                    <span className="text-white font-black text-base sm:text-lg" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}>
                         {rank}
                     </span>
                 </div>
@@ -115,13 +115,13 @@ function TopCarCard({ car, rank, index, onClick }: { car: RankedCar; rank: numbe
 
             {/* Car Info - Flex grow to fill space and align button */}
             <div className="px-3 pt-2 pb-2 sm:px-4 sm:pt-3 sm:pb-3 flex flex-col flex-grow">
-                <h3 className="font-bold text-gray-900 text-sm leading-tight truncate" title={`${car.brandName} ${car.name}`}>
+                <h3 className="font-bold text-gray-900 text-xs leading-tight truncate" title={`${car.brandName} ${car.name}`}>
                     {car.brandName} {car.name}
                 </h3>
 
                 <div className="mt-1">
                     <div className="flex items-baseline gap-1.5">
-                        <span className="text-red-600 font-bold text-base sm:text-lg">₹ {(displayPrice / 100000).toFixed(2)} Lakh</span>
+                        <span className="text-red-600 font-bold text-sm sm:text-base">₹ {(displayPrice / 100000).toFixed(2)} Lakh</span>
                         <span className="text-gray-500 text-[10px] sm:text-xs">Onwards</span>
                     </div>
                     <span className="text-[10px] text-gray-400">{priceLabel}</span>
@@ -192,7 +192,7 @@ export default function TopCarsByBodyType({ initialCars = [] }: { initialCars?: 
     return (
         <div>
             {/* Section Header */}
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">
                 Top Selling Cars in India
             </h2>
 
@@ -282,7 +282,7 @@ export default function TopCarsByBodyType({ initialCars = [] }: { initialCars?: 
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                             </svg>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white mb-1">View All</h3>
+                                        <h3 className="text-lg font-bold text-white mb-1">View All</h3>
                                         <p className="text-white/80 text-sm mb-4">
                                             {selectedBodyType === 'all' ? 'Top Cars' : selectedBodyType}
                                         </p>

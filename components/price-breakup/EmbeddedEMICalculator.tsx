@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useMemo, useEffect } from 'react'
-import { Info } from 'lucide-react'
+import { Info, ChevronDown, ChevronUp } from 'lucide-react'
 
 interface EmbeddedEMICalculatorProps {
     onRoadPrice: number
@@ -22,6 +22,7 @@ export default function EmbeddedEMICalculator({
     // Section visibility
     const [showDownPayment, setShowDownPayment] = useState(true)
     const [showInterest, setShowInterest] = useState(true)
+    const [showSchedule, setShowSchedule] = useState(false)
 
     // Update when onRoadPrice changes
     useEffect(() => {
@@ -85,7 +86,7 @@ export default function EmbeddedEMICalculator({
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             {/* Section Header */}
             <div className="px-5 pt-6 pb-4">
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                     {carName} EMI Calculator
                 </h3>
                 <p className="text-sm text-gray-600 mt-1">
@@ -97,7 +98,7 @@ export default function EmbeddedEMICalculator({
             <div className="px-5 pb-5 border-b border-gray-100">
                 <div className="flex items-baseline justify-between">
                     <div>
-                        <p className="text-2xl sm:text-3xl font-bold text-gray-900">{formatCurrency(emiCalculation.emi)}</p>
+                        <p className="text-xl sm:text-2xl font-bold text-gray-900">{formatCurrency(emiCalculation.emi)}</p>
                         <p className="text-xs text-gray-500 mt-1">Monthly EMI</p>
                     </div>
                     <div className="text-right">
@@ -242,30 +243,43 @@ export default function EmbeddedEMICalculator({
             </div>
 
             {/* Amortization Table */}
-            <div className="p-5">
-                <h4 className="text-sm font-semibold text-gray-900 mb-4">Payment Schedule</h4>
-                <div className="overflow-x-auto -mx-5 px-5">
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr className="border-b-2 border-gray-200">
-                                <th className="text-left py-3 font-semibold text-gray-700">Months</th>
-                                <th className="text-right py-3 font-semibold text-gray-700">Principal</th>
-                                <th className="text-right py-3 font-semibold text-gray-700">Interest</th>
-                                <th className="text-right py-3 font-semibold text-gray-700">Balance</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-100">
-                            {amortizationTable.map((row, i) => (
-                                <tr key={i} className="hover:bg-gray-50 transition-colors">
-                                    <td className="py-3 text-gray-900 font-medium">{row.months}</td>
-                                    <td className="py-3 text-right text-gray-700">{formatCurrency(row.principal)}</td>
-                                    <td className="py-3 text-right text-orange-600">{formatCurrency(row.interest)}</td>
-                                    <td className="py-3 text-right text-gray-900 font-medium">{formatCurrency(row.balance)}</td>
+            <div className={`p-5 ${showSchedule ? 'pb-5' : 'pb-4'}`}>
+                <button
+                    onClick={() => setShowSchedule(!showSchedule)}
+                    className="w-full flex items-center justify-between text-left group"
+                >
+                    <h4 className="text-sm font-semibold text-gray-900">Payment Schedule</h4>
+                    {showSchedule ? (
+                        <ChevronUp className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                    ) : (
+                        <ChevronDown className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                    )}
+                </button>
+                
+                {showSchedule && (
+                    <div className="overflow-x-auto -mx-5 px-5 mt-4">
+                        <table className="w-full text-sm">
+                            <thead>
+                                <tr className="border-b-2 border-gray-200">
+                                    <th className="text-left py-3 font-semibold text-gray-700">Months</th>
+                                    <th className="text-right py-3 font-semibold text-gray-700">Principal</th>
+                                    <th className="text-right py-3 font-semibold text-gray-700">Interest</th>
+                                    <th className="text-right py-3 font-semibold text-gray-700">Balance</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody className="divide-y divide-gray-100">
+                                {amortizationTable.map((row, i) => (
+                                    <tr key={i} className="hover:bg-gray-50 transition-colors">
+                                        <td className="py-3 text-gray-900 font-medium">{row.months}</td>
+                                        <td className="py-3 text-right text-gray-700">{formatCurrency(row.principal)}</td>
+                                        <td className="py-3 text-right text-orange-600">{formatCurrency(row.interest)}</td>
+                                        <td className="py-3 text-right text-gray-900 font-medium">{formatCurrency(row.balance)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
 
             {/* Summary Footer */}

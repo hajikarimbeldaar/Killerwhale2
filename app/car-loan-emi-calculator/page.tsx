@@ -76,7 +76,7 @@ export default function CarLoanEMICalculatorPage() {
             <PageContainer maxWidth="lg">
                 <PageSection spacing="normal">
                     {/* Page Heading (Server Rendered) */}
-                    <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div className="mb-5 flex flex-col md:flex-row md:items-end justify-between gap-4">
                         <div>
                             <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">Car Loan EMI Calculator</h1>
                             <p className="text-gray-600 mt-2 text-lg">Calculate your monthly car loan EMI and plan your finances before buying your dream car.</p>
@@ -108,7 +108,7 @@ export default function CarLoanEMICalculatorPage() {
                     </Suspense>
 
                     {/* Car Expert Banner (Server Rendered) */}
-                    <div className="mt-8">
+                    <div className="mt-5">
                         <CarExpertBanner
                             title="Need help with car financing options?"
                             subtitle="Our experts help you find the best loan deals & EMI options for your budget"
@@ -119,19 +119,19 @@ export default function CarLoanEMICalculatorPage() {
                     </div>
 
                     {/* SEO CONTENT SECTIONS (Server Rendered for Performance) */}
-                    <div className="mt-12 space-y-12">
+                    <div className="mt-6 sm:mt-8 space-y-6 sm:space-y-8">
                         {/* Section 1: What is a Car Loan EMI Calculator */}
                         <section className="bg-white rounded-3xl border border-gray-100 p-8 sm:p-10 shadow-sm">
-                            <div className="flex items-center gap-3 mb-6">
+                            <div className="flex items-center gap-3 mb-4">
                                 <div className="p-2 bg-orange-100 rounded-lg text-orange-600">
                                     <TrendingUp className="w-6 h-6" />
                                 </div>
                                 <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">What is a Car Loan EMI Calculator?</h2>
                             </div>
-                            <p className="text-gray-600 leading-relaxed text-lg mb-6">
+                            <p className="text-gray-600 leading-relaxed text-lg mb-4">
                                 A Car Loan EMI Calculator is an online financial tool that instantly computes your <strong>Equated Monthly Instalment (EMI)</strong> — the fixed amount you pay every month towards repaying a vehicle loan. Whether you are purchasing a hatchback, sedan, SUV, or electric car, knowing your EMI upfront helps you budget effectively and choose a loan that does not stretch your finances.
                             </p>
-                            <p className="text-gray-600 leading-relaxed text-lg mb-6">
+                            <p className="text-gray-600 leading-relaxed text-lg mb-4">
                                 India is one of the world&apos;s fastest-growing automobile markets, with year-on-year growth in car sales exceeding 8%. As car prices rise and more buyers opt for longer loan tenures, having a reliable EMI calculator has become essential. Instead of manually crunching numbers, the Gadizone EMI Calculator lets you input your loan amount, interest rate, and tenure to get accurate results within seconds.
                             </p>
                             <div className="bg-blue-50/50 border-l-4 border-blue-500 p-6 rounded-r-2xl">
@@ -143,7 +143,7 @@ export default function CarLoanEMICalculatorPage() {
 
                         {/* Section 2: How is EMI Calculated */}
                         <section className="bg-white rounded-3xl border border-gray-100 p-8 sm:p-10 shadow-sm">
-                            <div className="flex items-center gap-3 mb-6">
+                            <div className="flex items-center gap-3 mb-4">
                                 <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
                                     <ShieldCheck className="w-6 h-6" />
                                 </div>
@@ -152,7 +152,7 @@ export default function CarLoanEMICalculatorPage() {
                             <p className="text-gray-600 leading-relaxed text-lg mb-8">
                                 The car loan EMI is computed using the standard <strong>reducing-balance method</strong>, ensuring you pay interest only on the outstanding principal.
                             </p>
-                            <div className="relative p-8 bg-gray-900 rounded-3xl text-center overflow-hidden mb-8 group">
+                            <div className="relative p-6 sm:p-8 bg-gray-900 rounded-3xl text-center overflow-hidden mb-6 group">
                                 <p className="text-xl sm:text-2xl font-black text-white mb-2 tracking-wider">E = P × R × (1+R)ⁿ / ((1+R)ⁿ - 1)</p>
                                 <p className="text-[10px] font-bold text-orange-400 uppercase tracking-[0.2em]">The Mathematical Standard</p>
                             </div>
@@ -178,7 +178,7 @@ export default function CarLoanEMICalculatorPage() {
 
                         {/* Section 3: Understanding the Amortization Schedule */}
                         <section className="bg-white rounded-3xl border border-gray-100 p-8 sm:p-10 shadow-sm overflow-hidden">
-                            <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight mb-6">Mastering Your Amortization Schedule</h2>
+                            <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight mb-4">Mastering Your Amortization Schedule</h2>
                             <div className="flex flex-col lg:flex-row gap-8 items-center">
                                 <div className="flex-1">
                                     <p className="text-gray-600 leading-relaxed text-lg mb-4">
@@ -202,7 +202,7 @@ export default function CarLoanEMICalculatorPage() {
                         {/* Section 4 & 5: Benefits & Usage */}
                         <div className="grid lg:grid-cols-2 gap-8">
                             <section className="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
-                                <h2 className="text-xl font-black text-gray-900 tracking-tight mb-6">Why Use Gadizone?</h2>
+                                <h2 className="text-xl font-black text-gray-900 tracking-tight mb-4">Why Use Gadizone?</h2>
                                 <div className="space-y-4">
                                     {[
                                         { icon: Zap, text: "Instant results with 100% accuracy" },
@@ -219,7 +219,7 @@ export default function CarLoanEMICalculatorPage() {
                                 </div>
                             </section>
                             <section className="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
-                                <h2 className="text-xl font-black text-gray-900 tracking-tight mb-6">How to use?</h2>
+                                <h2 className="text-xl font-black text-gray-900 tracking-tight mb-4">How to use?</h2>
                                 <div className="space-y-3">
                                     {["Enter Loan Amount or Select Car", "Pick Interest Rate from current bank offers", "Slide Tenure from 1 to 7 years", "Instantly check your Monthly EMI"].map((step, i) => (
                                         <div key={i} className="flex gap-4">
@@ -233,7 +233,7 @@ export default function CarLoanEMICalculatorPage() {
 
                         {/* Section 6: Smart Tips */}
                         <section className="bg-white rounded-3xl border border-gray-100 p-8 sm:p-10 shadow-sm">
-                            <div className="flex items-center gap-3 mb-8">
+                            <div className="flex items-center gap-3 mb-5">
                                 <div className="p-2 bg-green-100 rounded-lg text-green-600">
                                     <Zap className="w-6 h-6" />
                                 </div>
@@ -261,7 +261,7 @@ export default function CarLoanEMICalculatorPage() {
 
                         {/* Section 7: Bank Rates Table */}
                         <section className="bg-white rounded-3xl border border-gray-100 p-8 sm:p-10 shadow-sm overflow-hidden relative">
-                            <div className="flex items-center gap-3 mb-6">
+                            <div className="flex items-center gap-3 mb-4">
                                 <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
                                     <ShieldCheck className="w-6 h-6" />
                                 </div>
@@ -301,7 +301,7 @@ export default function CarLoanEMICalculatorPage() {
                         {/* Section 8: FAQs */}
                         <section className="bg-gray-900 rounded-[3rem] p-8 sm:p-12 shadow-2xl relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
-                            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-10 relative">Frequently Asked Questions</h2>
+                            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-6 relative">Frequently Asked Questions</h2>
                             <div className="space-y-4 relative">
                                 {faqs.map((faq, index) => (
                                     <details key={index} className="group bg-white/5 border border-white/10 rounded-3xl p-6 transition-all hover:bg-white/[0.08]">

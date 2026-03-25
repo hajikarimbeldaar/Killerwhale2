@@ -151,7 +151,7 @@ export default function CitySEOContent({
 
     return (
         <div className="mt-8 pt-6 border-t border-gray-100">
-            <h3 className="text-lg font-bold text-gray-900 mb-3">
+            <h3 className="text-base font-bold text-gray-900 mb-3">
                 Why Buy the {modelName} in {cityName.split(',')[0]}?
             </h3>
             <div className="space-y-3 text-sm text-gray-600 leading-relaxed font-medium">

@@ -65,7 +65,7 @@ export default function ReviewsPage() {
                 <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
                     {/* Header */}
-                    <div className="text-center mb-16">
+                    <div className="text-center mb-8 sm:mb-10">
                         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
                             Expert <span className="text-red-600">Reviews</span> & Road Tests
                         </h1>
@@ -75,7 +75,7 @@ export default function ReviewsPage() {
                     </div>
 
                     {/* Featured Review (First Item) */}
-                    <div className="mb-16">
+                    <div className="mb-8 sm:mb-10">
                         <Link href={`/reviews/${REVIEWS[0].slug}`} className="group relative block rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300">
                             <div className="md:flex h-[500px]">
                                 <div className="md:w-2/3 h-64 md:h-full relative overflow-hidden">

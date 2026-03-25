@@ -233,7 +233,7 @@ export default function LoginPage() {
                     </form>
                 ) : (
                     /* Step 2: OTP Verification */
-                    <div className="max-w-md mx-auto space-y-4 sm:space-y-5">
+                    <div className="max-w-md mx-auto space-y-3 sm:space-y-4">
                         {/* Back Button */}
                         <button
                             onClick={handleBackToEmail}

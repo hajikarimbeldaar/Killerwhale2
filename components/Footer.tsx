@@ -19,7 +19,7 @@ export default function Footer() {
                   className="object-contain"
                 />
               </div>
-              <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent group-hover:from-red-400 group-hover:to-orange-300 transition-all pb-1">gadizone</span>
+              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent group-hover:from-red-400 group-hover:to-orange-300 transition-all pb-1">gadizone</span>
             </Link>
             <p className="text-gray-300 text-sm leading-relaxed">
               Your trusted partner for finding the perfect new car in India. Compare prices,
@@ -30,7 +30,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Quick Links</h3>
+            <h3 className="text-base font-semibold">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/car-expert" title="gadizone Car Buying Expert" aria-label="gadizone Car Buying Expert" className="text-gray-300 hover:text-orange-400 transition-colors font-medium">
@@ -67,7 +67,7 @@ export default function Footer() {
 
           {/* Popular Brands */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Popular Brands</h3>
+            <h3 className="text-base font-semibold">Popular Brands</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/maruti-suzuki-cars" title="Maruti Suzuki Cars" aria-label="Browse Maruti Suzuki Cars" className="text-gray-300 hover:text-red-400 transition-colors">
@@ -104,7 +104,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Contact Us</h3>
+            <h3 className="text-base font-semibold">Contact Us</h3>
             <div className="space-y-3 text-sm">
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-red-400" />

@@ -66,7 +66,7 @@ export default function PopularComparisons({ initialComparisons = [] }: PopularC
   return (
     <div>
       {/* Section Header */}
-      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Popular Comparison</h2>
+      <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6">Popular Comparison</h2>
 
       {/* Comparison Cards Horizontal Scroll */}
       <div className="relative group">
@@ -132,8 +132,8 @@ export default function PopularComparisons({ initialComparisons = [] }: PopularC
                     </div>
                     <div className="text-left">
                       <div className="text-xs text-gray-500">{comparison.model1.brand}</div>
-                      <div className="font-bold text-sm text-gray-900 mb-1">{comparison.model1.name}</div>
-                      <div className="text-red-600 font-bold text-sm">
+                      <div className="font-bold text-xs text-gray-900 mb-1">{comparison.model1.name}</div>
+                      <div className="text-red-600 font-bold text-xs">
                         ₹ {(model1OnRoad / 100000).toFixed(2)} Lakh
                       </div>
                       <div className="text-xs text-gray-500">{mounted ? 'On-Road Price' : 'Ex-Showroom'}</div>
@@ -159,8 +159,8 @@ export default function PopularComparisons({ initialComparisons = [] }: PopularC
                     </div>
                     <div className="text-left">
                       <div className="text-xs text-gray-500">{comparison.model2.brand}</div>
-                      <div className="font-bold text-sm text-gray-900 mb-1">{comparison.model2.name}</div>
-                      <div className="text-red-600 font-bold text-sm">
+                      <div className="font-bold text-xs text-gray-900 mb-1">{comparison.model2.name}</div>
+                      <div className="text-red-600 font-bold text-xs">
                         ₹ {(model2OnRoad / 100000).toFixed(2)} Lakh
                       </div>
                       <div className="text-xs text-gray-500">{mounted ? 'On-Road Price' : 'Ex-Showroom'}</div>
@@ -170,7 +170,7 @@ export default function PopularComparisons({ initialComparisons = [] }: PopularC
 
                 <button
                   onClick={() => handleCompareClick(comparison.model1, comparison.model2)}
-                  className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white py-2 rounded-lg transition-all duration-200 text-sm font-semibold shadow-sm"
+                  className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white py-2 rounded-lg transition-all duration-200 text-xs font-semibold shadow-sm"
                 >
                   Compare Now
                 </button>

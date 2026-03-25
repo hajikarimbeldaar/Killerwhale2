@@ -124,7 +124,7 @@ export default function OwnerReviewsPage() {
                 </div>
 
                 {/* Summary Section */}
-                <div className="mb-10">
+                <div className="mb-6 sm:mb-8">
                     <OwnerReviewSummary
                         overallRating={data.rating}
                         totalReviews={data.totalReviews}

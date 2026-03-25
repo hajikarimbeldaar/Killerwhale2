@@ -390,7 +390,7 @@ export default async function HomePage() {
     <div className="min-h-screen bg-white relative">
       <main className="relative z-[2]">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
-          <Ad3DCarousel className="my-3 sm:my-4" />
+          <Ad3DCarousel className="my-2 sm:my-3" />
         </div>
         <HeroSection />
 
@@ -401,7 +401,7 @@ export default async function HomePage() {
         {allCars.length > 0 && <CarsYouMightLike allCars={allCars} />}
 
         {/* Car Expert Promo Banner - Internal Link */}
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 my-6 sm:my-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 my-4 sm:my-6">
           <CarExpertBanner variant="full" />
         </div>
 
@@ -411,7 +411,7 @@ export default async function HomePage() {
           <TopCarsByBodyType initialCars={allCars} />
         </PageSection>
 
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 my-6 sm:my-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 my-4 sm:my-6">
           <TataSierraAdBanner />
         </div>
 

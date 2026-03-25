@@ -4,7 +4,7 @@ import VariantPage from '@/components/variant/VariantPage'
 import PriceBreakupPage from '@/components/price-breakup/PriceBreakupPage'
 import { generateVariantSEO } from '@/lib/seo'
 import { generateCarProductSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/structured-data'
-import { FloatingAIBot } from '@/components/FloatingAIBot'
+
 import { getPriceBreakupData } from '../price-in/[city]/page'
 import { resolveR2Url } from '@/lib/image-utils'
 import { getCurrentMonthYear } from '@/lib/date-utils'
@@ -276,7 +276,7 @@ export default async function VariantDetailPage({ params, searchParams }: PagePr
           initialSimilarCars={initialData?.similarCars}
           initialPopularCars={initialData?.popularCars}
         />
-        <FloatingAIBot type="price" id={modelSlug} name={modelSlug} hasStickyBottomBar={true} />
+
       </>
     )
   }
@@ -492,7 +492,7 @@ export default async function VariantDetailPage({ params, searchParams }: PagePr
           initialVariant={variant}
           initialAllVariants={variants}
         />
-        <FloatingAIBot type="variant" id={variant?.id || variantSlug} name={variant?.name || variantName} />
+
       </>
     )
   } catch (error) {
@@ -506,7 +506,7 @@ export default async function VariantDetailPage({ params, searchParams }: PagePr
           modelName={modelName}
           variantName={variantName}
         />
-        <FloatingAIBot type="variant" id={variantSlug} name={variantName} />
+
       </>
     )
   }

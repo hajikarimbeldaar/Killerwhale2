@@ -959,7 +959,7 @@ export default function PriceBreakupPage({
         <div id="overview" className="">
           {/* Header */}
           <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            <h1 className="text-xl font-bold text-gray-900 mb-2">
               {brandName} {modelName} On-Road Price in {selectedCity.split(',')[0]} - {getCurrentMonthYear()}
             </h1>
             <div className="relative">
@@ -1084,7 +1084,7 @@ export default function PriceBreakupPage({
 
               {/* Car Name with Icons */}
               <div className="flex items-center justify-between mb-6">
-                <div className="text-2xl font-bold text-gray-900">
+                <div className="text-xl font-bold text-gray-900">
                   <Link
                     href={`/${brandName.toLowerCase().replace(/\s+/g, '-')}-cars/${modelName.toLowerCase().replace(/\s+/g, '-')}`}
                     className="hover:text-orange-600 transition-colors"
@@ -1170,7 +1170,7 @@ export default function PriceBreakupPage({
             <div id="price-breakup">
               {/* Section Header - Matches other sections */}
               <div className="mb-5">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900">
                   On-Road Price Breakdown - {getCurrentMonthYear()}
                 </h2>
                 <p className="text-sm text-gray-600 mt-1">
@@ -1314,7 +1314,7 @@ export default function PriceBreakupPage({
                           <span className="block text-sm text-gray-600">On-Road Price in {selectedCity.split(',')[0]} ({getCurrentMonthYear()})</span>
                         </td>
                         <td className="px-5 py-5 text-right">
-                          <span className="text-2xl sm:text-3xl font-bold text-green-600">₹{formatIndianPrice(priceBreakup.totalOnRoadPrice)}</span>
+                          <span className="text-xl sm:text-2xl font-bold text-green-600">₹{formatIndianPrice(priceBreakup.totalOnRoadPrice)}</span>
                         </td>
                       </tr>
                     </tfoot>
@@ -1337,7 +1337,7 @@ export default function PriceBreakupPage({
       </PageSection>
 
       <PageSection background="gray" maxWidth="7xl">
-        <div id="emi" className="space-y-10">
+        <div id="emi" className="space-y-6 sm:space-y-8">
           {/* Ad Banner */}
           <Ad3DCarousel />
 
@@ -1353,11 +1353,11 @@ export default function PriceBreakupPage({
 
       {/* Section 3: Large White Block (Variants, Comparisons, Reviews, FAQ) */}
       <PageSection background="white" maxWidth="7xl">
-        <div className="space-y-16 sm:space-y-24">
+        <div className="space-y-8 sm:space-y-12">
           {/* Variants Section */}
-          <div id="variants" className="space-y-10">
+          <div id="variants" className="space-y-6 sm:space-y-8">
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900">
                 {brandName} {modelName} Variants Price in {selectedCity.split(',')[0]} {new Date().getFullYear()}
               </h2>
               <p className="text-sm text-gray-600 mt-1">
@@ -1372,7 +1372,7 @@ export default function PriceBreakupPage({
                   key={filter}
                   onClick={() => handleFilterToggle(filter)}
                   className={`px-4 py-2 rounded-lg transition-colors border ${selectedFilters.includes(filter)
-                    ? 'bg-red-600 border-red-600 text-white'
+                    ? 'bg-gradient-to-r from-red-600 to-orange-500 border-transparent text-white'
                     : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'
                     }`}
                 >
@@ -1434,11 +1434,11 @@ export default function PriceBreakupPage({
           </div>
 
           {/* Similar Cars & Popular Cars */}
-          <div className="space-y-16 sm:space-y-24">
-            <div id="similar-cars" className="space-y-10">
+          <div className="space-y-8 sm:space-y-12">
+            <div id="similar-cars" className="space-y-6 sm:space-y-8">
               <Ad3DCarousel />
-              <div className="space-y-8">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+              <div className="space-y-5 sm:space-y-6">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900">
                   Compare {brandName} {modelName} with Similar Cars
                 </h2>
 
@@ -1476,8 +1476,8 @@ export default function PriceBreakupPage({
               </div>
             </div>
 
-            <div id="popular-cars" className="space-y-10">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Popular Cars in India {new Date().getFullYear()}</h2>
+            <div id="popular-cars" className="space-y-6 sm:space-y-8">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900">Popular Cars in India {new Date().getFullYear()}</h2>
               <div className="relative group">
                 <button
                   onClick={() => {
@@ -1513,8 +1513,8 @@ export default function PriceBreakupPage({
           </div>
 
           {/* Reviews & FAQ */}
-          <div className="space-y-16 sm:space-y-24">
-            <div id="reviews" className="space-y-10">
+          <div className="space-y-8 sm:space-y-12">
+            <div id="reviews" className="space-y-6 sm:space-y-8">
               <Ad3DCarousel />
               <ModelOwnerReviews
                 brandName={brandName}
@@ -1524,10 +1524,10 @@ export default function PriceBreakupPage({
               />
             </div>
 
-            <div id="faq" className="space-y-10">
+            <div id="faq" className="space-y-6 sm:space-y-8">
               <Ad3DCarousel />
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">{brandName} {modelName} FAQ</h2>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6">{brandName} {modelName} FAQ</h2>
                 <div className="space-y-4 max-w-4xl">
                   {faqs.map((faq, index) => (
                     <div key={index} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
@@ -1555,7 +1555,7 @@ export default function PriceBreakupPage({
                 <div className="p-6 sm:p-8">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-gray-100">
                     <div>
-                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+                      <h2 className="text-lg sm:text-xl font-bold text-gray-900">
                         {brandName} {modelName} Expert Verdict
                       </h2>
                       <p className="text-sm text-gray-500 mt-1">Curated by our automotive editorial team</p>
@@ -1563,7 +1563,7 @@ export default function PriceBreakupPage({
                     <div className="flex items-center gap-3 bg-red-50 px-4 py-2 rounded-lg border border-red-100">
                       <Award className="w-5 h-5 text-red-600" />
                       <div>
-                        <span className="text-2xl font-bold text-red-600">8.4</span>
+                        <span className="text-xl font-bold text-red-600">8.4</span>
                         <span className="text-red-400 text-sm font-medium ml-1">/ 10</span>
                       </div>
                     </div>
@@ -1625,7 +1625,7 @@ export default function PriceBreakupPage({
 
       {/* Section 4: Bottom Gray Block (Nearby Cities & Feedback) */}
       <PageSection background="gray" maxWidth="7xl">
-        <div id="dealers" className="space-y-16 sm:space-y-24">
+        <div id="dealers" className="space-y-8 sm:space-y-12">
           {modelVariants.length > 0 && (
             <CityPriceGrid
               brandSlug={brandName.toLowerCase().replace(/\s+/g, '-')}
@@ -1641,10 +1641,10 @@ export default function PriceBreakupPage({
           {/* Feedback Form */}
           <div id="feedback" className="max-w-2xl mx-auto w-full">
             <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8">
-              <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 text-center mb-2 sm:mb-3">
+              <h2 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 text-center mb-2 sm:mb-3">
                 Share Your Feedback
               </h2>
-              <p className="text-sm sm:text-base text-gray-600 text-center mb-4 sm:mb-6">
+              <p className="text-xs sm:text-sm text-gray-600 text-center mb-4 sm:mb-6">
                 Help us improve our website by sharing your experience
               </p>
 
@@ -1659,7 +1659,7 @@ export default function PriceBreakupPage({
                     onChange={(e) => setFeedbackForm({ ...feedbackForm, feedback: e.target.value })}
                     placeholder="Tell us what you think about our website..."
                     rows={3}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent resize-none"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent resize-none"
                   />
                 </div>
 
@@ -1674,7 +1674,7 @@ export default function PriceBreakupPage({
                       value={feedbackForm.name}
                       onChange={(e) => setFeedbackForm({ ...feedbackForm, name: e.target.value })}
                       placeholder="Enter your name"
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     />
                   </div>
                   <div>
@@ -1686,7 +1686,7 @@ export default function PriceBreakupPage({
                       value={feedbackForm.email}
                       onChange={(e) => setFeedbackForm({ ...feedbackForm, email: e.target.value })}
                       placeholder="Enter your email"
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -1694,7 +1694,7 @@ export default function PriceBreakupPage({
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center space-x-2 text-sm sm:text-base min-h-[44px]"
+                  className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center space-x-2 text-xs sm:text-sm min-h-[44px]"
                 >
                   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />

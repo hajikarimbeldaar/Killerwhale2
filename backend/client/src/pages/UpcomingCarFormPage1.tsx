@@ -7,14 +7,43 @@ import RichTextEditor from "@/components/RichTextEditor";
 import { useLocation, useParams } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { useUpcomingCarForm } from "@/contexts/UpcomingCarFormContext";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 import type { Brand, UpcomingCar } from "@shared/schema";
 
 export default function UpcomingCarFormPage1() {
     const [, setLocation] = useLocation();
     const params = useParams();
     const { formData, updateFormData, resetFormData, saveProgress, isEditMode: contextIsEditMode, setEditMode } = useUpcomingCarForm();
+    const { toast } = useToast();
     const isEditMode = !!params.id;
     const editingCarId = params.id;
+
+    const toggleStatus = async (newStatus: 'active' | 'inactive') => {
+        if (!isEditMode || !editingCarId) {
+            updateFormData({ status: newStatus });
+            return;
+        }
+
+        try {
+            await apiRequest('PUT', `/api/upcoming-cars/${editingCarId}`, { status: newStatus });
+            updateFormData({ status: newStatus });
+            await queryClient.invalidateQueries({ queryKey: ['/api/upcoming-cars'] });
+            await queryClient.invalidateQueries({ queryKey: ['/api/upcoming-cars', editingCarId] });
+
+            toast({
+                title: `Upcoming Car ${newStatus === 'active' ? 'Activated' : 'Deactivated'}`,
+                description: `The upcoming car status has been updated to ${newStatus}.`,
+            });
+        } catch (error) {
+            console.error('Failed to update status:', error);
+            toast({
+                title: "Error",
+                description: "Failed to update upcoming car status.",
+                variant: "destructive",
+            });
+        }
+    };
 
     const { data: brands = [], isLoading: brandsLoading } = useQuery<Brand[]>({
         queryKey: ['/api/brands?admin=true'],
@@ -195,14 +224,16 @@ export default function UpcomingCarFormPage1() {
                 <div className="flex gap-4">
                     <Button
                         type="button"
-                        variant="default"
+                        variant={formData.status === 'active' ? "default" : "outline"}
+                        onClick={() => toggleStatus('active')}
                         data-testid="button-activate"
                     >
                         Activate
                     </Button>
                     <Button
                         type="button"
-                        variant="outline"
+                        variant={formData.status === 'inactive' ? "default" : "outline"}
+                        onClick={() => toggleStatus('inactive')}
                         data-testid="button-deactivate"
                     >
                         Deactivate

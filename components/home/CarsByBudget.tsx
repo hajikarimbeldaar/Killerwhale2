@@ -121,7 +121,7 @@ export default function CarsByBudget({ allCars }: CarsByBudgetProps) {
 
   return (
     <div>
-      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Cars by Budget</h2>
+      <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Cars by Budget</h2>
 
       {/* Budget Filter Buttons with Scroll Arrows */}
       <div className="relative group/filters mb-5">
@@ -233,7 +233,7 @@ export default function CarsByBudget({ allCars }: CarsByBudgetProps) {
                   {/* Top section matching image height */}
                   <div className="h-40 sm:h-48 flex items-center justify-center bg-gradient-to-br from-orange-400 to-orange-500">
                     <div className="text-center px-4 sm:px-6">
-                      <h3 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                         See More
                       </h3>
                     </div>
@@ -241,7 +241,7 @@ export default function CarsByBudget({ allCars }: CarsByBudgetProps) {
 
                   {/* Bottom section matching card info height */}
                   <div className="p-4 sm:p-5 bg-gradient-to-br from-orange-500 to-orange-600">
-                    <h4 className="text-xl sm:text-2xl font-bold text-white text-center mb-3 sm:mb-4">
+                    <h4 className="text-lg sm:text-xl font-bold text-white text-center mb-3 sm:mb-4">
                       {selectedRange?.label} Cars
                     </h4>
 
@@ -249,7 +249,7 @@ export default function CarsByBudget({ allCars }: CarsByBudgetProps) {
                     <div className="h-20 sm:h-24"></div>
 
                     {/* Button matching View Details */}
-                    <div className="w-full bg-white text-orange-600 py-2 sm:py-2.5 rounded-lg font-semibold text-sm sm:text-base text-center shadow-md">
+                    <div className="w-full bg-white text-orange-600 py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-sm text-center shadow-md">
                       View All Cars
                     </div>
                   </div>

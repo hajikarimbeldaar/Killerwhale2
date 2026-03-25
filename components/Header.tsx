@@ -145,7 +145,7 @@ export default function Header() {
                   priority
                 />
               </div>
-              <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text text-transparent group-hover:from-red-700 group-hover:to-orange-600 transition-all pb-1">gadizone</span>
+              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text text-transparent group-hover:from-red-700 group-hover:to-orange-600 transition-all pb-1">gadizone</span>
             </Link>
 
             {/* Right Side Icons */}

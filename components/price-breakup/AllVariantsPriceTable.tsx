@@ -74,7 +74,7 @@ export default function AllVariantsPriceTable({
         <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
             {/* Header with gradient */}
             <div className="bg-gradient-to-r from-red-600 to-orange-500 px-4 sm:px-6 py-4">
-                <h3 className="text-lg sm:text-xl font-bold text-white">
+                <h3 className="text-base sm:text-lg font-bold text-white">
                     {brandName} {modelName} Price List in {cityName}
                 </h3>
                 <p className="text-sm text-white/80 mt-1">
@@ -90,7 +90,7 @@ export default function AllVariantsPriceTable({
                             <button
                                 key={fuel}
                                 onClick={() => setSelectedFilter(fuel)}
-                                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${selectedFilter === fuel
+                                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${selectedFilter === fuel
                                         ? 'bg-gradient-to-r from-red-600 to-orange-500 text-white'
                                         : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100'
                                     }`}
@@ -133,7 +133,7 @@ export default function AllVariantsPriceTable({
                                 onClick={() => onVariantSelect?.(variant)}
                             >
                                 <td className="px-4 sm:px-6 py-3 sm:py-4">
-                                    <div className="font-medium text-gray-900 text-sm sm:text-base">
+                                    <div className="font-medium text-gray-900 text-xs sm:text-sm">
                                         {variant.name}
                                     </div>
                                     <div className="text-xs sm:text-sm text-gray-500 mt-0.5">
@@ -150,7 +150,7 @@ export default function AllVariantsPriceTable({
                                     ₹{formatIndianPrice(variant.insurance)}
                                 </td>
                                 <td className="text-right px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
-                                    <span className="font-bold text-green-600 text-sm sm:text-base">
+                                    <span className="font-bold text-green-600 text-xs sm:text-sm">
                                         ₹{(variant.onRoadPrice / 100000).toFixed(2)}L
                                     </span>
                                 </td>

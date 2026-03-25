@@ -24,7 +24,7 @@ export default function PageHeader({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {breadcrumbs && (
           <nav className="mb-4">
-            <ol className="flex items-center space-x-2 text-sm">
+            <ol className="flex items-center space-x-2 text-xs">
               {breadcrumbs.map((crumb, index) => (
                 <li key={index} className="flex items-center">
                   {index > 0 && <span className="mx-2 text-gray-400">/</span>}
@@ -45,11 +45,11 @@ export default function PageHeader({
         
         <div className="flex items-center justify-between">
           <div>
-            <h1 className={`text-3xl font-bold ${background === 'gradient' ? 'text-white' : 'text-gray-900'} mb-2`}>
+            <h1 className={`text-2xl font-bold ${background === 'gradient' ? 'text-white' : 'text-gray-900'} mb-2`}>
               {title}
             </h1>
             {subtitle && (
-              <p className={`text-lg ${background === 'gradient' ? 'text-blue-100' : 'text-gray-600'}`}>
+              <p className={`text-base ${background === 'gradient' ? 'text-blue-100' : 'text-gray-600'}`}>
                 {subtitle}
               </p>
             )}

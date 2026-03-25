@@ -711,7 +711,7 @@ async function getModelData(brandSlug: string, modelSlug: string) {
   }
 }
 
-import { FloatingAIBot } from '@/components/FloatingAIBot'
+
 
 export default async function ModelPage({ params }: ModelPageProps) {
   const resolvedParams = await params
@@ -827,7 +827,7 @@ export default async function ModelPage({ params }: ModelPageProps) {
         initialVariants={modelData.variants}
         newsSlot={<BrandNews brandSlug={modelData.slug} brandName={modelData.name} />}
       />
-      <FloatingAIBot type="model" id={modelData.id} name={modelData.name} hasStickyBottomBar={true} />
+
     </>
   )
 }

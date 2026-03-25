@@ -40,7 +40,7 @@ export default function BrandSection({ initialBrands = [] }: BrandSectionProps) 
 
   return (
     <div>
-      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Popular Brands</h2>
+      <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Popular Brands</h2>
 
       {/* Brands Grid - Refined UI */}
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 sm:gap-4 mb-6">
@@ -79,7 +79,7 @@ export default function BrandSection({ initialBrands = [] }: BrandSectionProps) 
         <div className="text-center">
           <button
             onClick={() => setShowAllBrands(!showAllBrands)}
-            className="inline-flex items-center bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white px-5 py-2.5 sm:px-8 sm:py-4 rounded-lg font-semibold text-sm sm:text-lg transition-all duration-200 shadow-md"
+            className="inline-flex items-center bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold text-xs sm:text-base transition-all duration-200 shadow-md"
           >
             {showAllBrands ? (
               <>
