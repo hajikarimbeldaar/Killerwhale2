@@ -210,15 +210,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
         {/* Schema.org structured data */}
-
-        {/* Google AdSense */}
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1143112388277725"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
-
-        {/* Schema.org structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(generateWebSiteSchema()) }}
@@ -229,6 +220,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </head>
       <body className={`${inter.className} min-h-screen bg-gray-50 overflow-x-hidden`} suppressHydrationWarning>
+        {/* Google AdSense Auto Ads / Site Approval */}
+        <Script
+          id="adsbygoogle-init"
+          strategy="lazyOnload"
+          crossOrigin="anonymous"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1143112388277725"
+        />
+
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
