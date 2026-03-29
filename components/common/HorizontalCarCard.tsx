@@ -92,7 +92,7 @@ export default function HorizontalCarCard({ car, showFuelType = false, customLab
                         <div>
                             <div className="flex items-start justify-between mb-0.5 sm:mb-1">
                                 <div className="flex-1 pr-1 sm:pr-2 min-w-0">
-                                    <h3 className="text-sm sm:text-lg md:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
+                                    <h3 className="text-base sm:text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
                                         <span className="truncate block">{car.brandName} {car.name}</span>
                                     </h3>
                                 </div>
@@ -128,8 +128,8 @@ export default function HorizontalCarCard({ car, showFuelType = false, customLab
                         {/* Bottom Section: Price - Responsive */}
                         <div>
                             <div className="flex items-baseline gap-1 sm:gap-2 flex-wrap">
-                                <span className="text-sm sm:text-lg md:text-xl font-bold text-red-600">₹ {displayPrice}</span>
-                                <span className="text-xs sm:text-sm md:text-base font-semibold text-red-600">Lakh</span>
+                                <span className="text-base sm:text-lg font-bold text-red-600">₹ {displayPrice}</span>
+                                <span className="text-xs sm:text-sm font-semibold text-red-600">Lakh</span>
                                 <span className="text-gray-500 text-xs sm:text-sm">Onwards</span>
                             </div>
                             <span className="text-[10px] sm:text-xs text-gray-500">{priceLabel}</span>

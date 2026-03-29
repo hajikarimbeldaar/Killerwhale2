@@ -59,12 +59,12 @@ export default function CompareSelectionClient({ initialCars, initialBrands }: C
                 <PageSection spacing="normal">
                     {/* Header */}
                     <div className="text-center mb-8">
-                        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
                             Add cars of your choice
                         </h1>
-                        <p className="text-base text-gray-600 leading-relaxed">
+                        <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                             gadizone brings you comparison of Hyundai Venue, Kia Sonet and Maruti Suzuki Baleno...
-                            <span className="text-blue-600 cursor-pointer hover:underline">more</span>
+                            <span className="text-red-600 cursor-pointer hover:underline">more</span>
                         </p>
                     </div>
 
@@ -127,7 +127,7 @@ export default function CompareSelectionClient({ initialCars, initialBrands }: C
                     <button
                         onClick={handleStartComparison}
                         disabled={!selectedCar1 || !selectedCar2}
-                        className="w-full bg-gray-300 hover:bg-gray-400 disabled:bg-gray-200 disabled:cursor-not-allowed text-gray-900 font-bold text-xl py-5 rounded-2xl transition-colors mb-12"
+                        className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 disabled:from-gray-300 disabled:to-gray-200 disabled:cursor-not-allowed text-white font-bold text-lg sm:text-xl py-5 rounded-2xl transition-all shadow-lg active:scale-[0.98] mb-12"
                     >
                         Start Comparison
                     </button>
@@ -145,7 +145,7 @@ export default function CompareSelectionClient({ initialCars, initialBrands }: C
                     <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
                         <div className="p-6 border-b border-gray-200">
                             <div className="flex items-center justify-between mb-4">
-                                <h3 className="text-xl font-bold text-gray-900">
+                                <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                                     Select Car {showCarSelector}
                                 </h3>
                                 <button

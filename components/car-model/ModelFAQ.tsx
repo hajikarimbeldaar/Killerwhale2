@@ -29,7 +29,7 @@ export default function ModelFAQ({ brandName = 'Car', modelName = 'Model', faqs 
         <section className="py-6 sm:py-8 bg-white">
             <div className="">
                 <div className="mb-6 sm:mb-8">
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1.5 sm:mb-2">
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1.5 sm:mb-2">
                         {brandName} {modelName} FAQ
                     </h2>
                     <p className="text-sm sm:text-base text-gray-600">

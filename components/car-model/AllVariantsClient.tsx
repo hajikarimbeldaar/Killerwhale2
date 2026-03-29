@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import VariantCard from './VariantCard'
+import WhatsAppLeadModal from '../lead-capture/WhatsAppLeadModal'
 
 interface AllVariantsClientProps {
   model: any
@@ -20,6 +21,8 @@ export default function AllVariantsClient({
 }: AllVariantsClientProps) {
   const router = useRouter()
   const [selectedFilters, setSelectedFilters] = useState<string[]>(['All']) // Multi-select filters
+  const [isWhatsAppModalOpen, setIsWhatsAppModalOpen] = useState(false)
+  const [selectedVariant, setSelectedVariant] = useState('')
 
   // ✅ Use server-rendered variants directly (no client-side fetch)
   const modelVariants = initialVariants
@@ -157,7 +160,7 @@ export default function AllVariantsClient({
             <ArrowLeft className="w-5 h-5 mr-2" />
             Back
           </button>
-          <h1 className="text-2xl font-bold text-gray-900">Variants</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Variants</h1>
         </div>
       </div>
 
@@ -192,7 +195,11 @@ export default function AllVariantsClient({
                     e.stopPropagation()
                     handleVariantClick(variant)
                   }}
-                  onCompare={(e) => e.stopPropagation()}
+                  onGetBestDeal={(e) => {
+                    e.stopPropagation()
+                    setSelectedVariant(variant.name)
+                    setIsWhatsAppModalOpen(true)
+                  }}
                 />
               ))
             ) : (
@@ -203,6 +210,16 @@ export default function AllVariantsClient({
           </div>
         </div>
       </div>
+      
+      <WhatsAppLeadModal
+        isOpen={isWhatsAppModalOpen}
+        onClose={() => setIsWhatsAppModalOpen(false)}
+        brandName={model.brand}
+        modelName={model.name}
+        selectedVariantName={selectedVariant}
+        variants={modelVariants}
+        defaultCity="Delhi"
+      />
     </div>
   )
 }

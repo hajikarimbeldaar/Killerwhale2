@@ -489,10 +489,10 @@ export default function ComparePageClient({
         {/* Header with Share Button */}
         <div className="flex items-start justify-between mb-6">
           <div className="flex-1">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
               {comparisonItems.filter((item): item is ComparisonItem => item !== null).map(item => `${item.model.brandName} ${item.model.name}`).join(' vs ')} - Comparison {new Date().getFullYear()}
             </h1>
-            <p className="text-base text-gray-600 leading-relaxed">
+            <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
               Detailed comparison of {comparisonItems.filter((item): item is ComparisonItem => item !== null).map(item => `${item.model.brandName} ${item.model.name}`).join(' vs ')}. Compare on-road prices, specifications, mileage, safety rating, and features to choose the best car for you.
             </p>
           </div>
@@ -590,7 +590,7 @@ export default function ComparePageClient({
                 {/* Car Info Section */}
                 <div className={`text-center ${isScrolled ? 'p-2 md:p-3' : 'p-3 md:p-4'}`}>
                   {/* Brand and Model Name - Venue HYUNDAI Style */}
-                  <h3 className={`font-extrabold text-gray-900 leading-tight line-clamp-1 ${isScrolled ? 'text-xs md:text-sm' : 'text-base md:text-xl md:tracking-tight mb-0.5'}`}>
+                  <h3 className={`font-extrabold text-gray-900 leading-tight line-clamp-1 ${isScrolled ? 'text-xs md:text-sm' : 'text-sm sm:text-lg md:tracking-tight mb-0.5'}`}>
                     {item.model.name}
                   </h3>
                   <div className={`font-bold text-gray-500 uppercase tracking-widest ${isScrolled ? 'text-[8px] md:text-[10px] mb-1.5' : 'text-[10px] md:text-[11px] mb-3'}`}>
@@ -632,7 +632,7 @@ export default function ComparePageClient({
                 <Landmark className="h-5 w-5 text-white" />
               </div>
               <div className="min-w-0">
-                <h3 className="text-base font-bold text-gray-900 leading-tight">Bank</h3>
+                <h3 className="text-sm sm:text-base font-bold text-gray-900 leading-tight">Bank</h3>
                 <p className="text-sm font-medium text-gray-500">Partner</p>
               </div>
             </div>
@@ -664,8 +664,8 @@ export default function ComparePageClient({
         <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-200 mb-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
             <div>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-gray-900 tracking-tight">Specification Battle</h2>
-              <p className="text-sm text-gray-500 mt-1">Detailed feature tracking & performance comparison</p>
+              <h2 className="text-lg sm:text-xl font-extrabold text-gray-900 tracking-tight">Specification Battle</h2>
+              <p className="text-xs sm:text-sm text-gray-500 mt-1">Detailed feature tracking & performance comparison</p>
             </div>
             {/* Sleek iOS Style Toggle */}
             <label className="flex items-center gap-3 cursor-pointer select-none">
@@ -693,7 +693,7 @@ export default function ComparePageClient({
                     onClick={() => toggleSection(section.id)}
                     className="w-full flex items-center justify-between py-4 px-5 bg-gray-50 hover:bg-gray-100 transition-colors text-left group"
                   >
-                    <h3 className="text-base font-bold text-gray-800">{section.title}</h3>
+                    <h3 className="text-sm sm:text-base font-bold text-gray-800">{section.title}</h3>
                     <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center group-hover:border-indigo-300 transition-colors">
                       <ChevronDown className={`h-4 w-4 text-gray-500 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
                     </div>
@@ -770,7 +770,7 @@ export default function ComparePageClient({
 
                                 return (
                                   <div key={idx} className="relative">
-                                    <div className={`text-sm md:text-base font-medium transition-all ${isWinner ? 'text-emerald-700 bg-emerald-50 px-2 py-1 -ml-2 rounded-md inline-block font-bold' :
+                                    <div className={`text-xs sm:text-sm font-medium transition-all ${isWinner ? 'text-emerald-700 bg-emerald-50 px-2 py-1 -ml-2 rounded-md inline-block font-bold' :
                                       isLoser ? 'text-gray-400' :
                                         allSame && showDifferences === false ? 'text-gray-600' : 'text-gray-900'
                                       }`}>
@@ -808,7 +808,7 @@ export default function ComparePageClient({
 
         {/* Compare With Similar Cars */}
         <div className="mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">More Car Comparisons You May Like</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">More Car Comparisons You May Like</h2>
 
           {loadingSimilarCars ? (
             <div className="flex gap-3 sm:gap-4 lg:gap-6 overflow-x-auto pb-4">
@@ -917,7 +917,7 @@ export default function ComparePageClient({
         {/* Similar Cars Section - Exact copy from Model Page */}
         <div className="mb-6">
           <div className="space-y-6">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900">
               Popular Cars in India {new Date().getFullYear()}
             </h2>
 

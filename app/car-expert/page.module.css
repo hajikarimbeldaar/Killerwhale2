@@ -126,7 +126,7 @@
 
 /* Hero Title */
 .heroTitle {
-    font-size: 44px;
+    font-size: 24px;
     font-weight: 700;
     color: #0f172a;
     line-height: 1.2;
@@ -134,19 +134,24 @@
     letter-spacing: -0.01em;
 }
 
-@media (max-width: 900px) {
+@media (min-width: 640px) {
     .heroTitle {
-        font-size: 34px;
-        line-height: 1.25;
+        font-size: 30px;
     }
 }
 
 .heroSubtitle {
-    font-size: 17px;
+    font-size: 14px;
     color: #64748b;
     line-height: 1.7;
     margin-bottom: 32px;
     max-width: 460px;
+}
+
+@media (min-width: 640px) {
+    .heroSubtitle {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 900px) {
@@ -340,7 +345,7 @@
 }
 
 .offersTitle {
-    font-size: 48px;
+    font-size: 18px;
     font-weight: 800;
     color: #0f172a;
     line-height: 1.1;
@@ -348,21 +353,21 @@
     letter-spacing: -0.03em;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 640px) {
     .offersTitle {
-        font-size: 32px;
+        font-size: 20px;
         margin-bottom: 12px;
     }
 }
 
 .offersSubtitle {
-    font-size: 18px;
+    font-size: 14px;
     color: #64748b;
     line-height: 1.6;
     font-weight: 400;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 640px) {
     .offersSubtitle {
         font-size: 16px;
         max-width: 90%;
@@ -483,33 +488,29 @@
 }
 
 .resolveContent h2 {
-    font-size: 30px;
+    font-size: 18px;
     font-weight: 700;
     color: #0f172a;
     margin-bottom: 16px;
     line-height: 1.25;
 }
 
-@media (max-width: 768px) {
-    .resolveContent {
-        text-align: center;
-    }
-
+@media (min-width: 640px) {
     .resolveContent h2 {
-        font-size: 32px;
+        font-size: 20px;
         margin-bottom: 12px;
         line-height: 1.15;
     }
 }
 
 .resolveContent>p {
-    font-size: 15px;
+    font-size: 14px;
     color: #64748b;
     line-height: 1.7;
     margin-bottom: 28px;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 640px) {
     .resolveContent>p {
         margin-bottom: 24px;
         font-size: 16px;

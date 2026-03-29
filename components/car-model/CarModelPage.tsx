@@ -16,6 +16,7 @@ import Breadcrumbs from '../common/Breadcrumbs'
 import { OptimizedImage } from '../common/OptimizedImage'
 import TestDriveBottomBar from '../common/TestDriveBottomBar'
 import LeadFormModal from '../common/LeadFormModal'
+import WhatsAppLeadModal from '../lead-capture/WhatsAppLeadModal'
 import { useOnRoadPrice } from '@/hooks/useOnRoadPrice'
 import CarCard from '../home/CarCard'
 import { saveVisitedModel } from '../home/CarsYouMightLike'
@@ -280,7 +281,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
   const [selectedCity, setSelectedCity] = useState(model?.cities?.[0]?.name || 'Delhi')
   const [selectedRating, setSelectedRating] = useState<number | null>(null)
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'rating' | 'helpful'>('newest')
-  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false)
+  const [isWhatsAppModalOpen, setIsWhatsAppModalOpen] = useState(false)
 
   // Active section tracking for sticky navigation
   const [activeSection, setActiveSection] = useState('hero')
@@ -948,7 +949,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
               {/* Car Title and Actions */}
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
                     {model?.brand || 'Car Brand'} {model?.name || 'Car Model'}
                   </h1>
 
@@ -1008,7 +1009,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
               </div>
 
               {/* Description */}
-              <div className="text-gray-700 leading-relaxed">
+              <div className="text-gray-700 leading-relaxed text-sm sm:text-base">
                 <p className={`${!showFullDescription ? 'line-clamp-3' : ''}`}>
                   {model?.seoDescription || `The ${model?.brand || 'Car Brand'} ${model?.name || 'Car Model'} is a compact hatchback that offers excellent fuel efficiency, modern features, and a spacious interior. Perfect for city driving with its compact dimensions and easy maneuverability.`}
                 </p>
@@ -1032,7 +1033,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
 
               {/* Price Display */}
               <div className="space-y-4">
-                <div className="text-2xl sm:text-3xl font-bold text-green-600">
+                <div className="text-xl sm:text-2xl font-bold text-green-600">
                   {formatPriceRange(displayStartPrice / 100000, displayEndPrice / 100000)}
                 </div>
                 <div className="text-sm text-gray-500">
@@ -1065,7 +1066,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
               {/* Launch Date Section - Only for Upcoming Cars */}
               {model?.isUpcomingCar && model?.formattedLaunchDate && (
                 <div className="space-y-4 border-t pt-6">
-                  <h3 className="text-xl font-bold text-gray-900">
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900">
                     {model.brand} {model.name} Launch Date
                   </h3>
                   <div className="space-y-2">
@@ -1183,7 +1184,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
 
             {/* Model Highlights */}
             <div className="space-y-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">{model?.brand || 'Car'} {model?.name || 'Model'} Key Features & Highlights</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">{model?.brand || 'Car'} {model?.name || 'Model'} Key Features & Highlights</h2>
 
               {/* Tab Navigation - Clickable Headers */}
               <div className="flex space-x-4 sm:space-x-8 border-b border-gray-200 overflow-x-auto scrollbar-hide">
@@ -1411,10 +1412,10 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
               <div className="space-y-8">
                 {/* Model Price Header */}
                 <div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">{model?.brand || 'Car'} {model?.name || 'Model'} Price in India {new Date().getFullYear()}</h2>
+                  <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">{model?.brand || 'Car'} {model?.name || 'Model'} Price in India {new Date().getFullYear()}</h2>
 
                   {/* SEO Content */}
-                  <div className="text-gray-700 leading-relaxed">
+                  <div className="text-gray-700 leading-relaxed text-sm sm:text-base">
                     <p>
                       {model?.brand || 'Car'} {model?.name || 'Model'} price for the base model starts at {formatPrice(displayStartPrice / 100000)} and the top model price goes upto {formatPrice(displayEndPrice / 100000)} ({priceLabel}). {model?.name || 'Model'} price for {model?.variants?.length || 0} variants is listed below.
                     </p>
@@ -1423,7 +1424,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
 
                 {/* Variants Section */}
                 <div className="space-y-6">
-                  <h3 className="text-xl font-bold text-gray-900">Variants</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900">Variants</h3>
 
                   {/* Filter Options - Dynamic based on available variants */}
                   <div className="flex flex-wrap gap-3">
@@ -1461,7 +1462,11 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
                             const variantSlug = variant.name.toLowerCase().replace(/\s+/g, '-')
                             router.push(`/${brandSlug}-cars/${modelSlug}/price-in-mumbai?variant=${variantSlug}`)
                           }}
-                          onCompare={(e) => e.stopPropagation()}
+                          onGetBestDeal={(e) => {
+                            e.stopPropagation()
+                            setSelectedVariant(variant.name)
+                            setIsWhatsAppModalOpen(true)
+                          }}
                         />
                       ))
                     ) : (
@@ -1495,20 +1500,20 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
         {/* Section 4: AD Banner + Color Options */}
         {((model?.colorImages?.length || 0) > 0) && (
           <PageSection background="white" maxWidth="7xl">
-            <div id="colors" className="space-y-8">
+            <div id="colors" className="space-y-6 sm:space-y-8">
               {/* Ad Banner */}
               <Ad3DCarousel className="mb-6" />
 
               {/* Color Options Section */}
-              <div className="space-y-6">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">{model?.brand || 'Car'} {model?.name || 'Model'} Colors - All Available Options</h2>
+              <div className="space-y-4 sm:space-y-6">
+                <h2 className="text-lg sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-8">{model?.brand || 'Car'} {model?.name || 'Model'} Colors - All Available Options</h2>
 
                 {/* Check if backend colorImages exist */}
                 {model?.colorImages && model.colorImages.length > 0 ? (
                   <>
                     {/* Main Car Image Display - Clickable */}
                     <div
-                      className="relative bg-gray-50 rounded-2xl p-8 cursor-pointer"
+                      className="relative bg-gray-50 rounded-xl p-4 sm:p-6 cursor-pointer hover:shadow-md transition-shadow"
                       onClick={() => {
                         // Build color gallery images
                         const colorGalleryImgs = model.colorImages?.map((c, idx) => ({
@@ -1572,11 +1577,11 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
                             key={index}
                             onClick={() => setSelectedColor(color.caption)}
                             className={`flex-shrink-0 relative rounded-xl overflow-hidden transition-all duration-300 ${selectedColor === color.caption
-                              ? 'ring-4 ring-red-500 shadow-lg scale-105'
-                              : 'hover:shadow-md hover:scale-102'
+                              ? 'ring-2 ring-red-500 shadow-md scale-105'
+                              : 'hover:shadow-md hover:scale-102 border border-gray-100'
                               }`}
                           >
-                            <div className="w-32 h-24 bg-gray-100">
+                            <div className="w-28 h-20 sm:w-32 sm:h-24 bg-gray-100">
                               <OptimizedImage
                                 src={color.url || ''}
                                 alt={`${model?.brand || 'Car'} ${model?.name || 'Model'} in ${color.caption}`}
@@ -1598,7 +1603,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
                   /* Fallback to legacy colors structure using model.colors */
                   <>
                     {/* Main Car Image Display */}
-                    <div className="relative bg-gray-50 rounded-2xl p-8">
+                    <div className="relative bg-gray-50 rounded-xl p-4 sm:p-6 hover:shadow-md transition-shadow">
                       <div className="flex items-center justify-center">
                         <div className="relative max-w-2xl w-full">
                           <OptimizedImage
@@ -1622,11 +1627,11 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
                           key={index}
                           onClick={() => setSelectedColor(color.name)}
                           className={`flex-shrink-0 relative rounded-xl overflow-hidden transition-all duration-300 ${selectedColor === color.name
-                            ? 'ring-4 ring-red-500 shadow-lg scale-105'
-                            : 'hover:shadow-md hover:scale-102'
+                            ? 'ring-2 ring-red-500 shadow-md scale-105'
+                            : 'hover:shadow-md hover:scale-102 border border-gray-100'
                             }`}
                         >
-                          <div className="w-32 h-24 bg-gray-100">
+                          <div className="w-28 h-20 sm:w-32 sm:h-24 bg-gray-100">
                             <OptimizedImage
                               src={color.image}
                               alt={`${model?.brand || 'Car'} ${model?.name || 'Model'} in ${color.name}`}
@@ -1665,23 +1670,23 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
               <div className="space-y-6">
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">{model?.brand || 'Car'} {model?.name || 'Model'} Pros and Cons - Should You Buy?</h2>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                   {/* Pros Column */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-5 hover:shadow-md transition-shadow">
                     <div className="flex items-center space-x-2 mb-4">
-                      <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                      <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                         <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V18m-7-8a2 2 0 01-2-2V4a2 2 0 012-2h2.343M7 12h4m-4 0v8-8z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900">Pros</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900">Pros</h3>
                     </div>
 
-                    <ul className="space-y-4">
+                    <ul className="space-y-3 sm:space-y-4">
                       {(showAllPros ? allPros : allPros.slice(0, 2)).map((pro, index) => (
                         <li key={index} className="flex items-start space-x-3">
-                          <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <p className="text-gray-700 text-base leading-relaxed">
+                          <div className="w-2 h-2 bg-gray-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                          <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
                             {pro}
                           </p>
                         </li>
@@ -1697,21 +1702,21 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
                   </div>
 
                   {/* Cons Column */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-5 hover:shadow-md transition-shadow">
                     <div className="flex items-center space-x-2 mb-4">
-                      <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center">
+                      <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
                         <svg className="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 13l3 3 7-7" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900">Cons</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900">Cons</h3>
                     </div>
 
-                    <ul className="space-y-4">
+                    <ul className="space-y-3 sm:space-y-4">
                       {(showAllCons ? allCons : allCons.slice(0, 2)).map((con, index) => (
                         <li key={index} className="flex items-start space-x-3">
-                          <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <p className="text-gray-700 text-base leading-relaxed">
+                          <div className="w-2 h-2 bg-gray-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                          <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
                             {con}
                           </p>
                         </li>
@@ -1732,32 +1737,32 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
             {/* Model Summary Section - Only show if any summary data exists */}
             {(model?.description || model?.exteriorDesign || model?.comfortConvenience) && (
               <div className="space-y-8">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">{model?.brand || 'Car'} {model?.name || 'Model'} Review - Expert Summary</h2>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">{model?.brand || 'Car'} {model?.name || 'Model'} Review - Expert Summary</h2>
 
-                <div className="space-y-8">
+                <div className="space-y-4 sm:space-y-6">
                   {/* Description - Only show if backend data exists */}
                   {model?.description && (
-                    <div>
-                      <div className="flex items-center space-x-2 mb-3">
-                        <div className="w-1.5 h-1.5 bg-gray-600 rounded-full"></div>
-                        <h3 className="text-lg font-bold text-gray-900">Description</h3>
+                    <div className="bg-gray-50/50 rounded-xl p-3 sm:p-5 border border-gray-100">
+                      <div className="flex items-center space-x-2 mb-2 sm:mb-3">
+                        <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900">Description</h3>
                       </div>
-                      <div className={`relative ${!showDescription ? 'max-h-[6rem] overflow-hidden' : ''} transition-all duration-300`}>
-                        <ul className="space-y-2">
+                      <div className={`relative ${!showDescription ? 'max-h-[5rem] sm:max-h-[6rem] overflow-hidden' : ''} transition-all duration-300`}>
+                        <ul className="space-y-1.5 sm:space-y-2">
                           {parseBulletPoints(model.description).map((point, index) => (
                             <li key={index} className="flex items-start space-x-2">
-                              <span className="text-gray-400 mt-1">•</span>
-                              <span className="text-gray-700 text-base leading-relaxed">{point}</span>
+                              <span className="text-gray-400 mt-1 text-xs">•</span>
+                              <span className="text-gray-700 text-sm sm:text-base leading-relaxed">{point}</span>
                             </li>
                           ))}
                         </ul>
                         {!showDescription && (
-                          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+                          <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-gray-50/50 to-transparent pointer-events-none"></div>
                         )}
                       </div>
                       <button
                         onClick={() => setShowDescription(!showDescription)}
-                        className="text-red-500 hover:text-red-600 font-normal text-base transition-colors mt-2 flex items-center gap-1"
+                        className="text-red-500 hover:text-red-600 font-medium text-sm transition-colors mt-2 flex items-center gap-1"
                       >
                         {showDescription ? 'Read Less' : 'Read More'}
                       </button>
@@ -1766,27 +1771,27 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
 
                   {/* Exterior Design - Only show if backend data exists */}
                   {model?.exteriorDesign && (
-                    <div>
-                      <div className="flex items-center space-x-2 mb-3">
-                        <div className="w-1.5 h-1.5 bg-gray-600 rounded-full"></div>
-                        <h3 className="text-lg font-bold text-gray-900">Exterior Design</h3>
+                    <div className="bg-gray-50/50 rounded-xl p-3 sm:p-5 border border-gray-100">
+                      <div className="flex items-center space-x-2 mb-2 sm:mb-3">
+                        <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900">Exterior Design</h3>
                       </div>
-                      <div className={`relative ${!showExterior ? 'max-h-[6rem] overflow-hidden' : ''} transition-all duration-300`}>
-                        <ul className="space-y-2">
+                      <div className={`relative ${!showExterior ? 'max-h-[5rem] sm:max-h-[6rem] overflow-hidden' : ''} transition-all duration-300`}>
+                        <ul className="space-y-1.5 sm:space-y-2">
                           {parseBulletPoints(model.exteriorDesign).map((point, index) => (
                             <li key={index} className="flex items-start space-x-2">
-                              <span className="text-gray-400 mt-1">•</span>
-                              <span className="text-gray-700 text-base leading-relaxed">{point}</span>
+                              <span className="text-gray-400 mt-1 text-xs">•</span>
+                              <span className="text-gray-700 text-sm sm:text-base leading-relaxed">{point}</span>
                             </li>
                           ))}
                         </ul>
                         {!showExterior && (
-                          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+                          <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-gray-50/50 to-transparent pointer-events-none"></div>
                         )}
                       </div>
                       <button
                         onClick={() => setShowExterior(!showExterior)}
-                        className="text-red-500 hover:text-red-600 font-normal text-base transition-colors mt-2 flex items-center gap-1"
+                        className="text-red-500 hover:text-red-600 font-medium text-sm transition-colors mt-2 flex items-center gap-1"
                       >
                         {showExterior ? 'Read Less' : 'Read More'}
                       </button>
@@ -1795,27 +1800,27 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
 
                   {/* Comfort & Convenience - Only show if backend data exists */}
                   {model?.comfortConvenience && (
-                    <div>
-                      <div className="flex items-center space-x-2 mb-3">
-                        <div className="w-1.5 h-1.5 bg-gray-600 rounded-full"></div>
-                        <h3 className="text-lg font-bold text-gray-900">Comfort & Convenience</h3>
+                    <div className="bg-gray-50/50 rounded-xl p-3 sm:p-5 border border-gray-100">
+                      <div className="flex items-center space-x-2 mb-2 sm:mb-3">
+                        <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900">Comfort & Convenience</h3>
                       </div>
-                      <div className={`relative ${!showComfort ? 'max-h-[6rem] overflow-hidden' : ''} transition-all duration-300`}>
-                        <ul className="space-y-2">
+                      <div className={`relative ${!showComfort ? 'max-h-[5rem] sm:max-h-[6rem] overflow-hidden' : ''} transition-all duration-300`}>
+                        <ul className="space-y-1.5 sm:space-y-2">
                           {parseBulletPoints(model.comfortConvenience).map((point, index) => (
                             <li key={index} className="flex items-start space-x-2">
-                              <span className="text-gray-400 mt-1">•</span>
-                              <span className="text-gray-700 text-base leading-relaxed">{point}</span>
+                              <span className="text-gray-400 mt-1 text-xs">•</span>
+                              <span className="text-gray-700 text-sm sm:text-base leading-relaxed">{point}</span>
                             </li>
                           ))}
                         </ul>
                         {!showComfort && (
-                          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+                          <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-gray-50/50 to-transparent pointer-events-none"></div>
                         )}
                       </div>
                       <button
                         onClick={() => setShowComfort(!showComfort)}
-                        className="text-red-500 hover:text-red-600 font-normal text-sm transition-colors mt-2 flex items-center gap-1"
+                        className="text-red-500 hover:text-red-600 font-medium text-sm transition-colors mt-2 flex items-center gap-1"
                       >
                         {showComfort ? 'Read Less' : 'Read More'}
                       </button>
@@ -1840,7 +1845,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
                 {(() => {
                   const isEV = model?.fuelTypes?.some(f => f?.toLowerCase() === 'electric') || model?.name?.toLowerCase().includes('ev') || model?.name?.toLowerCase().includes('electric')
                   return (
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
                       {model?.brand || 'Car'} {model?.name || 'Model'} {isEV ? 'Motor & Battery' : 'Engine'}
                     </h2>
                   )
@@ -1855,17 +1860,17 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
                     const isElectric = model?.fuelTypes?.includes('electric') || engineTitle?.toLowerCase().includes('electric') || engineTitle?.toLowerCase().includes('kwh')
 
                     return (
-                      <div key={engineId} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                      <div key={engineId} className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
                         {/* Engine Header - Always Visible */}
-                        <div className="p-4 sm:p-6">
-                          <div className="flex items-start justify-between gap-3">
-                            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-                              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-red-600 to-orange-500 rounded flex items-center justify-center flex-shrink-0">
+                        <div className="p-3 sm:p-5">
+                          <div className="flex items-start justify-between gap-2 sm:gap-3">
+                            <div className="flex items-start gap-2 sm:gap-3 min-w-0 flex-1">
+                              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-red-600 to-orange-500 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
                                 <span className="text-white font-bold text-xs sm:text-sm">
                                   {index + 1}
                                 </span>
                               </div>
-                              <h3 className="text-base sm:text-lg font-bold text-gray-900 truncate">{engineTitle}</h3>
+                              <h3 className="text-sm sm:text-lg font-bold text-gray-900">{engineTitle}</h3>
                             </div>
                             <button
                               onClick={() => setExpandedEngine(expandedEngine === engineId ? null : engineId)}
@@ -2002,7 +2007,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
 
                     return (
                       <>
-                        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
+                        <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
                           {model?.brand || 'Car'} {model?.name || 'Model'} {isElectric ? 'Driving Range' : 'Mileage'}
                         </h2>
                         <div
@@ -2029,37 +2034,37 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
                             return (
                               <div
                                 key={index}
-                                className={`flex-shrink-0 w-64 bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-all duration-300 ${isSingleCard ? 'mx-auto' : ''}`}
+                                className={`flex-shrink-0 w-56 sm:w-64 bg-white rounded-xl border border-gray-200 p-3 sm:p-4 hover:shadow-md transition-all duration-300 ${isSingleCard ? 'mx-auto' : ''}`}
                               >
                                 {/* Engine/Battery Header - Dynamic for EVs */}
-                                <div className="text-center mb-4">
-                                  <h3 className="text-red-500 font-bold text-sm mb-1">
+                                <div className="text-center mb-3">
+                                  <h3 className="text-red-500 font-bold text-xs sm:text-sm mb-1">
                                     {isElectric ? 'Battery & Range' : 'Engine & Transmission'}
                                   </h3>
-                                  <h4 className="text-red-500 font-bold text-base">{engineName}</h4>
+                                  <h4 className="text-red-500 font-bold text-sm sm:text-base">{engineName}</h4>
                                 </div>
 
                                 {/* Mileage/Range Details */}
-                                <div className="space-y-2">
-                                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                                    <span className="text-gray-600 text-sm">
+                                <div className="space-y-1 sm:space-y-2">
+                                  <div className="flex justify-between items-center py-1.5 border-b border-gray-100">
+                                    <span className="text-gray-600 text-xs sm:text-sm">
                                       {isElectric ? 'Range (Claimed)' : 'Company Claimed'}
                                     </span>
-                                    <span className="text-gray-900 font-bold text-sm">{companyClaimed}</span>
+                                    <span className="text-gray-900 font-bold text-xs sm:text-sm">{companyClaimed}</span>
                                   </div>
 
-                                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                                    <span className="text-gray-600 text-sm">
+                                  <div className="flex justify-between items-center py-1.5 border-b border-gray-100">
+                                    <span className="text-gray-600 text-xs sm:text-sm">
                                       {isElectric ? 'City Range' : 'City Real World'}
                                     </span>
-                                    <span className="text-gray-900 font-bold text-sm">{cityRealWorld}</span>
+                                    <span className="text-gray-900 font-bold text-xs sm:text-sm">{cityRealWorld}</span>
                                   </div>
 
-                                  <div className="flex justify-between items-center py-2">
-                                    <span className="text-gray-600 text-sm">
+                                  <div className="flex justify-between items-center py-1.5">
+                                    <span className="text-gray-600 text-xs sm:text-sm">
                                       {isElectric ? 'Highway Range' : 'Highway Real World'}
                                     </span>
-                                    <span className="text-gray-900 font-bold text-sm">{highwayRealWorld}</span>
+                                    <span className="text-gray-900 font-bold text-xs sm:text-sm">{highwayRealWorld}</span>
                                   </div>
                                 </div>
                               </div>
@@ -2119,7 +2124,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
             <div id="similar-cars" className="space-y-8">
               {/* Similar Cars Section - Exact copy from CarsByBudget */}
               <div className="space-y-6">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">
                   Similar Cars To {model?.name || 'model'}
                 </h2>
 
@@ -2187,7 +2192,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
 
               {/* Compare With Similar Cars Section - Dynamic with body type matching */}
               <div className="space-y-4">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">Compare {model?.brand || 'Car'} {model?.name || 'Model'} with Similar Cars</h2>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">Compare {model?.brand || 'Car'} {model?.name || 'Model'} with Similar Cars</h2>
 
                 {/* Comparison Cards - Horizontal Scroll */}
                 <div className="relative">
@@ -2384,7 +2389,7 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
       <section className="py-6 sm:py-8 bg-gray-50">
         <div className="max-w-2xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
           <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8">
-            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 text-center mb-2 sm:mb-3">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 text-center mb-2 sm:mb-3">
               Share Your Feedback
             </h2>
             <p className="text-sm sm:text-base text-gray-600 text-center mb-4 sm:mb-6">
@@ -2459,11 +2464,15 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
         onClose={() => setGalleryModalOpen(false)}
         carName={`${model?.brand || 'Car'} ${model?.name || 'Model'}`}
       />
-      <TestDriveBottomBar onBookTestDrive={() => setIsLeadModalOpen(true)} />
-      <LeadFormModal
-        isOpen={isLeadModalOpen}
-        onClose={() => setIsLeadModalOpen(false)}
-        carName={model.name}
+      <TestDriveBottomBar onBookTestDrive={() => setIsWhatsAppModalOpen(true)} />
+      <WhatsAppLeadModal
+        isOpen={isWhatsAppModalOpen}
+        onClose={() => setIsWhatsAppModalOpen(false)}
+        brandName={model.brand}
+        modelName={model.name}
+        selectedVariantName={selectedVariant}
+        variants={modelVariants}
+        defaultCity={cityName}
       />
     </div >
   )

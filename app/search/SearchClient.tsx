@@ -319,7 +319,7 @@ export default function SearchClient({ trendingSearches, initialQuery = '' }: Se
                             <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <Search className="h-8 w-8 text-red-500" />
                             </div>
-                            <h3 className="text-lg font-bold text-gray-900 mb-1">No results for "{searchQuery}"</h3>
+                            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">No results for "{searchQuery}"</h3>
                             <p className="text-gray-500 text-sm px-10">We couldn't find any cars matching your search. Try checking for typos or use fewer keywords.</p>
                         </motion.div>
                     )}

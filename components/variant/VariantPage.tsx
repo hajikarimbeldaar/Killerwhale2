@@ -18,6 +18,7 @@ import ExpertReviewSection from '../car-model/ExpertReviewSection'
 import { generateExpertReview } from '@/lib/expert-review-logic'
 import CarCard from '../home/CarCard'
 import UpcomingCars from '../home/UpcomingCars'
+import WhatsAppLeadModal from '../lead-capture/WhatsAppLeadModal'
 import Ad3DCarousel from '../ads/Ad3DCarousel'
 import UpcomingCarCard from '../home/UpcomingCarCard'
 import { resolveR2Url } from '@/lib/image-utils'
@@ -139,6 +140,8 @@ export default function VariantPage({
   // Upcoming Cars State
   const [upcomingCars, setUpcomingCars] = useState<UpcomingCar[]>([])
   const [loadingUpcomingCars, setLoadingUpcomingCars] = useState(true)
+  const [isWhatsAppModalOpen, setIsWhatsAppModalOpen] = useState(false)
+  const [selectedLeadVariant, setSelectedLeadVariant] = useState('')
 
   // Image Gallery Modal state for highlights
   const [galleryModalOpen, setGalleryModalOpen] = useState(false)
@@ -323,7 +326,7 @@ export default function VariantPage({
   const [showAllPros, setShowAllPros] = useState(false)
   const [showAllCons, setShowAllCons] = useState(false)
   const [expandedEngine, setExpandedEngine] = useState<boolean>(false)
-  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false)
+  // Removed isLeadModalOpen
 
 
 
@@ -892,7 +895,7 @@ export default function VariantPage({
               {/* Car Title and Actions */}
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
                     {showSkeleton ? (
                       <div className="bg-gray-200 animate-pulse h-9 w-96 rounded"></div>
                     ) : (
@@ -955,7 +958,7 @@ export default function VariantPage({
               </div>
 
               {/* Description */}
-              <div className="text-gray-700 leading-relaxed">
+              <div className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 {showSkeleton ? (
                   <div className="space-y-2">
                     <div className="bg-gray-200 animate-pulse h-4 w-full rounded"></div>
@@ -1127,7 +1130,7 @@ export default function VariantPage({
 
             {/* Key Features */}
             <div className="space-y-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">Key Features</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">Key Features</h2>
 
               {/* Highlights Grid - Horizontal Scroll */}
               <div className="relative">
@@ -1266,7 +1269,7 @@ export default function VariantPage({
           <div id="specifications" className="space-y-8">
             {/* SEO Text Section */}
             <div className="space-y-4">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">{displayModelName} {displayVariantName} Info</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">{displayModelName} {displayVariantName} Info</h2>
               <div className="text-gray-700 leading-relaxed">
                 {(() => {
                   const keyFeaturesText = variant?.keyFeatures || variant?.headerSummary || '';
@@ -1310,7 +1313,7 @@ export default function VariantPage({
 
             {/* Specifications Section */}
             <div className="space-y-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">
                 {displayModelName} {displayVariantName} Specifications & Features
               </h2>
 
@@ -1323,7 +1326,7 @@ export default function VariantPage({
                     onClick={() => toggleSpecSection('comfort')}
                     className="w-full flex items-center justify-between p-6 hover:bg-gray-50 transition-colors"
                   >
-                    <h3 className="text-base font-bold text-gray-900">Comfort & Convenience</h3>
+                    <h3 className="text-base sm:text-lg font-bold text-gray-900">Comfort & Convenience</h3>
                     <ChevronDown className={`h-5 w-5 text-gray-400 transition-transform duration-300 ${expandedSpecs['comfort'] ? 'rotate-180' : ''}`} />
                   </button>
 
@@ -2687,7 +2690,7 @@ export default function VariantPage({
 
             {/* More Variants Section */}
             <div className="space-y-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">More {displayModelName} Variants</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">More {displayModelName} Variants</h2>
 
               {/* Filter Options - Dynamic based on available variants */}
               <div className="flex flex-wrap gap-3">
@@ -2748,7 +2751,11 @@ export default function VariantPage({
                         // Navigate directly to price-in route with variant parameter
                         router.push(`/${brandSlug}-cars/${modelSlug}/price-in-${citySlug}?variant=${varSlug}`)
                       }}
-                      onCompare={(e) => e.stopPropagation()}
+                      onGetBestDeal={(e) => {
+                        e.stopPropagation()
+                        setSelectedLeadVariant(variantItem.name)
+                        setIsWhatsAppModalOpen(true)
+                      }}
                     />
                   ))
                 ) : (
@@ -2785,26 +2792,26 @@ export default function VariantPage({
               <div className="space-y-6">
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">{displayBrandName || 'Car'} {displayModelName || 'Model'} {displayVariantName} Pros and Cons - Should You Buy?</h2>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                   {/* Pros Column */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-5 hover:shadow-md transition-shadow">
                     <div className="flex items-center space-x-2 mb-4">
-                      <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                      <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                         <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V18m-7-8a2 2 0 01-2-2V4a2 2 0 012-2h2.343M7 12h4m-4 0v8-8z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900">Pros</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900">Pros</h3>
                     </div>
 
-                    <ul className="space-y-4">
+                    <ul className="space-y-3 sm:space-y-4">
                       {(() => {
                         const rawPros = expertReviewData?.pros || model?.pros || []
                         const prosList = Array.isArray(rawPros) ? rawPros : []
-                        return prosList.slice(0, showAllPros ? undefined : 2).map((pro, index) => (
+                        return (showAllPros ? prosList : prosList.slice(0, 2)).map((pro, index) => (
                           <li key={index} className="flex items-start space-x-3">
-                            <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <p className="text-gray-700 text-base leading-relaxed">
+                            <div className="w-2 h-2 bg-gray-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                            <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
                               {pro}
                             </p>
                           </li>
@@ -2821,24 +2828,24 @@ export default function VariantPage({
                   </div>
 
                   {/* Cons Column */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-5 hover:shadow-md transition-shadow">
                     <div className="flex items-center space-x-2 mb-4">
-                      <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center">
+                      <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
                         <svg className="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 13l3 3 7-7" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900">Cons</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900">Cons</h3>
                     </div>
 
-                    <ul className="space-y-4">
+                    <ul className="space-y-3 sm:space-y-4">
                       {(() => {
                         const rawCons = expertReviewData?.cons || model?.cons || []
                         const consList = Array.isArray(rawCons) ? rawCons : []
-                        return consList.slice(0, showAllCons ? undefined : 2).map((con, index) => (
+                        return (showAllCons ? consList : consList.slice(0, 2)).map((con, index) => (
                           <li key={index} className="flex items-start space-x-3">
-                            <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <p className="text-gray-700 text-base leading-relaxed">
+                            <div className="w-2 h-2 bg-gray-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                            <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
                               {con}
                             </p>
                           </li>
@@ -2857,99 +2864,101 @@ export default function VariantPage({
               </div>
             )}
 
-            {/* Variant Summary Section */}
-            <div className="space-y-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">{displayModelName} {displayVariantName} Summary</h2>
+            {/* Variant Summary Section - Only show if any summary data exists */}
+            {(variant?.description || model?.description || variant?.exteriorDesign || model?.exteriorDesign || variant?.comfortConvenience || model?.comfortConvenience) && (
+              <div className="space-y-8">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">{displayModelName} {displayVariantName} Review - Expert Summary</h2>
 
-              <div className="space-y-6">
-                {/* Description - Only show if backend data exists */}
-                {(variant?.description || model?.description) && (
-                  <div>
-                    <div className="flex items-center space-x-2 mb-3">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                      <h3 className="text-lg font-bold text-gray-900">Description</h3>
+                <div className="space-y-4 sm:space-y-6">
+                  {/* Description - Only show if data exists */}
+                  {(variant?.description || model?.description) && (
+                    <div className="bg-gray-50/50 rounded-xl p-3 sm:p-5 border border-gray-100">
+                      <div className="flex items-center space-x-2 mb-2 sm:mb-3">
+                        <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900">Description</h3>
+                      </div>
+                      <div className={`relative ${!showSummaryDescription ? 'max-h-[5rem] sm:max-h-[6rem] overflow-hidden' : ''} transition-all duration-300`}>
+                        <ul className="space-y-1.5 sm:space-y-2">
+                          {parseBulletPoints(variant?.description || model?.description || '').map((point: string, index: number) => (
+                            <li key={index} className="flex items-start space-x-2">
+                              <span className="text-gray-400 mt-1 text-xs">•</span>
+                              <span className="text-gray-700 text-sm sm:text-base leading-relaxed">{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        {!showSummaryDescription && (
+                          <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-gray-50/50 to-transparent pointer-events-none"></div>
+                        )}
+                      </div>
+                      <button
+                        onClick={() => setShowSummaryDescription(!showSummaryDescription)}
+                        className="text-red-500 hover:text-red-600 font-medium text-sm transition-colors mt-2 flex items-center gap-1"
+                      >
+                        {showSummaryDescription ? 'Read Less' : 'Read More'}
+                      </button>
                     </div>
-                    <div className={`relative ${!showSummaryDescription ? 'max-h-[6rem] overflow-hidden' : ''} transition-all duration-300`}>
-                      <ul className="space-y-2">
-                        {parseBulletPoints(variant?.description || model?.description || '').map((point: string, index: number) => (
-                          <li key={index} className="flex items-start space-x-2">
-                            <span className="text-gray-400 mt-1">•</span>
-                            <span className="text-gray-700 text-base leading-relaxed">{point}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      {!showSummaryDescription && (
-                        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => setShowSummaryDescription(!showSummaryDescription)}
-                      className="text-red-500 hover:text-red-600 font-normal text-base transition-colors mt-2 flex items-center gap-1"
-                    >
-                      {showSummaryDescription ? 'Read Less' : 'Read More'}
-                    </button>
-                  </div>
-                )}
+                  )}
 
-                {/* Exterior Design - Only show if backend data exists */}
-                {(variant?.exteriorDesign || model?.exteriorDesign) && (
-                  <div>
-                    <div className="flex items-center space-x-2 mb-3">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                      <h3 className="text-lg font-bold text-gray-900">Exterior Design</h3>
+                  {/* Exterior Design - Only show if data exists */}
+                  {(variant?.exteriorDesign || model?.exteriorDesign) && (
+                    <div className="bg-gray-50/50 rounded-xl p-3 sm:p-5 border border-gray-100">
+                      <div className="flex items-center space-x-2 mb-2 sm:mb-3">
+                        <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900">Exterior Design</h3>
+                      </div>
+                      <div className={`relative ${!showSummaryExterior ? 'max-h-[5rem] sm:max-h-[6rem] overflow-hidden' : ''} transition-all duration-300`}>
+                        <ul className="space-y-1.5 sm:space-y-2">
+                          {parseBulletPoints(variant?.exteriorDesign || model?.exteriorDesign || '').map((point: string, index: number) => (
+                            <li key={index} className="flex items-start space-x-2">
+                              <span className="text-gray-400 mt-1 text-xs">•</span>
+                              <span className="text-gray-700 text-sm sm:text-base leading-relaxed">{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        {!showSummaryExterior && (
+                          <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-gray-50/50 to-transparent pointer-events-none"></div>
+                        )}
+                      </div>
+                      <button
+                        onClick={() => setShowSummaryExterior(!showSummaryExterior)}
+                        className="text-red-500 hover:text-red-600 font-medium text-sm transition-colors mt-2 flex items-center gap-1"
+                      >
+                        {showSummaryExterior ? 'Read Less' : 'Read More'}
+                      </button>
                     </div>
-                    <div className={`relative ${!showSummaryExterior ? 'max-h-[6rem] overflow-hidden' : ''} transition-all duration-300`}>
-                      <ul className="space-y-2">
-                        {parseBulletPoints(variant?.exteriorDesign || model?.exteriorDesign || '').map((point: string, index: number) => (
-                          <li key={index} className="flex items-start space-x-2">
-                            <span className="text-gray-400 mt-1">•</span>
-                            <span className="text-gray-700 text-base leading-relaxed">{point}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      {!showSummaryExterior && (
-                        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => setShowSummaryExterior(!showSummaryExterior)}
-                      className="text-red-500 hover:text-red-600 font-normal text-base transition-colors mt-2 flex items-center gap-1"
-                    >
-                      {showSummaryExterior ? 'Read Less' : 'Read More'}
-                    </button>
-                  </div>
-                )}
+                  )}
 
-                {/* Comfort & Convenience - Only show if backend data exists */}
-                {(variant?.comfortConvenience || model?.comfortConvenience) && (
-                  <div>
-                    <div className="flex items-center space-x-2 mb-3">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                      <h3 className="text-lg font-bold text-gray-900">Comfort & Convenience</h3>
+                  {/* Comfort & Convenience - Only show if data exists */}
+                  {(variant?.comfortConvenience || model?.comfortConvenience) && (
+                    <div className="bg-gray-50/50 rounded-xl p-3 sm:p-5 border border-gray-100">
+                      <div className="flex items-center space-x-2 mb-2 sm:mb-3">
+                        <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900">Comfort & Convenience</h3>
+                      </div>
+                      <div className={`relative ${!showSummaryComfort ? 'max-h-[5rem] sm:max-h-[6rem] overflow-hidden' : ''} transition-all duration-300`}>
+                        <ul className="space-y-1.5 sm:space-y-2">
+                          {parseBulletPoints(variant?.comfortConvenience || model?.comfortConvenience || '').map((point: string, index: number) => (
+                            <li key={index} className="flex items-start space-x-2">
+                              <span className="text-gray-400 mt-1 text-xs">•</span>
+                              <span className="text-gray-700 text-sm sm:text-base leading-relaxed">{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        {!showSummaryComfort && (
+                          <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-gray-50/50 to-transparent pointer-events-none"></div>
+                        )}
+                      </div>
+                      <button
+                        onClick={() => setShowSummaryComfort(!showSummaryComfort)}
+                        className="text-red-500 hover:text-red-600 font-medium text-sm transition-colors mt-2 flex items-center gap-1"
+                      >
+                        {showSummaryComfort ? 'Read Less' : 'Read More'}
+                      </button>
                     </div>
-                    <div className={`relative ${!showSummaryComfort ? 'max-h-[6rem] overflow-hidden' : ''} transition-all duration-300`}>
-                      <ul className="space-y-2">
-                        {parseBulletPoints(variant?.comfortConvenience || model?.comfortConvenience || '').map((point: string, index: number) => (
-                          <li key={index} className="flex items-start space-x-2">
-                            <span className="text-gray-400 mt-1">•</span>
-                            <span className="text-gray-700 text-base leading-relaxed">{point}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      {!showSummaryComfort && (
-                        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => setShowSummaryComfort(!showSummaryComfort)}
-                      className="text-red-500 hover:text-red-600 font-normal text-base transition-colors mt-2 flex items-center gap-1"
-                    >
-                      {showSummaryComfort ? 'Read Less' : 'Read More'}
-                    </button>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Ad Banner */}
             <Ad3DCarousel className="mb-6" />
@@ -2960,7 +2969,7 @@ export default function VariantPage({
               {(() => {
                 const isEV = currentVariantData?.fuelType?.toLowerCase() === 'electric' || displayModelName?.toLowerCase().includes('ev') || displayModelName?.toLowerCase().includes('electric') || displayVariantName?.toLowerCase().includes('electric')
                 return (
-                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
+                  <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
                     {displayModelName} {displayVariantName} {isEV ? 'Motor & Battery' : 'Engine'}
                   </h2>
                 )
@@ -2971,15 +2980,15 @@ export default function VariantPage({
                   const isEV = currentVariantData?.fuelType?.toLowerCase() === 'electric' || displayModelName?.toLowerCase().includes('ev') || displayModelName?.toLowerCase().includes('electric') || displayVariantName?.toLowerCase().includes('electric')
 
                   return (
-                    <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <div className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
                       {/* Engine Header - Always Visible */}
-                      <div className="p-4 sm:p-6">
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-                            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-red-600 to-orange-500 rounded flex items-center justify-center flex-shrink-0">
+                      <div className="p-3 sm:p-5">
+                        <div className="flex items-start justify-between gap-2 sm:gap-3">
+                          <div className="flex items-start gap-2 sm:gap-3 min-w-0 flex-1">
+                            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-red-600 to-orange-500 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
                               <span className="text-white font-bold text-xs sm:text-sm">1</span>
                             </div>
-                            <h3 className="text-base sm:text-lg font-bold text-gray-900 truncate">
+                            <h3 className="text-sm sm:text-lg font-bold text-gray-900 truncate">
                               {variant?.engineName || currentVariantData?.engine}
                             </h3>
                           </div>
@@ -3006,7 +3015,7 @@ export default function VariantPage({
                           <p className="text-gray-600 text-sm mt-3 line-clamp-2">
                             {isEV
                               ? `High-performance electric motor delivering instant torque and smooth acceleration.`
-                              : `Suitable for both city driving and highway cruising. The ${variant?.engineName || currentVariantData?.engine} engine offers excellent fuel efficiency with smooth acceleration.`
+                              : `Suitable for both city driving and highway cruising. The ${variant?.engineName || currentVariantData?.engine} engine offers excellent fuel efficiency.`
                             }
                           </p>
                         )}
@@ -3067,7 +3076,7 @@ export default function VariantPage({
                               <p className="text-gray-700 text-sm leading-relaxed mb-4 sm:mb-6">
                                 {isEV
                                   ? `The electric motor provides instant torque delivery for quick acceleration. It offers a perfect balance between performance and efficiency, making it ideal for daily commuting and long-distance travel with zero emissions.`
-                                  : `Suitable for both city driving and highway cruising. The ${variant?.engineName || currentVariantData?.engine} engine offers excellent fuel efficiency with smooth acceleration. It provides a perfect balance between performance and economy, making it ideal for daily commuting and long-distance travel.`
+                                  : `Suitable for both city driving and highway cruising. The ${variant?.engineName || currentVariantData?.engine} engine offers excellent fuel efficiency with smooth acceleration. It provides a perfect balance between performance and economy.`
                                 }
                               </p>
 
@@ -3118,51 +3127,51 @@ export default function VariantPage({
 
                   return (
                     <>
-                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
+                      <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
                         {displayModelName} {displayVariantName} {isEV ? 'Driving Range' : 'Mileage'}
                       </h2>
 
-                      <div className="flex justify-center">
-                        <div className="w-64 bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-all duration-300">
+                      <div className="flex overflow-x-auto pb-4 gap-4 snap-x snap-mandatory scrollbar-hide">
+                        <div className="min-w-[240px] sm:min-w-[280px] bg-white rounded-xl border border-gray-200 p-3 sm:p-4 hover:shadow-md transition-all duration-300 snap-center">
                           {/* Engine/Battery Header - Dynamic for EVs */}
-                          <div className="text-center mb-4">
-                            <h3 className="text-red-500 font-bold text-sm mb-1">
-                              {isEV ? 'Battery & Range' : 'Engine & Transmission'}
+                          <div className="text-center mb-4 border-b border-gray-100 pb-3">
+                            <h3 className="text-red-500 font-bold text-xs sm:text-sm uppercase tracking-wider mb-1">
+                              {isEV ? 'Battery & Range' : (variant?.mileageEngineName || variant?.engineName || currentVariantData?.engine || 'Engine')}
                             </h3>
-                            <h4 className="text-red-500 font-bold text-base mb-1">
-                              {variant?.mileageEngineName || variant?.engineName || currentVariantData?.engine}
+                            <h4 className="text-gray-900 font-bold text-sm sm:text-base">
+                              {isEV ? 'Electric Motor' : (variant?.fuel || currentVariantData?.fuelType || 'Fuel')} - {variant?.transmission || currentVariantData?.transmission || 'Manual'}
                             </h4>
                           </div>
 
                           {/* Mileage/Range Details */}
-                          <div className="space-y-2">
-                            <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                              <span className="text-gray-600 text-sm">
-                                {isEV ? 'Range (Claimed)' : 'Company Claimed'}
+                          <div className="space-y-0.5 sm:space-y-1">
+                            <div className="flex justify-between items-center py-2 border-b border-gray-50">
+                              <span className="text-gray-500 text-xs sm:text-sm">
+                                {isEV ? 'Claimed Range' : 'Company Claimed'}
                               </span>
-                              <span className="text-gray-900 font-bold text-sm">
-                                {variant?.mileageCompanyClaimed} {isEV ? 'km' : 'Kmpl'}
+                              <span className="text-gray-900 font-bold text-xs sm:text-sm">
+                                {variant?.mileageCompanyClaimed || 'N/A'} {isEV ? 'km' : (isEV ? 'km' : 'kmpl')}
                               </span>
                             </div>
 
                             {variant?.mileageCityRealWorld && (
-                              <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                                <span className="text-gray-600 text-sm">
-                                  {isEV ? 'City Range' : 'City Real World'}
+                              <div className="flex justify-between items-center py-2 border-b border-gray-50">
+                                <span className="text-gray-500 text-xs sm:text-sm">
+                                  {isEV ? 'City Range' : 'City Mileage'}
                                 </span>
-                                <span className="text-gray-900 font-bold text-sm">
-                                  {variant?.mileageCityRealWorld} {isEV ? 'km' : 'Kmpl'}
+                                <span className="text-gray-900 font-bold text-xs sm:text-sm">
+                                  {variant?.mileageCityRealWorld} {isEV ? 'km' : 'kmpl'}
                                 </span>
                               </div>
                             )}
 
                             {variant?.mileageHighwayRealWorld && (
                               <div className="flex justify-between items-center py-2">
-                                <span className="text-gray-600 text-sm">
-                                  {isEV ? 'Highway Range' : 'Highway Real World'}
+                                <span className="text-gray-500 text-xs sm:text-sm">
+                                  {isEV ? 'Highway Range' : 'Highway Mileage'}
                                 </span>
-                                <span className="text-gray-900 font-bold text-sm">
-                                  {variant?.mileageHighwayRealWorld} {isEV ? 'km' : 'Kmpl'}
+                                <span className="text-gray-900 font-bold text-xs sm:text-sm">
+                                  {variant?.mileageHighwayRealWorld} {isEV ? 'km' : 'kmpl'}
                                 </span>
                               </div>
                             )}
@@ -3197,7 +3206,7 @@ export default function VariantPage({
           <div id="similar-cars" className="space-y-12">
             {/* Similar Cars Section - Same as Model Page */}
             <div className="space-y-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">
                 Similar Cars To {displayModelName || 'model'}
               </h2>
 
@@ -3470,11 +3479,18 @@ export default function VariantPage({
         carName={`${displayBrandName || 'Car'} ${displayModelName || 'Model'}`}
       />
 
-      <TestDriveBottomBar onBookTestDrive={() => setIsLeadModalOpen(true)} />
-      <LeadFormModal
-        isOpen={isLeadModalOpen}
-        onClose={() => setIsLeadModalOpen(false)}
-        carName={`${displayBrandName} ${displayModelName} ${displayVariantName}`}
+      <TestDriveBottomBar onBookTestDrive={() => {
+        setSelectedLeadVariant(variantName || '')
+        setIsWhatsAppModalOpen(true)
+      }} />
+      <WhatsAppLeadModal
+        isOpen={isWhatsAppModalOpen}
+        onClose={() => setIsWhatsAppModalOpen(false)}
+        brandName={displayBrandName || brandName || ''}
+        modelName={displayModelName || modelName || ''}
+        selectedVariantName={selectedLeadVariant || displayVariantName || variantName || ''}
+        variants={allModelVariants}
+        defaultCity="Delhi"
       />
     </div >
   )

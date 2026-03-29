@@ -95,7 +95,7 @@ export default function BrandHeroSection({ brand, brands = [], models = [], bran
       <section className="py-6 sm:py-8 bg-white">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
           {/* Brand Title */}
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
             {brand.name} Cars Price in India, New Models {new Date().getFullYear()}, Reviews & Offers
           </h1>
 
@@ -253,7 +253,7 @@ export default function BrandHeroSection({ brand, brands = [], models = [], bran
       {/* Section 8: Owner Reviews */}
       <section className="py-6 sm:py-8 bg-gray-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">{brand.name} Owner Reviews</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">{brand.name} Owner Reviews</h2>
           <div className="bg-gray-50 rounded-lg p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">Own a {brand.name.toLowerCase()} car? Share your experience!</h3>
             <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
@@ -273,7 +273,7 @@ export default function BrandHeroSection({ brand, brands = [], models = [], bran
       <section className="py-6 sm:py-8 bg-gray-50">
         <div className="max-w-2xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
           <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8">
-            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 text-center mb-2 sm:mb-3">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 text-center mb-2 sm:mb-3">
               Share Your Feedback
             </h2>
             <p className="text-sm sm:text-base text-gray-600 text-center mb-4 sm:mb-6">

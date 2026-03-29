@@ -20,6 +20,7 @@ import CityPriceGrid from './CityPriceGrid'
 import { OptimizedImage } from '../common/OptimizedImage'
 import TestDriveBottomBar from '../common/TestDriveBottomBar'
 import LeadFormModal from '../common/LeadFormModal'
+import WhatsAppLeadModal from '../lead-capture/WhatsAppLeadModal'
 import CitySEOContent from './CitySEOContent'
 import { getCurrentMonthYear } from '@/lib/date-utils'
 
@@ -272,7 +273,7 @@ export default function PriceBreakupPage({
   const [loadingVariants, setLoadingVariants] = useState(initialVariants.length === 0)
   const [showAllVariants, setShowAllVariants] = useState(false)
   const [openFAQ, setOpenFAQ] = useState<number | null>(null)
-  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false)
+  const [isWhatsAppModalOpen, setIsWhatsAppModalOpen] = useState(false)
 
   // Popular cars state
   const [popularCars, setPopularCars] = useState<any[]>(initialPopularCars)
@@ -959,11 +960,11 @@ export default function PriceBreakupPage({
         <div id="overview" className="">
           {/* Header */}
           <div className="mb-6">
-            <h1 className="text-xl font-bold text-gray-900 mb-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
               {brandName} {modelName} On-Road Price in {selectedCity.split(',')[0]} - {getCurrentMonthYear()}
             </h1>
             <div className="relative">
-              <div className={`text-gray-600 leading-relaxed transition-all duration-300 ${!isTextExpanded ? 'line-clamp-2' : ''}`}>
+              <div className={`text-sm sm:text-base text-gray-600 leading-relaxed transition-all duration-300 ${!isTextExpanded ? 'line-clamp-2' : ''}`}>
                 {/* Dynamic SEO Content based on variant data */}
                 {(() => {
                   const cityName = selectedCity.split(',')[0]
@@ -1084,7 +1085,7 @@ export default function PriceBreakupPage({
 
               {/* Car Name with Icons */}
               <div className="flex items-center justify-between mb-6">
-                <div className="text-xl font-bold text-gray-900">
+                <div className="text-lg sm:text-xl font-bold text-gray-900">
                   <Link
                     href={`/${brandName.toLowerCase().replace(/\s+/g, '-')}-cars/${modelName.toLowerCase().replace(/\s+/g, '-')}`}
                     className="hover:text-orange-600 transition-colors"
@@ -1164,6 +1165,21 @@ export default function PriceBreakupPage({
                 <span className="text-gray-700">{selectedCity}</span>
                 <ChevronDown className="w-5 h-5 text-gray-400" />
               </Link>
+
+              {/* Get Best Deal CTA */}
+              <div className="mt-6 space-y-3">
+                <button
+                  onClick={() => setIsWhatsAppModalOpen(true)}
+                  className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white rounded-xl px-4 py-4 font-bold text-lg flex flex-col items-center justify-center transition-all shadow-lg shadow-red-500/20"
+                >
+                  <span className="flex items-center gap-2">
+                    Get Best Deal <ChevronRight className="w-5 h-5" />
+                  </span>
+                  <span className="text-sm font-normal text-orange-100 mt-1">
+                    Save up to ₹50,000 + Free EMI & Insurance Help
+                  </span>
+                </button>
+              </div>
             </div>
 
             {/* Right: On-Road Price Breakdown - Clean & SEO Optimized */}
@@ -1331,6 +1347,16 @@ export default function PriceBreakupPage({
                   <div className="animate-pulse text-gray-400 text-sm">Calculating price...</div>
                 </div>
               )}
+
+              {/* Secondary CTA below price table */}
+              <div className="mt-6">
+                <button
+                  onClick={() => setIsWhatsAppModalOpen(true)}
+                  className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white rounded-xl px-4 py-4 font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-red-500/20"
+                >
+                  Get Deals & Offers <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1404,12 +1430,10 @@ export default function PriceBreakupPage({
                         setSelectedVariantName(variant.name)
                         scrollToSection('price-breakup')
                       }}
-                      onCompare={(e) => {
+                      onGetBestDeal={(e) => {
                         e.stopPropagation()
-                        // Add to comparison logic could go here
-                        const brandSlug = brandName.toLowerCase().replace(/\s+/g, '-')
-                        const modelSlug = modelName.toLowerCase().replace(/\s+/g, '-')
-                        router.push(`/${brandSlug}-cars/${modelSlug}/compare`)
+                        setSelectedVariantName(variant.name)
+                        setIsWhatsAppModalOpen(true)
                       }}
                     />
                   ))
@@ -1580,7 +1604,7 @@ export default function PriceBreakupPage({
                     </div>
 
                     <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
-                      <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+                      <h4 className="text-base sm:text-lg font-bold text-gray-900 uppercase tracking-wider mb-3 flex items-center gap-2">
                         <TrendingUp className="w-4 h-4 text-orange-500" />
                         Quick Highlights
                       </h4>
@@ -1641,10 +1665,10 @@ export default function PriceBreakupPage({
           {/* Feedback Form */}
           <div id="feedback" className="max-w-2xl mx-auto w-full">
             <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8">
-              <h2 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 text-center mb-2 sm:mb-3">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 text-center mb-2 sm:mb-3">
                 Share Your Feedback
               </h2>
-              <p className="text-xs sm:text-sm text-gray-600 text-center mb-4 sm:mb-6">
+              <p className="text-sm sm:text-base text-gray-600 text-center mb-4 sm:mb-6">
                 Help us improve our website by sharing your experience
               </p>
 
@@ -1714,11 +1738,15 @@ export default function PriceBreakupPage({
           { label: `Price in ${selectedCity.split(',')[0]}` }
         ]}
       />
-      <TestDriveBottomBar onBookTestDrive={() => setIsLeadModalOpen(true)} />
-      <LeadFormModal
-        isOpen={isLeadModalOpen}
-        onClose={() => setIsLeadModalOpen(false)}
-        carName={`${brandName} ${modelName} ${selectedVariantName}`}
+      <TestDriveBottomBar onBookTestDrive={() => setIsWhatsAppModalOpen(true)} />
+      <WhatsAppLeadModal
+        isOpen={isWhatsAppModalOpen}
+        onClose={() => setIsWhatsAppModalOpen(false)}
+        brandName={brandName}
+        modelName={modelName}
+        selectedVariantName={selectedVariantName}
+        variants={modelVariants}
+        defaultCity={selectedCity}
       />
       <Footer />
     </div>

@@ -82,14 +82,14 @@ export default function ExpertReviewSection({ model }: ExpertReviewSectionProps)
 
     return (
         <div className="space-y-6">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900">
                 {model?.brand} {model?.name} Expert Review
             </h2>
 
             {/* ── Overview summary injected from ModelSummarySEO ── */}
             <div className="space-y-3">
                 {/* Short summary paragraph */}
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
                     {shortSummary}
                 </p>
 
@@ -145,11 +145,11 @@ export default function ExpertReviewSection({ model }: ExpertReviewSectionProps)
 
                 {/* Content Body */}
                 <div className="space-y-3">
-                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">
                         {review.verdictTitle}
                     </h3>
 
-                    <div className="text-gray-600 text-base leading-relaxed">
+                    <div className="text-gray-600 text-sm sm:text-base leading-relaxed">
                         <p className={`${!isExpanded ? 'line-clamp-4' : ''} whitespace-pre-line`}>
                             {renderFormattedText(review.verdictSummary)}
                         </p>
@@ -159,7 +159,7 @@ export default function ExpertReviewSection({ model }: ExpertReviewSectionProps)
                     <div className="flex justify-end mt-2">
                         <button
                             onClick={() => setIsExpanded(!isExpanded)}
-                            className="text-red-500 hover:text-red-600 font-normal text-base transition-colors flex items-center gap-1"
+                            className="text-red-500 hover:text-red-600 font-normal text-sm sm:text-base transition-colors flex items-center gap-1"
                         >
                             {isExpanded ? 'Read Less' : 'Read More'}
                         </button>

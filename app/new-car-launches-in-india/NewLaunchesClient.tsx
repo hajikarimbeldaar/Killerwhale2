@@ -78,7 +78,7 @@ function NewLaunchCarCard({ car }: { car: Car }) {
                         <div>
                             <div className="flex items-start justify-between mb-0.5 sm:mb-1">
                                 <div className="flex-1 pr-1 sm:pr-2 min-w-0">
-                                    <h3 className="text-base sm:text-xl md:text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
+                                    <h3 className="text-sm sm:text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
                                         <span className="truncate block">{car.brandName} {car.name}</span>
                                     </h3>
                                 </div>
@@ -100,8 +100,8 @@ function NewLaunchCarCard({ car }: { car: Car }) {
 
                         <div>
                             <div className="flex items-baseline gap-1 sm:gap-2 flex-wrap">
-                                <span className="text-base sm:text-xl md:text-2xl font-bold text-red-600">₹ {displayPrice}</span>
-                                <span className="text-sm sm:text-base md:text-lg font-semibold text-red-600">Lakh</span>
+                                <span className="text-base sm:text-xl font-bold text-red-600">₹ {displayPrice}</span>
+                                <span className="text-sm sm:text-base font-semibold text-red-600">Lakh</span>
                                 <span className="text-gray-500 text-xs sm:text-sm">Onwards</span>
                             </div>
                             <span className="text-[10px] sm:text-xs text-gray-500">{priceLabel}</span>
@@ -171,10 +171,10 @@ export default function NewLaunchesClient({
     return (
         <>
             <div className="mb-6">
-                <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                     New Car Launches in India
                 </h1>
-                <div className="text-gray-600 mb-6">
+                <div className="text-gray-600 text-sm sm:text-base mb-6">
                     <p className={isExpanded ? '' : 'line-clamp-2'}>
                         {shortText}
                         {isExpanded && extendedText}

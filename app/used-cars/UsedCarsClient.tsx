@@ -369,10 +369,10 @@ export default function UsedCarsClient() {
             {/* Header Section */}
             <div className="bg-white border-b border-gray-200">
                 <div className="max-w-3xl mx-auto px-4 py-8">
-                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                         Find Used Cars in India
                     </h1>
-                    <p className="text-gray-600">
+                    <p className="text-sm sm:text-base text-gray-600">
                         Search for quality pre-owned cars in {selectedCity}
                     </p>
                 </div>
@@ -562,8 +562,8 @@ export default function UsedCarsClient() {
                 <div>
                     {/* Guide Introduction */}
                     <div className="mb-8">
-                        <h2 className="text-xl font-bold text-gray-900 mb-4 text-left">Complete Guide to Buying Used Cars in India</h2>
-                        <p className="text-gray-700 leading-relaxed mb-4 text-left">
+                        <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 text-left">Complete Guide to Buying Used Cars in India</h2>
+                        <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4 text-left">
                             Buying a pre-owned car is a smart financial decision that can save you lakhs of rupees compared to purchasing a new vehicle.
                             With the right knowledge and proper inspection, you can find a reliable second-hand car that serves you well for years.
                             This comprehensive guide will help you navigate the used car market in India confidently.
@@ -577,7 +577,7 @@ export default function UsedCarsClient() {
 
                     {/* Why Buy Used */}
                     <div className="mb-8">
-                        <h3 className="text-lg font-bold text-gray-900 mb-4 text-left">Why Buy a Used Car?</h3>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 text-left">Why Buy a Used Car?</h3>
                         <div className="grid md:grid-cols-2 gap-4">
                             <div className="flex items-start gap-3">
                                 <div className="p-2 bg-green-100 rounded-lg">
@@ -620,7 +620,7 @@ export default function UsedCarsClient() {
 
                     {/* Inspection Checklist */}
                     <div className="mb-8">
-                        <h3 className="text-lg font-bold text-gray-900 mb-4 text-left">Essential Inspection Checklist</h3>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 text-left">Essential Inspection Checklist</h3>
                         <p className="text-gray-700 mb-4 text-left">
                             Before finalizing any used car purchase, ensure you thoroughly inspect these critical areas:
                         </p>
@@ -650,7 +650,7 @@ export default function UsedCarsClient() {
 
                     {/* Red Flags */}
                     <div className="mb-8">
-                        <h3 className="text-lg font-bold text-gray-900 mb-4 text-left">Red Flags to Watch Out For</h3>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 text-left">Red Flags to Watch Out For</h3>
                         <div className="bg-red-50 rounded-lg p-4 space-y-3">
                             <div className="flex items-start gap-3">
                                 <AlertTriangle className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
@@ -673,7 +673,7 @@ export default function UsedCarsClient() {
 
                     {/* Best Used Cars to Buy */}
                     <div className="mb-8">
-                        <h3 className="text-lg font-bold text-gray-900 mb-4 text-left">Best Used Cars to Buy in India (By Budget)</h3>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 text-left">Best Used Cars to Buy in India (By Budget)</h3>
 
                         <div className="space-y-4">
                             <div>
@@ -702,7 +702,7 @@ export default function UsedCarsClient() {
 
                     {/* FAQ Section */}
                     <div className="mb-8">
-                        <h3 className="text-lg font-bold text-gray-900 mb-4 text-left">Frequently Asked Questions</h3>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 text-left">Frequently Asked Questions</h3>
                         <div className="space-y-4">
                             <details className="group border-b border-gray-200 pb-4">
                                 <summary className="flex justify-between items-center font-medium cursor-pointer list-none text-gray-800 hover:text-orange-600 text-left">

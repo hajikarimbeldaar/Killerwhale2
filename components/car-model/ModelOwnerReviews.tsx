@@ -168,7 +168,7 @@ export default function ModelOwnerReviews({ brandName, modelName, modelSlug, bra
         <div>
             {/* Title Row */}
             <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900">
                     Owner Reviews
                 </h2>
                 <Link

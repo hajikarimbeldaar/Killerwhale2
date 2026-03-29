@@ -112,10 +112,10 @@ export default function ElectricCarsClient({
         <>
             {/* Header & Filters */}
             <div className="mb-6">
-                <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                     Best Electric Cars in India {new Date().getFullYear()} - Price & Range
                 </h1>
-                <div className="text-gray-600 mb-6">
+                <div className="text-gray-600 text-sm sm:text-base mb-6">
                     <p className={isExpanded ? 'mb-4' : 'line-clamp-2'}>{shortText}</p>
                     {isExpanded && (
                         <div
@@ -170,7 +170,7 @@ export default function ElectricCarsClient({
             {/* Popular Cars */}
             {popularCars.length > 0 && (
                 <div className="mt-12">
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">Popular Electric Cars in India {new Date().getFullYear()}</h2>
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">Popular Electric Cars in India {new Date().getFullYear()}</h2>
                     <div className="relative group">
                         <button
                             onClick={() => {
@@ -214,7 +214,7 @@ export default function ElectricCarsClient({
             {/* New Launches */}
             {newLaunchedCars.length > 0 && (
                 <div className="mt-12">
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">Newly Launched Electric Cars {new Date().getFullYear()}</h2>
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8">Newly Launched Electric Cars {new Date().getFullYear()}</h2>
                     <div className="relative group">
                         <button
                             onClick={() => {

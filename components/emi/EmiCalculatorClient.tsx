@@ -281,7 +281,7 @@ export default function EmiCalculatorClient({
                 {/* Header */}
                 <div className="p-5 sm:p-6 border-b border-gray-100 bg-gray-50/30">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <h2 className="text-lg font-bold text-gray-900">Choose your EMI options</h2>
+                        <h2 className="text-lg sm:text-xl font-bold text-gray-900">Choose your EMI options</h2>
                         <div className="flex p-1 bg-white border border-gray-200 rounded-xl self-start shadow-sm">
                             <button
                                 onClick={() => setCalcMode('car')}
@@ -305,7 +305,7 @@ export default function EmiCalculatorClient({
                             <div className="flex-1">
                                 <p className="text-[10px] uppercase font-black text-orange-600/60 tracking-widest mb-1.5">Selected Vehicle</p>
                                 <div className="flex items-baseline gap-2">
-                                    <p className="font-extrabold text-gray-900 text-lg leading-tight">{selectedCar.brand} {selectedCar.model}</p>
+                                    <p className="font-extrabold text-gray-900 text-lg sm:text-xl leading-tight">{selectedCar.brand} {selectedCar.model}</p>
                                 </div>
                                 <p className="text-xs font-bold text-gray-500 mt-0.5">{selectedCar.variant}</p>
                             </div>
@@ -563,7 +563,7 @@ export default function EmiCalculatorClient({
                 <div className="flex items-center gap-3 mb-8">
                     <ShieldCheck className="w-8 h-8 text-orange-500" />
                     <div>
-                        <h3 className="text-xl font-black uppercase tracking-tight">Check Loan Eligibility</h3>
+                        <h3 className="text-lg sm:text-xl font-bold uppercase tracking-tight">Check Loan Eligibility</h3>
                         <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Instant approval in 3 simple steps</p>
                     </div>
                 </div>

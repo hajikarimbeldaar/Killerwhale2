@@ -67,10 +67,10 @@ export default function TopCarsClient({
         <>
             {/* Header & Filters */}
             <div className="mb-6">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                     Best {bodyTypeLabel} Cars in India
                 </h1>
-                <p className="text-gray-600 mb-6">
+                <p className="text-sm sm:text-base text-gray-600 mb-6">
                     {bodyTypeDescription}
                     <button className="text-red-600 ml-1 font-medium">...read more</button>
                 </p>
@@ -108,7 +108,7 @@ export default function TopCarsClient({
             {/* Popular Cars */}
             {popularCars.length > 0 && (
                 <div className="mt-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-8">Popular {bodyTypeLabel} Cars</h2>
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">Popular {bodyTypeLabel} Cars</h2>
                     <div className="relative group">
                         <button
                             onClick={() => {
@@ -152,7 +152,7 @@ export default function TopCarsClient({
             {/* New Launches */}
             {newLaunchedCars.length > 0 && (
                 <div className="mt-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-8">New {bodyTypeLabel} Launches</h2>
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-8">New {bodyTypeLabel} Launches</h2>
                     <div className="relative group">
                         <button
                             onClick={() => {

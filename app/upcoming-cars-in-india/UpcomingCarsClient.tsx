@@ -65,11 +65,11 @@ function UpcomingCarCard({ car }: { car: UpcomingCar }) {
                         <div>
                             <div className="flex items-start justify-between mb-0.5 sm:mb-1">
                                 <div className="flex-1 pr-1 sm:pr-2 min-w-0">
-                                    <h3 className="text-base sm:text-xl md:text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
+                                    <h3 className="text-base sm:text-lg font-bold text-gray-900 group-hover:text-red-600 transition-colors leading-tight">
                                         <span className="truncate block">{car.brandName} {car.name}</span>
                                     </h3>
                                 </div>
-                                <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-gray-400 group-hover:text-blue-600 transition-colors flex-shrink-0 mt-0.5 sm:mt-1" />
+                                <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-red-600 transition-colors flex-shrink-0 mt-0.5 sm:mt-1" />
                             </div>
 
                             <div className="flex items-center gap-0.5 sm:gap-1 mb-0.5 sm:mb-1">
@@ -85,7 +85,7 @@ function UpcomingCarCard({ car }: { car: UpcomingCar }) {
 
                         <div>
                             <div className="flex items-baseline gap-1 sm:gap-2 flex-wrap">
-                                <span className="text-base sm:text-xl md:text-2xl font-bold text-red-600">{displayPrice}</span>
+                                <span className="text-base sm:text-lg font-bold text-red-600">{displayPrice}</span>
                                 <span className="text-gray-500 text-xs sm:text-sm">(Expected)</span>
                             </div>
                         </div>
@@ -130,10 +130,10 @@ export default function UpcomingCarsClient({
     return (
         <>
             <div className="mb-6">
-                <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                     Upcoming Cars in India
                 </h1>
-                <div className="text-gray-600 mb-6">
+                <div className="text-gray-600 text-sm sm:text-base mb-6">
                     <p className={isExpanded ? '' : 'line-clamp-2'}>
                         {shortText}
                         {isExpanded && extendedText}

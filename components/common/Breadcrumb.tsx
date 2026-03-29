@@ -21,7 +21,7 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
                 <ol
-                    className="flex items-center flex-wrap gap-1 text-sm"
+                    className="flex items-center flex-wrap gap-1 text-xs sm:text-sm"
                     itemScope
                     itemType="https://schema.org/BreadcrumbList"
                 >

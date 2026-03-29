@@ -36,12 +36,12 @@ export default function TestDriveBottomBar({ onBookTestDrive }: TestDriveBottomB
         <div className={styles.container}>
             <div className={styles.content}>
                 <div className={styles.textElement}>
-                    <span className={styles.title}>Interested in this car?</span>
-                    <span className={styles.subtitle}>Get the best offers & test drive!</span>
+                    <span className={styles.title}>Lowest Price Guaranteed</span>
+                    <span className={styles.subtitle}>Save up to ₹50,000 & free EMI help</span>
                 </div>
                 <button className={styles.button} onClick={onBookTestDrive}>
                     <Car className="w-5 h-5" />
-                    <span>Book Test Drive</span>
+                    <span>Get Best Deal</span>
                 </button>
             </div>
         </div>
