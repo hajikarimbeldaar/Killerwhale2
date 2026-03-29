@@ -70,15 +70,24 @@ export default function ConsultancyAdSection() {
 
             {/* CTA Buttons */}
             <div className="space-y-3">
-              <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg text-sm transition-colors flex items-center justify-center">
+              <button 
+                onClick={() => window.location.href = 'tel:+917349466942'}
+                className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg text-sm transition-colors flex items-center justify-center"
+              >
                 <Phone className="w-4 h-4 mr-2" />
                 Call Now
               </button>
-              <button className="w-full bg-green-400 hover:bg-green-500 text-white font-medium py-3 px-4 rounded-lg text-sm transition-colors flex items-center justify-center">
+              <button 
+                onClick={() => window.open('https://wa.me/917349466942?text=Hi, I need help choosing the right car', '_blank')}
+                className="w-full bg-green-400 hover:bg-green-500 text-white font-medium py-3 px-4 rounded-lg text-sm transition-colors flex items-center justify-center"
+              >
                 <MessageCircle className="w-4 h-4 mr-2" />
                 WhatsApp
               </button>
-              <button className="w-full bg-white text-blue-600 font-medium py-3 px-4 rounded-lg text-sm transition-colors hover:bg-gray-50 flex items-center justify-center">
+              <button 
+                onClick={() => window.open('https://wa.me/917349466942?text=Hi, I want to book a car buying consultation.', '_blank')}
+                className="w-full bg-white text-blue-600 font-medium py-3 px-4 rounded-lg text-sm transition-colors hover:bg-gray-50 flex items-center justify-center"
+              >
                 <Calendar className="w-4 h-4 mr-2" />
                 Book Consultation
               </button>

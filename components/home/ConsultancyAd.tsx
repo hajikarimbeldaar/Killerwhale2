@@ -4,16 +4,15 @@ import { Phone, MessageCircle, Calendar, CheckCircle, Star, Users } from 'lucide
 
 export default function ConsultancyAd() {
   const handleCallClick = () => {
-    window.location.href = 'tel:+919876543210'
+    window.location.href = 'tel:+917349466942'
   }
 
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/919876543210?text=Hi, I need help choosing the right car', '_blank')
+    window.open('https://wa.me/917349466942?text=Hi, I need help choosing the right car', '_blank')
   }
 
   const handleBookConsultationClick = () => {
-    // In a real implementation, this would open a booking modal or navigate to booking page
-    window.location.href = '/consultation/book'
+    window.open('https://wa.me/917349466942?text=Hi, I want to book a car buying consultation.', '_blank')
   }
 
   return (

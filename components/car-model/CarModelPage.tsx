@@ -754,15 +754,15 @@ export default function CarModelPage({ model, initialVariants = [], newsSlot }: 
 
   // Consultancy helper functions
   const handleCallClick = () => {
-    window.location.href = 'tel:+919876543210'
+    window.location.href = 'tel:+917349466942'
   }
 
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/919876543210?text=Hi, I need help choosing the right car', '_blank')
+    window.open('https://wa.me/917349466942?text=Hi, I need help choosing the right car', '_blank')
   }
 
   const handleBookConsultationClick = () => {
-    window.location.href = '/consultation/book'
+    window.open('https://wa.me/917349466942?text=Hi, I want to book a car buying consultation.', '_blank')
   }
 
   // Section navigation data
