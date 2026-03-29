@@ -9,7 +9,7 @@ import Breadcrumb from '@/components/common/Breadcrumb'
 import { resolveR2Url } from '@/lib/image-utils'
 import CarExpertBanner from '@/components/CarExpertBanner'
 
-export const revalidate = 86400 // 24 hours
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 const transMap: Record<string, string> = {
     'automatic': 'Automatic',
@@ -98,8 +98,8 @@ async function getTransCarsData(type: string) {
 
     try {
         const [modelsRes, brandsRes] = await Promise.all([
-            fetch(`${backendUrl}/api/models-with-pricing?limit=50`, { next: { revalidate: 86400 } }),
-            fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } })
+            fetch(`${backendUrl}/api/models-with-pricing?limit=50`, { next: { revalidate: 172800 } }),
+            fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
         ])
 
         const modelsResponse = await modelsRes.json()

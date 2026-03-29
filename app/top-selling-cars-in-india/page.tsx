@@ -10,7 +10,7 @@ import { resolveR2Url } from '@/lib/image-utils'
 import CarExpertBanner from '@/components/CarExpertBanner'
 
 // Enable ISR with 1-hour revalidation
-export const revalidate = 21600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 // Generate metadata for SEO
 // Generate metadata for SEO
@@ -62,8 +62,8 @@ async function getTopSellingCarsData() {
 
     try {
         const [modelsRes, brandsRes] = await Promise.all([
-            fetch(`${backendUrl}/api/models-with-pricing?limit=60`, { next: { revalidate: 3600 } }),
-            fetch(`${backendUrl}/api/brands`, { next: { revalidate: 3600 } })
+            fetch(`${backendUrl}/api/models-with-pricing?limit=60`, { next: { revalidate: 172800 } }),
+            fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
         ])
 
         const modelsResponse = await modelsRes.json()

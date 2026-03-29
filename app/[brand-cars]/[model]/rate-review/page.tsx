@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import RateReviewClient from './RateReviewClient'
 
-export const revalidate = 3600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 interface RateReviewPageProps {
     params: Promise<{

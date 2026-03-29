@@ -18,7 +18,7 @@ import PageHeader from '@/components/common/PageHeader'
 import CarComparison from '@/components/common/CarComparison'
 
 // Enable ISR with 1-hour revalidation for better performance
-export const revalidate = 3600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 // Server-side data fetching functions with timeout and better error handling
 async function fetchBrandData(brandSlug: string) {
@@ -28,7 +28,7 @@ async function fetchBrandData(brandSlug: string) {
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
     const response = await fetch(`${backendUrl}/api/brands`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 172800 },
       signal: controller.signal,
       headers: {
         'Accept': 'application/json',
@@ -69,7 +69,7 @@ async function fetchBrandModels(brandId: string) {
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
     const response = await fetch(`${backendUrl}/api/frontend/brands/${brandId}/models`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 172800 },
       signal: controller.signal,
       headers: {
         'Accept': 'application/json',

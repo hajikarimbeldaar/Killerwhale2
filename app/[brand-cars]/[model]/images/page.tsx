@@ -9,7 +9,7 @@ interface GalleryPageProps {
     }>
 }
 
-export const revalidate = 3600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 // Generate SEO metadata
 export async function generateMetadata({ params }: GalleryPageProps): Promise<Metadata> {
@@ -43,7 +43,7 @@ async function getModelGalleryData(brandSlug: string, modelSlug: string) {
         const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'
 
         // Step 1: Fetch brands to get brand ID
-        const brandsResponse = await fetch(`${baseUrl}/api/brands`, { next: { revalidate: 3600 } })
+        const brandsResponse = await fetch(`${baseUrl}/api/brands`, { next: { revalidate: 172800 } })
         if (!brandsResponse.ok) throw new Error('Failed to fetch brands')
 
         const brands = await brandsResponse.json()
@@ -57,7 +57,7 @@ async function getModelGalleryData(brandSlug: string, modelSlug: string) {
         if (!brandData) throw new Error('Brand not found')
 
         // Step 2: Fetch models for this brand
-        const modelsResponse = await fetch(`${baseUrl}/api/frontend/brands/${brandData.id}/models`, { next: { revalidate: 3600 } })
+        const modelsResponse = await fetch(`${baseUrl}/api/frontend/brands/${brandData.id}/models`, { next: { revalidate: 172800 } })
         if (!modelsResponse.ok) throw new Error('Failed to fetch models')
 
         const modelsData = await modelsResponse.json()
@@ -65,7 +65,7 @@ async function getModelGalleryData(brandSlug: string, modelSlug: string) {
         if (!modelData) throw new Error('Model not found')
 
         // Step 3: Fetch detailed model data
-        const detailedModelRes = await fetch(`${baseUrl}/api/models/${modelData.id}`, { next: { revalidate: 3600 } })
+        const detailedModelRes = await fetch(`${baseUrl}/api/models/${modelData.id}`, { next: { revalidate: 172800 } })
         const detailedModelData = detailedModelRes.ok ? await detailedModelRes.json() : null
 
         // Build gallery array from backend data

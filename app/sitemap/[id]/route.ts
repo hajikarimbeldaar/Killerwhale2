@@ -3,7 +3,7 @@ import { BACKEND_URL } from '@/lib/config'
 import { CITY_DATABASE } from '@/lib/city-database'
 
 // Cache each sitemap chunk for 24 hours — significantly reduces Vercel CPU/Data overages.
-export const revalidate = 86400
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 const BASE_URL = 'https://www.gadizone.com'
 const EXTERNAL_API_URL = BACKEND_URL
@@ -33,7 +33,7 @@ const MODELS_PER_CHUNK = 3
 //   Submit these to Google Search Console as your domain authority grows.
 
 
-async function fetchData(endpoint: string, cacheTime = 3600) {
+async function fetchData(endpoint: string, cacheTime = 172800) {
     try {
         const url = `${EXTERNAL_API_URL}${endpoint}`
         const res = await fetch(url, {

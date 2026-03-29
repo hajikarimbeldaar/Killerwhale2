@@ -23,10 +23,10 @@ export default async function ModelRedirectPage({ params }: ModelPageProps) {
   try {
     // 1. Try to fetch as a direct model ID (numeric)
     if (/^\d+$/.test(slug)) {
-      const modelRes = await fetch(`${backendUrl}/api/models/${slug}`, { next: { revalidate: 86400 } })
+      const modelRes = await fetch(`${backendUrl}/api/models/${slug}`, { next: { revalidate: 172800 } })
       if (modelRes.ok) {
         const model = await modelRes.json()
-        const brandsRes = await fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } })
+        const brandsRes = await fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
         const brands = await brandsRes.json()
         const brand = brands.find((b: any) => b.id === model.brandId)
 
@@ -40,7 +40,7 @@ export default async function ModelRedirectPage({ params }: ModelPageProps) {
 
     if (!redirectPath) {
       // 2. Try to resolve as a legacy slug (e.g. "maruti-suzuki-grand-vitara")
-      const brandsRes = await fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } })
+      const brandsRes = await fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
       const brands = await brandsRes.json()
 
       let brandData = null
@@ -57,7 +57,7 @@ export default async function ModelRedirectPage({ params }: ModelPageProps) {
       }
 
       if (brandData && modelSlugPart) {
-        const modelsRes = await fetch(`${backendUrl}/api/frontend/brands/${brandData.id}/models`, { next: { revalidate: 86400 } })
+        const modelsRes = await fetch(`${backendUrl}/api/frontend/brands/${brandData.id}/models`, { next: { revalidate: 172800 } })
         if (modelsRes.ok) {
           const modelsData = await modelsRes.json()
           const model = modelsData.models.find((m: any) => m.slug === modelSlugPart || m.name.toLowerCase().replace(/\s+/g, '-') === modelSlugPart)
@@ -71,7 +71,7 @@ export default async function ModelRedirectPage({ params }: ModelPageProps) {
 
       if (!redirectPath) {
         // 3. Fallback: Search all models for a slug match if the brand prefix didn't work
-        const allModelsRes = await fetch(`${backendUrl}/api/models-with-pricing?limit=100`, { next: { revalidate: 86400 } })
+        const allModelsRes = await fetch(`${backendUrl}/api/models-with-pricing?limit=100`, { next: { revalidate: 172800 } })
         if (allModelsRes.ok) {
           const modelsData = await allModelsRes.json()
           const models = modelsData.data || modelsData

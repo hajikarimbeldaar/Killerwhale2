@@ -66,7 +66,7 @@ const CarExpertBanner = dynamic(() => import('@/components/CarExpertBanner'), {
 
 
 export const metadata: Metadata = staticPageSEO.home
-export const revalidate = 86400 // Revalidate every 24 hours
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 // Helper interfaces and functions
 interface Car {
@@ -165,17 +165,17 @@ async function getHomeData() {
       budgetUnder25Res,
       budgetUnder50Res
     ] = await Promise.all([
-      fetch(`${backendUrl}/api/cars/popular?limit=10`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/popular-comparisons`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/news?limit=6`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/upcoming-cars`, { next: { revalidate: 86400 } }),
+      fetch(`${backendUrl}/api/cars/popular?limit=10`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/popular-comparisons`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/news?limit=6`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/upcoming-cars`, { next: { revalidate: 172800 } }),
       // Budget cars - fetch 12 each (10 displayed + buffer) with 24-hour cache
-      fetch(`${backendUrl}/api/cars-by-budget/under-8?limit=12`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/cars-by-budget/under-15?limit=12`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/cars-by-budget/under-25?limit=12`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/cars-by-budget/under-50?limit=12`, { next: { revalidate: 86400 } })
+      fetch(`${backendUrl}/api/cars-by-budget/under-8?limit=12`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/cars-by-budget/under-15?limit=12`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/cars-by-budget/under-25?limit=12`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/cars-by-budget/under-50?limit=12`, { next: { revalidate: 172800 } })
     ])
 
     const popularData = await popularRes.json()

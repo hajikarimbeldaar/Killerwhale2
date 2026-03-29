@@ -22,7 +22,7 @@ import { generateBreadcrumbSchema } from '@/lib/structured-data'
 import Breadcrumb from '@/components/common/Breadcrumb'
 
 // Enable ISR with 24-hour revalidation
-export const revalidate = 86400 // saves Vercel CPU
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 interface BrandPageProps {
   params: Promise<{
@@ -46,7 +46,7 @@ async function fetchBrandData(brandSlug: string) {
     const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
     const response = await fetch(`${backendUrl}/api/brands`, {
-      next: { revalidate: 86400 },
+      next: { revalidate: 172800 },
       signal: controller.signal,
       headers: {
         'Accept': 'application/json',
@@ -87,7 +87,7 @@ async function fetchBrandModels(brandId: string) {
     const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
     const response = await fetch(`${backendUrl}/api/frontend/brands/${brandId}/models`, {
-      next: { revalidate: 86400 },
+      next: { revalidate: 172800 },
       signal: controller.signal,
       headers: {
         'Accept': 'application/json',
@@ -267,7 +267,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
   try {
     // Fetch brands first to get brand ID
     const brandsRes = await fetch(`${backendUrl}/api/brands`, {
-      next: { revalidate: 86400 }, // Cache for 24 hours
+      next: { revalidate: 172800 }, // Cache for 24 hours
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -322,7 +322,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
       fetch(
         `${backendUrl}/api/models-with-pricing?brandId=${backendBrand.id}`,
         {
-          next: { revalidate: 86400 }, // Cache for 24 hours
+          next: { revalidate: 172800 }, // Cache for 24 hours
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -332,7 +332,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
       fetch(
         `${backendUrl}/api/frontend/brands/${backendBrand.id}/models`,
         {
-          next: { revalidate: 86400 },
+          next: { revalidate: 172800 },
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'

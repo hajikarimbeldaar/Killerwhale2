@@ -113,8 +113,8 @@ async function getCarExpertData() {
 
     try {
         const [modelsRes, brandsRes] = await Promise.all([
-            fetch(`${backendUrl}/api/models-with-pricing?limit=200`, { next: { revalidate: 3600 } }),
-            fetch(`${backendUrl}/api/brands`, { next: { revalidate: 3600 } })
+            fetch(`${backendUrl}/api/models-with-pricing?limit=200`, { next: { revalidate: 172800 } }),
+            fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
         ])
 
         const modelsData = await modelsRes.json()

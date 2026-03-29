@@ -1,6 +1,6 @@
 import PriceBreakupPage from '@/components/price-breakup/PriceBreakupPage'
 
-export const revalidate = 3600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 interface GetPricePageProps {
   params: Promise<{

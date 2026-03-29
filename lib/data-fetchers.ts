@@ -64,7 +64,7 @@ export async function getPopularCars(limit: number = 10): Promise<Car[]> {
 
     try {
         const popularRes = await fetch(`${backendUrl}/api/cars/popular?limit=${limit}`, {
-            next: { revalidate: 3600 },
+            next: { revalidate: 172800 },
             cache: 'force-cache'
         })
 
@@ -112,11 +112,11 @@ export async function getNewLaunches(limit: number = 10): Promise<Car[]> {
         // Fetch models and brands
         const [modelsRes, brandsRes] = await Promise.all([
             fetch(`${backendUrl}/api/models-with-pricing?limit=100`, {
-                next: { revalidate: 3600 },
+                next: { revalidate: 172800 },
                 cache: 'force-cache'
             }),
             fetch(`${backendUrl}/api/brands`, {
-                next: { revalidate: 3600 },
+                next: { revalidate: 172800 },
                 cache: 'force-cache'
             }),
         ])

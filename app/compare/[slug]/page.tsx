@@ -9,7 +9,7 @@ interface PageProps {
 }
 
 // Enable ISR with 1-hour revalidation
-export const revalidate = 3600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 // Generate dynamic metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   try {
     const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001'
     const response = await fetch(`${backendUrl}/api/compare/${slug}`, {
-      next: { revalidate: 3600 }
+      next: { revalidate: 172800 }
     })
 
     if (!response.ok) {
@@ -82,7 +82,7 @@ async function getComparisonData(slug: string) {
 
   try {
     const response = await fetch(`${backendUrl}/api/compare/${slug}`, {
-      next: { revalidate: 3600 }
+      next: { revalidate: 172800 }
     })
 
     if (!response.ok) {

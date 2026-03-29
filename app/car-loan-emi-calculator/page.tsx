@@ -11,7 +11,7 @@ import Footer from '@/components/Footer'
 import CarExpertBanner from '@/components/CarExpertBanner'
 
 // Enable Incremental Static Regeneration (ISR)
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 const currentYear = new Date().getFullYear()
 

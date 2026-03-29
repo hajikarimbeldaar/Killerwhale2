@@ -19,7 +19,7 @@ interface PageProps {
 }
 
 // Enable ISR with 1-hour revalidation for caching
-export const revalidate = 86400 // 24 hours — saves Vercel CPU
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 // City mapping for display (used by price-in pages)
 const cityMap: { [key: string]: string } = {
@@ -65,8 +65,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     try {
       const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001'
       const [brandsRes, modelsRes] = await Promise.all([
-        fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } }),
-        fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 86400 } }),
+        fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } }),
+        fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 172800 } }),
       ])
       if (brandsRes.ok && modelsRes.ok) {
         const brands = await brandsRes.json()
@@ -141,8 +141,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     
     // Fetch brands to find brand ID, then model ID, then variants
     const [brandsRes, modelsRes] = await Promise.all([
-      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 86400 } }),
+      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 172800 } }),
     ])
 
     if (brandsRes.ok && modelsRes.ok) {
@@ -162,7 +162,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         )
         
         if (model) {
-          const variantsRes = await fetch(`${backendUrl}/api/variants?modelId=${model.id}`, { next: { revalidate: 86400 } })
+          const variantsRes = await fetch(`${backendUrl}/api/variants?modelId=${model.id}`, { next: { revalidate: 172800 } })
           if (variantsRes.ok) {
             const variants = await variantsRes.json()
             const normalize = (s: string) => s.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
@@ -292,7 +292,7 @@ export default async function VariantDetailPage({ params, searchParams }: PagePr
 
     // Fetch brands to get brand ID
     const brandsRes = await fetch(`${backendUrl}/api/brands`, {
-      next: { revalidate: 86400 } // Cache for 24 hours
+      next: { revalidate: 172800 } // Cache for 24 hours
     })
     const brands = await brandsRes.json()
 
@@ -310,7 +310,7 @@ export default async function VariantDetailPage({ params, searchParams }: PagePr
 
     // Fetch models for this brand
     const modelsRes = await fetch(`${backendUrl}/api/models?brandId=${brand.id}`, {
-      next: { revalidate: 86400 } // Cache for 24 hours
+      next: { revalidate: 172800 } // Cache for 24 hours
     })
     const models = await modelsRes.json()
     const model = models.find((m: any) =>
@@ -323,7 +323,7 @@ export default async function VariantDetailPage({ params, searchParams }: PagePr
 
     // Fetch variants for this model
     const variantsRes = await fetch(`${backendUrl}/api/variants?modelId=${model.id}`, {
-      next: { revalidate: 86400 } // Cache for 24 hours
+      next: { revalidate: 172800 } // Cache for 24 hours
     })
     const variants = await variantsRes.json()
 
@@ -354,7 +354,7 @@ export default async function VariantDetailPage({ params, searchParams }: PagePr
     // Fetch similar cars — limit=20 is enough to find 6 similar cars (was 500, very wasteful)
     const similarModelsRes = await fetch(
       `${backendUrl}/api/models-with-pricing?limit=20`,
-      { next: { revalidate: 86400 } }
+      { next: { revalidate: 172800 } }
     ).then(res => res.json()).catch(() => [])
 
     const similarModelsData = similarModelsRes?.data || similarModelsRes || []

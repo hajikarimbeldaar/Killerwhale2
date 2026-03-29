@@ -9,12 +9,12 @@ interface VariantsPageProps {
 }
 
 // Enable ISR with 1-hour revalidation (matches Model Page)
-export const revalidate = 3600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 async function getModelData(brandSlug: string, modelSlug: string) {
   try {
     const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001'
-    const brandsResponse = await fetch(`${backendUrl}/api/brands`, { next: { revalidate: 3600 } })
+    const brandsResponse = await fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
     if (!brandsResponse.ok) throw new Error('Failed to fetch brands')
 
     const brands = await brandsResponse.json()
@@ -26,7 +26,7 @@ async function getModelData(brandSlug: string, modelSlug: string) {
 
     if (!brandData) throw new Error('Brand not found')
 
-    const modelsResponse = await fetch(`${backendUrl}/api/frontend/brands/${brandData.id}/models`, { next: { revalidate: 3600 } })
+    const modelsResponse = await fetch(`${backendUrl}/api/frontend/brands/${brandData.id}/models`, { next: { revalidate: 172800 } })
     if (!modelsResponse.ok) throw new Error('Failed to fetch models')
 
     const modelsData = await modelsResponse.json()
@@ -35,7 +35,7 @@ async function getModelData(brandSlug: string, modelSlug: string) {
 
     // ✅ Fetch ALL variants for View All page (no limit)
     const variantsResponse = await fetch(`${backendUrl}/api/variants?modelId=${modelData.id}&fields=minimal`, {
-      next: { revalidate: 3600 }
+      next: { revalidate: 172800 }
     })
     const variants = variantsResponse.ok ? await variantsResponse.json() : []
 

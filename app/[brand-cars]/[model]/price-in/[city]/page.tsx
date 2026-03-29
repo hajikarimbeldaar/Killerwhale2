@@ -7,7 +7,7 @@ import { resolveR2Url } from '@/lib/image-utils'
 import { getCurrentMonthYear } from '@/lib/date-utils'
 
 // Enable ISR caching with 24-hour revalidation intervals
-export const revalidate = 86400 // 24 hours — saves Vercel CPU
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 interface PriceInCityPageProps {
   params: Promise<{
@@ -62,8 +62,8 @@ export async function generateMetadata({ params }: PriceInCityPageProps): Promis
     const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001'
 
     const [brandsRes, modelsRes] = await Promise.all([
-      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/models`, { next: { revalidate: 86400 } }),
+      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/models`, { next: { revalidate: 172800 } }),
     ])
 
     if (brandsRes.ok && modelsRes.ok) {
@@ -138,10 +138,10 @@ export async function getPriceBreakupData(brandSlug: string, modelSlug: string, 
   try {
     // Parallel fetch — limit=20 is enough to find 6 similar cars (was 500, very wasteful)
     const [brandsRes, modelsRes, modelsWithPricingRes, popularCarsRes] = await Promise.all([
-      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/models`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/cars/popular?limit=20`, { next: { revalidate: 86400 } }),
+      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/models`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/cars/popular?limit=20`, { next: { revalidate: 172800 } }),
     ])
 
     if (!brandsRes.ok || !modelsRes.ok) {
@@ -176,7 +176,7 @@ export async function getPriceBreakupData(brandSlug: string, modelSlug: string, 
 
     // Fetch variants for this model
     const variantsRes = await fetch(`${backendUrl}/api/variants?modelId=${model.id}&full=true`, {
-      next: { revalidate: 86400 }
+      next: { revalidate: 172800 }
     })
 
     let variants: any[] = []

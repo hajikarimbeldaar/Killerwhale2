@@ -12,7 +12,7 @@ interface PageProps {
 }
 
 // Enable ISR with 2-hour revalidation for news articles
-export const revalidate = 7200
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 // Generate dynamic metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   try {
     const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001'
     const res = await fetch(`${backendUrl}/api/news/${id}`, {
-      next: { revalidate: 7200 }
+      next: { revalidate: 172800 }
     })
 
     if (!res.ok) {
@@ -68,7 +68,7 @@ async function getArticle(id: string) {
 
   try {
     const res = await fetch(`${backendUrl}/api/news/${id}`, {
-      next: { revalidate: 7200 }
+      next: { revalidate: 172800 }
     })
 
     if (!res.ok) {
@@ -82,11 +82,11 @@ async function getArticle(id: string) {
     if (article.linkedCars && article.linkedCars.length > 0) {
       try {
         const carsPromises = article.linkedCars.map(async (carId: string) => {
-          const carRes = await fetch(`${backendUrl}/api/models/${carId}`, { next: { revalidate: 3600 } })
+          const carRes = await fetch(`${backendUrl}/api/models/${carId}`, { next: { revalidate: 172800 } })
           if (carRes.ok) {
             const car = await carRes.json()
             // Get brand name for slug generation
-            const brandRes = await fetch(`${backendUrl}/api/brands`, { next: { revalidate: 3600 } })
+            const brandRes = await fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
             const brands = await brandRes.json()
             const brand = brands.find((b: any) => b.id === car.brandId)
 

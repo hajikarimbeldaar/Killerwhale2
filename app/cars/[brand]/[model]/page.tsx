@@ -10,7 +10,7 @@ interface PageProps {
 }
 
 // Enable ISR with 1-hour revalidation for better performance
-export const revalidate = 3600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { brand: brandSlug, model: modelSlug } = await params
@@ -66,8 +66,8 @@ export default async function ModelPage({ params }: PageProps) {
   try {
     // Fetch all models and brands to find the matching one
     const [modelsRes, brandsRes] = await Promise.all([
-      fetch(`${backendUrl}/api/models?limit=100`, { next: { revalidate: 3600 } }),
-      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 3600 } })
+      fetch(`${backendUrl}/api/models?limit=100`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
     ])
 
     const modelsResponse = await modelsRes.json()

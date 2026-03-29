@@ -18,7 +18,7 @@ const BUDGET_INFO = {
     apiSlug: 'under-30'
 }
 
-export const revalidate = 21600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 
 
@@ -52,9 +52,9 @@ async function getBudgetCarsData() {
 
     try {
         const [budgetRes, modelsRes, brandsRes] = await Promise.all([
-            fetch(`${backendUrl}/api/cars-by-budget/${BUDGET_INFO.apiSlug}?page=1&limit=100`, { next: { revalidate: 3600 } }),
-            fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 3600 } }),
-            fetch(`${backendUrl}/api/brands`, { next: { revalidate: 3600 } })
+            fetch(`${backendUrl}/api/cars-by-budget/${BUDGET_INFO.apiSlug}?page=1&limit=100`, { next: { revalidate: 172800 } }),
+            fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 172800 } }),
+            fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
         ])
 
         if (!budgetRes.ok) return { cars: [], popularCars: [], newLaunchedCars: [], dynamicDescription: '' }

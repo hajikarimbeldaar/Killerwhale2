@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server'
 import { BACKEND_URL } from '@/lib/config'
 
 // Cache for 24 hours — prevents repeated backend calls when Googlebot hits the index repeatedly.
-export const revalidate = 86400
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 const BASE_URL = 'https://www.gadizone.com'
 const EXTERNAL_API_URL = BACKEND_URL
@@ -10,7 +10,7 @@ const EXTERNAL_API_URL = BACKEND_URL
 // Must match the chunk size in /sitemap/[id]/route.ts
 const MODELS_PER_CHUNK = 3
 
-async function fetchData(endpoint: string, cacheTime = 3600) {
+async function fetchData(endpoint: string, cacheTime = 172800) {
     try {
         const url = `${EXTERNAL_API_URL}${endpoint}`
         const res = await fetch(url, {

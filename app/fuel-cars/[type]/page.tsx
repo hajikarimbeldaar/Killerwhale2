@@ -9,7 +9,7 @@ import Breadcrumb from '@/components/common/Breadcrumb'
 import { resolveR2Url } from '@/lib/image-utils'
 import CarExpertBanner from '@/components/CarExpertBanner'
 
-export const revalidate = 21600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 const fuelTypeMap: Record<string, string> = {
     'petrol': 'Petrol',
@@ -102,8 +102,8 @@ async function getFuelCarsData(type: string) {
         // OR use the existing models API if it supports filtering. 
         // For now, fetching models and filtering client-side logic on server
         const [modelsRes, brandsRes] = await Promise.all([
-            fetch(`${backendUrl}/api/models-with-pricing?limit=100`, { next: { revalidate: 3600 } }),
-            fetch(`${backendUrl}/api/brands`, { next: { revalidate: 3600 } })
+            fetch(`${backendUrl}/api/models-with-pricing?limit=100`, { next: { revalidate: 172800 } }),
+            fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
         ])
 
         const modelsResponse = await modelsRes.json()

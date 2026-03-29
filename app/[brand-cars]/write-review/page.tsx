@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import RateReviewClient from '../[model]/rate-review/RateReviewClient'
 
-export const revalidate = 3600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 interface WriteReviewPageProps {
     params: Promise<{

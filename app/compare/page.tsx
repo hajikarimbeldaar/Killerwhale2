@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import CompareSelectionClient from './CompareSelectionClient'
 
 // Enable ISR with 1-hour revalidation for the car list
-export const revalidate = 3600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 export const metadata: Metadata = {
   title: 'Compare Cars - Side by Side Comparison | gadizone',
@@ -19,8 +19,8 @@ async function getCarsAndBrands() {
 
   try {
     const [modelsRes, brandsRes] = await Promise.all([
-      fetch(`${backendUrl}/api/models?limit=100`, { next: { revalidate: 3600 } }),
-      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 3600 } })
+      fetch(`${backendUrl}/api/models?limit=100`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
     ])
 
     if (!modelsRes.ok || !brandsRes.ok) {

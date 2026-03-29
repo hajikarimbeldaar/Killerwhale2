@@ -13,7 +13,7 @@ interface PageProps {
 }
 
 // Enable ISR with 1-hour revalidation
-export const revalidate = 3600
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 // Budget ranges configuration
 const budgetRanges: Record<string, { label: string; min: number; max: number; lakhValue: string; title: string }> = {
@@ -127,9 +127,9 @@ async function getBudgetCarsData(budgetSlug: string) {
     try {
         // Fetch budget cars using optimized endpoint
         const [budgetRes, modelsRes, brandsRes] = await Promise.all([
-            fetch(`${backendUrl}/api/cars-by-budget/${budgetSlug}?page=1&limit=100`, { next: { revalidate: 3600 } }),
-            fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 3600 } }),
-            fetch(`${backendUrl}/api/brands`, { next: { revalidate: 3600 } })
+            fetch(`${backendUrl}/api/cars-by-budget/${budgetSlug}?page=1&limit=100`, { next: { revalidate: 172800 } }),
+            fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 172800 } }),
+            fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
         ])
 
         if (!budgetRes.ok) {

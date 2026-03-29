@@ -19,7 +19,7 @@ const resolveAssetUrl = (path: string, backendUrl: string) => {
   return resolveR2Url(path)
 }
 
-export const revalidate = 86400 // 24 hours — car specs don't change hourly, saves Vercel CPU
+export const revalidate = 172800 // 48 hours — data updates weekly
 
 
 export async function generateMetadata({ params }: ModelPageProps): Promise<Metadata> {
@@ -40,8 +40,8 @@ export async function generateMetadata({ params }: ModelPageProps): Promise<Meta
   try {
     const backendUrl = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5001'
     const [brandsRes, modelsWithPricingRes] = await Promise.all([
-      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 86400 } })
+      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 172800 } })
     ])
     if (brandsRes.ok && modelsWithPricingRes.ok) {
       const brands = await brandsRes.json()
@@ -98,8 +98,8 @@ async function getUpcomingCarData(brandSlug: string, modelSlug: string) {
 
     // OPTIMIZED: Parallel fetch of brands and upcoming cars
     const [brandsResponse, upcomingCarsResponse] = await Promise.all([
-      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } }),
-      fetch(`${backendUrl}/api/upcoming-cars`, { next: { revalidate: 86400 } })
+      fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } }),
+      fetch(`${backendUrl}/api/upcoming-cars`, { next: { revalidate: 172800 } })
     ])
 
     if (!brandsResponse.ok) throw new Error('Failed to fetch brands')
@@ -163,7 +163,7 @@ async function getUpcomingCarData(brandSlug: string, modelSlug: string) {
     }
 
     // Fetch actual variants for this upcoming car
-    const variantsResponse = await fetch(`${backendUrl}/api/variants?modelId=${upcomingCarData.id}`, { next: { revalidate: 86400 } });
+    const variantsResponse = await fetch(`${backendUrl}/api/variants?modelId=${upcomingCarData.id}`, { next: { revalidate: 172800 } });
     let variants = [];
 
     if (variantsResponse.ok) {
@@ -289,7 +289,7 @@ async function getModelData(brandSlug: string, modelSlug: string) {
     const startTime = Date.now()
 
     // Step 1: Fetch brands (required first to get brandId) - ISR cached
-    const brandsResponse = await fetch(`${backendUrl}/api/brands`, { next: { revalidate: 86400 } })
+    const brandsResponse = await fetch(`${backendUrl}/api/brands`, { next: { revalidate: 172800 } })
     if (!brandsResponse.ok) throw new Error('Failed to fetch brands')
 
     const brands = await brandsResponse.json()
@@ -303,7 +303,7 @@ async function getModelData(brandSlug: string, modelSlug: string) {
     if (!brandData) throw new Error('Brand not found')
 
     // Step 2: Fetch models for this brand to get modelId - ISR cached
-    const modelsResponse = await fetch(`${backendUrl}/api/frontend/brands/${brandData.id}/models`, { next: { revalidate: 86400 } })
+    const modelsResponse = await fetch(`${backendUrl}/api/frontend/brands/${brandData.id}/models`, { next: { revalidate: 172800 } })
     if (!modelsResponse.ok) throw new Error('Failed to fetch models')
 
     const modelsData = await modelsResponse.json()
@@ -312,25 +312,25 @@ async function getModelData(brandSlug: string, modelSlug: string) {
 
     // Step 3: PARALLEL FETCH - Get detailed model data, variants, and similar cars data simultaneously
     const [detailedModelData, variantsData, similarModelsRes, reviewsRes] = await Promise.all([
-      fetch(`${backendUrl}/api/models/${modelData.id}`, { next: { revalidate: 86400 } })
+      fetch(`${backendUrl}/api/models/${modelData.id}`, { next: { revalidate: 172800 } })
         .then(res => res.ok ? res.json() : null)
         .catch(err => {
           console.log('❌ Error fetching detailed model data:', err)
           return null
         }),
       // Fetch ALL variants for accurate price calculation and View All features
-      fetch(`${backendUrl}/api/variants?modelId=${modelData.id}`, { next: { revalidate: 86400 } })
+      fetch(`${backendUrl}/api/variants?modelId=${modelData.id}`, { next: { revalidate: 172800 } })
         .then(res => res.ok ? res.json() : [])
         .catch(err => {
           console.log('❌ Error fetching variants:', err)
           return []
         }),
       // ✅ limit=20 is enough to find 6 similar cars — was 500 (wasteful)
-      fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 86400 } })
+      fetch(`${backendUrl}/api/models-with-pricing?limit=20`, { next: { revalidate: 172800 } })
         .then(res => res.ok ? res.json() : { data: [] })
         .catch(() => ({ data: [] })),
       // ✅ Fetch approved reviews for SSR
-      fetch(`${backendUrl}/api/reviews/${modelSlug}?limit=50`, { next: { revalidate: 86400 } })
+      fetch(`${backendUrl}/api/reviews/${modelSlug}?limit=50`, { next: { revalidate: 172800 } })
         .then(res => res.ok ? res.json() : { success: false, data: { reviews: [], total: 0, overallRating: 0 } })
         .catch(err => {
           console.log('❌ Error fetching reviews:', err)
