@@ -69,8 +69,8 @@ export default function CarExpertClient({ allCars, brands }: CarExpertClientProp
                             We save you money, time, and future regrets by finding the perfect car for your needs and budget.
                         </p>
 
-                        <button 
-                            onClick={() => window.open('https://wa.me/917349466942?text=Hi, I need expert car buying consultation.', '_blank')} 
+                        <button
+                            onClick={() => window.open('https://wa.me/917349466942?text=Hi, I need expert car buying consultation.', '_blank')}
                             className={styles.ctaPrimary}
                         >
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -232,8 +232,8 @@ export default function CarExpertClient({ allCars, brands }: CarExpertClientProp
                 </div>
 
                 <div className={styles.resolveCta}>
-                    <button 
-                        onClick={() => window.open('https://wa.me/917349466942?text=Hi, I need expert car buying consultation.', '_blank')} 
+                    <button
+                        onClick={() => window.open('https://wa.me/917349466942?text=Hi, I need expert car buying consultation.', '_blank')}
                         className={styles.ctaPrimary}
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
